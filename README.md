@@ -12,24 +12,24 @@ An advanced, responsive, client-side analytical ranking engine for College Footb
 
 ---
 
-## 1. Top 10 College Football Ranking Systems Compendium & Live Emulation
+## 1. Top 10 College Football Ranking Systems Compendium
 
 College football ranking systems divide into two distinct categories: **Human Consensus Polls** (measuring subjective merit/résumé) and **Algorithmic/Computer Models** (measuring predictive power or mathematically balanced schedules).
 
-In ACFC v0.3.0, users can click **"⚡ Emulate"** directly inside the Compendium modal to test each system live against the 2026 FBS dataset:
+In ACFC v0.3.1, users can review the methodologies of each benchmark system inside the Compendium modal:
 
-| # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | ACFC Live Emulation Settings |
+| # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | Primary Analytical Focus |
 | :-: | :--- | :--- | :--- | :--- | :--- |
-| **1** | **College Football Playoff (CFP)** | Human Committee | Principles Published, Math N/A | Multi-round secret balloting by 13-member committee evaluating head-to-head, SOS, and championships without fixed formulas. | 70% RMS, 30% PES, $1.6\times$ SOS, 25% Prior |
-| **2** | **Associated Press (AP) Top 25** | Human Media Poll | Public Voter Ballots | 60+ sports journalists submit 1–25 ballots weekly (25 pts to 1 pt). Fully public voter ballots published weekly. | 80% RMS, 20% PES, $1.1\times$ SOS, 30% Prior |
-| **3** | **US LBM Coaches Poll (USA Today)** | Human Coaches Poll | Public Voter Ballots | Active FBS head coaches submit weekly 1–25 ballots (25 pts to 1 pt). Published with individual final ballots disclosed. | 75% RMS, 25% PES, $1.0\times$ SOS, 45% Prior |
-| **4** | **ESPN Football Power Index (FPI)** | Predictive Computer | Concepts Explained, Code Proprietary | Evaluates EPA per play, returning production, recruiting ratings, and component efficiencies. | 75% PES, 25% RMS, 55% Prior, +35 Cap |
-| **5** | **SP+ (Bill Connelly / ESPN)** | Predictive Computer | Full Conceptual Breakdown | Three pillars: Play-by-play Success Rate (30%), Explosiveness (35%), and Finishing Drives (35%). | 80% PES, 20% RMS, 65% Prior, 90% MOV |
-| **6** | **Sagarin Ratings (Jeff Sagarin)** | Computer (Predictive & Elo) | Fully Explained Principles | Linear algebra & network theory with diminishing-returns point margins. Publishes Elo-Chess vs Predictor. | 60% PES, 40% RMS, 95% SAM MOV, $1.3\times$ SOS |
-| **7** | **TeamRankings Predictive Ratings** | Predictive Computer | Inputs & Mechanics Published | Point differential adjusted for opponent strength, venue, and game state representing expected point spreads. | 75% PES, 25% RMS, 100% MOV Cap, $1.0\times$ SOS |
-| **8** | **Colley’s Bias-Free Matrix** | Résumé Computer | Fully Open Source Math | Solves linear equation system ($r = M^{-1} b$). Completely ignores point margins, assessing purely wins and schedule. | 95% RMS, 5% PES, 0% Margin (Off), $1.5\times$ SOS |
-| **9** | **CFB Graphs / CFBD (PPA / EPA)** | Analytical Metric Site | Open Methodology & Public API | Down, distance, and field-position Predicted Points Added open API metrics. | 85% PES, 15% RMS, 50% Prior, Net EPA Mode |
-| **10** | **Massey Ratings (Kenneth Massey)** | Composite / Computer | Mathematical Formulation Published | Least-squares linear model balancing scoring differential and game outcomes against strength of schedule. | 50% RMS, 50% PES, 70% MOV, $1.2\times$ SOS |
+| **1** | **College Football Playoff (CFP)** | Human Committee | Principles Published, Math N/A | Multi-round secret balloting by 13-member committee evaluating head-to-head, SOS, and championships without fixed formulas. | Pure Résumé & Schedule Gauntlet |
+| **2** | **Associated Press (AP) Top 25** | Human Media Poll | Public Voter Ballots | 60+ sports journalists submit 1–25 ballots weekly (25 pts to 1 pt). Fully public voter ballots published weekly. | Voter Consensus & Traditional Record |
+| **3** | **US LBM Coaches Poll (USA Today)** | Human Coaches Poll | Public Voter Ballots | Active FBS head coaches submit weekly 1–25 ballots (25 pts to 1 pt). Published with individual final ballots disclosed. | Head Coach Merit Assessment |
+| **4** | **ESPN Football Power Index (FPI)** | Predictive Computer | Concepts Explained, Code Proprietary | Evaluates EPA per play, returning production, recruiting ratings, and component efficiencies. | Predictive Down-to-Down Efficiency |
+| **5** | **SP+ (Bill Connelly / ESPN)** | Predictive Computer | Full Conceptual Breakdown | Three pillars: Play-by-play Success Rate (30%), Explosiveness (35%), and Finishing Drives (35%). | Drive Quality & Explosive Plays |
+| **6** | **Sagarin Ratings (Jeff Sagarin)** | Computer (Predictive & Elo) | Fully Explained Principles | Linear algebra & network theory with diminishing-returns point margins. Publishes Elo-Chess vs Predictor. | Pure Spreads & Diminishing Margins |
+| **7** | **TeamRankings Predictive Ratings** | Predictive Computer | Inputs & Mechanics Published | Point differential adjusted for opponent strength, venue, and game state representing expected point spreads. | Neutral-Field Vegas Lines |
+| **8** | **Colley’s Bias-Free Matrix** | Résumé Computer | Fully Open Source Math | Solves linear equation system ($r = M^{-1} b$). Completely ignores point margins, assessing purely wins and schedule. | Margin-Free Mathematical W-L |
+| **9** | **CFB Graphs / CFBD (PPA / EPA)** | Analytical Metric Site | Open Methodology & Public API | Down, distance, and field-position Predicted Points Added open API metrics. | Play-by-Play EPA Metrics |
+| **10** | **Massey Ratings (Kenneth Massey)** | Composite / Computer | Mathematical Formulation Published | Least-squares linear model balancing scoring differential and game outcomes against strength of schedule. | Least-Squares Balanced Composite |
 
 ---
 
