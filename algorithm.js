@@ -2,12 +2,17 @@
  * Advanced College Football Composite (ACFC) - 2026-27 Algorithm Engine
  * 
  * Implements decoupled Resume Merit Score (RMS) and Predictive Efficiency Score (PES),
- * Bayesian Prior Blending, Multi-Poll Benchmarking, and Emulation Presets for:
- * - SP+ / ESPN FPI (Predictive Power)
- * - Colley Matrix (Pure W-L Quality)
- * - Sagarin Predictor (Diminishing-Returns Margin)
- * - CFP Committee (High SOS & Marquee Wins)
- * - The Sideline / AP Poll (Consensus)
+ * Bayesian Prior Blending, Multi-Poll Benchmarking, and Matchup Simulation.
+ * 
+ * Synthesizes mathematical principles and metrics pioneered across the 8 Premier CFB Analytics Hubs:
+ * 1. CollegeFootballData (CFBD) - Play-by-play Net EPA, Success Rate, Havoc, APIs
+ * 2. Game on Paper - Dropback/Rush EPA profiles, Cumulative Game EPA curves
+ * 3. BCF Toys (Brian Fremeau) - FEI Drive Efficiency, Value Drives, Garbage Filtering
+ * 4. ESPN SP+ (Bill Connelly) & FPI - 5 Factors tempo/opponent predictive efficiency
+ * 5. CFB-Graphs (Parker Fleming) - Efficiency tiers, early vs late down splits
+ * 6. Beta_Rank (Rob Henderson) - Drive state simulation and spread projections
+ * 7. cfbstats - Granular situational down-and-distance and red-zone buckets
+ * 8. Pro Football Focus (PFF) - Film-graded talent priors and turnover-luck neutralization
  */
 
 class ACFCAlgorithmEngine {

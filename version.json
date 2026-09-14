@@ -1,11 +1,11 @@
 {
-  "version": "0.3.3",
+  "version": "0.3.4",
   "name": "Advanced College Football Composite (ACFC) Top 25 Ranking Engine",
   "releaseDate": "2026-09-14",
   "versionType": "minor",
   "season": "2026-27",
   "week": "Week 3 Calibrated Baseline",
-  "description": "v0.3.3: Streamlined On-Demand Algorithm Execution & Update Engine. Dedicated execution dock enables instant recalculation of the ACFC algorithmic ranking model on demand with live millisecond telemetry, preserving the complete 2026-27 analytical Top 25 dashboard, Bayesian priors, and Matchup Arena.",
+  "description": "v0.3.4: Comprehensive College Football Analytics Intelligence Hub integration. Features in-depth profiles and direct access to the 8 premier CFB analytics platforms (CFBD, Game on Paper, BCF Toys / FEI, ESPN SP+ & FPI, CFB-Graphs, Beta_Rank, cfbstats, PFF College) alongside the Top 10 Benchmark Ranking Systems Compendium.",
   "versioningProtocol": {
     "minor": "+0.1: Algorithmic weight tweaks, UI styling refinements, roster/schedule adjustments, heuristic updates",
     "major": "+1.0: New ranking data models, backend API integration, multi-season archives, or architectural changes"

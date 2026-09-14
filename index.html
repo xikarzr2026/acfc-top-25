@@ -178,8 +178,8 @@
       <div class="flex items-center gap-2 sm:gap-3">
         <button id="btn-top10-systems" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 transition flex items-center gap-2">
           <i class="fa-solid fa-layer-group text-purple-400"></i>
-          <span class="hidden md:inline">Top 10 Systems</span>
-          <span class="md:hidden">Systems</span>
+          <span class="hidden md:inline">Systems &amp; Analytics Hubs</span>
+          <span class="md:hidden">Analytics &amp; Polls</span>
         </button>
         <button id="btn-matchup-simulator" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-750 text-slate-200 hover:text-white border border-slate-700 transition flex items-center gap-2">
           <i class="fa-solid fa-swords text-cyan-400"></i>
@@ -465,18 +465,19 @@
 
   </main>
 
-  <!-- TOP 10 CFB RANKING SYSTEMS BENCHMARK MODAL -->
+  <!-- CFB RANKING SYSTEMS & ANALYTICS INTELLIGENCE COMPENDIUM MODAL -->
   <div id="top10-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-250">
     <div class="bg-slate-900 border border-slate-750 rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 space-y-6">
       
+      <!-- Modal Header -->
       <div class="flex items-center justify-between border-b border-slate-800 pb-4">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
             <i class="fa-solid fa-layer-group text-lg"></i>
           </div>
           <div>
-            <h3 class="text-xl font-bold font-display text-white">Top 10 College Football Ranking Systems Compendium</h3>
-            <p class="text-xs text-slate-400">Predictive Computer Engines vs. Human Consensus Polls &amp; How ACFC Synthesizes Them</p>
+            <h3 class="text-xl font-bold font-display text-white">CFB Ranking Systems &amp; Analytics Compendium</h3>
+            <p class="text-xs text-slate-400">Top 10 Benchmark Ranking Models &amp; The 8 Premier Analytics Data Hubs</p>
           </div>
         </div>
         <button id="btn-close-top10" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
@@ -484,163 +485,486 @@
         </button>
       </div>
 
-      <!-- Key Concept Banner -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-purple-950/20 border border-purple-800/40 p-4 rounded-xl space-y-1.5">
-          <span class="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
-            <i class="fa-solid fa-chart-line-up"></i> Predictive Models (SP+, FPI, Sagarin Predictor)
-          </span>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Measure <em>who would win on a neutral field tomorrow</em> using per-play success rates, net EPA, and roster talent. May rank a 1-loss dominant team over an unblemished team with a weak schedule.
-          </p>
-        </div>
-        <div class="bg-amber-950/20 border border-amber-800/40 p-4 rounded-xl space-y-1.5">
-          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
-            <i class="fa-solid fa-trophy"></i> Résumé &amp; Merit Systems (CFP, AP, Colley Matrix)
-          </span>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Measure <em>what a team has earned on the field</em> based strictly on wins, losses, opponent difficulty, and game control, disregarding margin-of-victory blowout style points.
-          </p>
-        </div>
+      <!-- Tab Navigation -->
+      <div class="flex items-center gap-2 border-b border-slate-800 pb-3">
+        <button id="compendium-tab-btn-polls" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-purple-500 text-black border border-purple-400 transition flex items-center gap-2 cursor-pointer font-display">
+          <i class="fa-solid fa-list-ol"></i>
+          <span>Top 10 Benchmark Systems</span>
+        </button>
+        <button id="compendium-tab-btn-hubs" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition flex items-center gap-2 cursor-pointer font-display">
+          <i class="fa-solid fa-chart-network text-cyan-400"></i>
+          <span>Premier Analytics Hubs &amp; Data Sources (8)</span>
+        </button>
       </div>
 
-      <!-- Systems Table -->
-      <div class="overflow-x-auto rounded-xl border border-slate-800">
-        <table class="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr class="bg-slate-950 text-slate-400 font-mono uppercase text-[10px] tracking-wider border-b border-slate-800">
-              <th class="py-3 px-3.5 text-center w-10">#</th>
-              <th class="py-3 px-3.5 w-48">System / Site</th>
-              <th class="py-3 px-3.5 w-36">Type</th>
-              <th class="py-3 px-3.5 w-40">Transparency Level</th>
-              <th class="py-3 px-3.5">Methodology &amp; How It Is Calculated</th>
-              <th class="py-3 px-3.5 text-right w-44">Primary Focus</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800/60 bg-slate-900/50">
-            
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">1</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">College Football Playoff (CFP)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Committee</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Principles Published, Math N/A</td>
-              <td class="py-3 px-3.5 text-slate-300">13-member selection committee voting in secret balloting rounds evaluating head-to-head, SOS, and conference championships. Consensus voting without fixed formulas.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">Secret Consensus</span>
-              </td>
-            </tr>
+      <!-- TAB 1: TOP 10 BENCHMARK RANKING SYSTEMS -->
+      <div id="compendium-tab-polls" class="space-y-6">
+        
+        <!-- Key Concept Banner -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-purple-950/20 border border-purple-800/40 p-4 rounded-xl space-y-1.5">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
+              <i class="fa-solid fa-chart-line-up"></i> Predictive Models (SP+, FPI, Sagarin Predictor)
+            </span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Measure <em>who would win on a neutral field tomorrow</em> using per-play success rates, net EPA, and roster talent. May rank a 1-loss dominant team over an unblemished team with a weak schedule.
+            </p>
+          </div>
+          <div class="bg-amber-950/20 border border-amber-800/40 p-4 rounded-xl space-y-1.5">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
+              <i class="fa-solid fa-trophy"></i> Résumé &amp; Merit Systems (CFP, AP, Colley Matrix)
+            </span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Measure <em>what a team has earned on the field</em> based strictly on wins, losses, opponent difficulty, and game control, disregarding margin-of-victory blowout style points.
+            </p>
+          </div>
+        </div>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">2</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">Associated Press (AP) Top 25</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Media Poll</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Public Voter Ballots</td>
-              <td class="py-3 px-3.5 text-slate-300">60+ sports journalists submit 1–25 ballots weekly (25 pts for #1 to 1 pt for #25). Fully public voter ballots published weekly on AP News.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">25-to-1 Media Votes</span>
-              </td>
-            </tr>
+        <!-- Systems Table -->
+        <div class="overflow-x-auto rounded-xl border border-slate-800">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="bg-slate-950 text-slate-400 font-mono uppercase text-[10px] tracking-wider border-b border-slate-800">
+                <th class="py-3 px-3.5 text-center w-10">#</th>
+                <th class="py-3 px-3.5 w-48">System / Site</th>
+                <th class="py-3 px-3.5 w-36">Type</th>
+                <th class="py-3 px-3.5 w-40">Transparency Level</th>
+                <th class="py-3 px-3.5">Methodology &amp; How It Is Calculated</th>
+                <th class="py-3 px-3.5 text-right w-44">Primary Focus</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60 bg-slate-900/50">
+              
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">1</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">College Football Playoff (CFP)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Committee</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Principles Published, Math N/A</td>
+                <td class="py-3 px-3.5 text-slate-300">13-member selection committee voting in secret balloting rounds evaluating head-to-head, SOS, and conference championships. Consensus voting without fixed formulas.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">Secret Consensus</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">3</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">US LBM Coaches Poll (USA Today)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Coaches Poll</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Public Voter Ballots</td>
-              <td class="py-3 px-3.5 text-slate-300">Active FBS head coaches submit weekly 1–25 ballots (25 pts to 1 pt). Published by USA Today with individual final ballots disclosed.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">Coaches Consensus</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">2</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">Associated Press (AP) Top 25</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Media Poll</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Public Voter Ballots</td>
+                <td class="py-3 px-3.5 text-slate-300">60+ sports journalists submit 1–25 ballots weekly (25 pts for #1 to 1 pt for #25). Fully public voter ballots published weekly on AP News.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">25-to-1 Media Votes</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">4</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">ESPN Football Power Index (FPI)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Concepts Explained, Code Proprietary</td>
-              <td class="py-3 px-3.5 text-slate-300">Evaluates Expected Points Added (EPA) per play, returning production, recruiting ratings, and component efficiencies. Regression weights are proprietary.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">EPA / Drive Regressions</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">3</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">US LBM Coaches Poll (USA Today)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Coaches Poll</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Public Voter Ballots</td>
+                <td class="py-3 px-3.5 text-slate-300">Active FBS head coaches submit weekly 1–25 ballots (25 pts to 1 pt). Published by USA Today with individual final ballots disclosed.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">Coaches Consensus</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">5</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">SP+ (Bill Connelly / ESPN)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Full Conceptual Breakdown</td>
-              <td class="py-3 px-3.5 text-slate-300">Three pillars: Play-by-play Success Rate, Explosiveness (yards per successful play), and Finishing Drives. Integrates recruiting and returning production priors.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Success &amp; Explosiveness</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">4</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">ESPN Football Power Index (FPI)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Concepts Explained, Code Proprietary</td>
+                <td class="py-3 px-3.5 text-slate-300">Evaluates Expected Points Added (EPA) per play, returning production, recruiting ratings, and component efficiencies. Regression weights are proprietary.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">EPA / Drive Regressions</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">6</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">Sagarin Ratings (Jeff Sagarin)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive &amp; Elo</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Fully Explained Principles</td>
-              <td class="py-3 px-3.5 text-slate-300">Linear algebra &amp; network theory modeling with diminishing-returns point margins. Publishes Elo-Chess vs Predictor ratings and exact home-field adjustments.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Diminishing Margin SAM</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">5</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">SP+ (Bill Connelly / ESPN)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Full Conceptual Breakdown</td>
+                <td class="py-3 px-3.5 text-slate-300">Three pillars: Play-by-play Success Rate, Explosiveness (yards per successful play), and Finishing Drives. Integrates recruiting and returning production priors.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Success &amp; Explosiveness</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">7</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">TeamRankings Predictive Ratings</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Inputs &amp; Mechanics Published</td>
-              <td class="py-3 px-3.5 text-slate-300">Point differential adjusted for opponent strength, venue location, and game state. Rating difference represents expected neutral field point spread.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Vegas Neutral Spread</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">6</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">Sagarin Ratings (Jeff Sagarin)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive &amp; Elo</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Fully Explained Principles</td>
+                <td class="py-3 px-3.5 text-slate-300">Linear algebra &amp; network theory modeling with diminishing-returns point margins. Publishes Elo-Chess vs Predictor ratings and exact home-field adjustments.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Diminishing Margin SAM</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">8</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">Colley’s Bias-Free Matrix</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 font-mono">Résumé Computer</span></td>
-              <td class="py-3 px-3.5 text-emerald-400 font-mono font-bold">Fully Open Source Math</td>
-              <td class="py-3 px-3.5 text-slate-300">Solves linear equation system (r = M⁻¹ b). Completely ignores point margins, assessing purely wins, losses, and opponent win percentages.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 font-mono text-[10px]">Pure Matrix W-L (r=M⁻¹b)</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">7</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">TeamRankings Predictive Ratings</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Inputs &amp; Mechanics Published</td>
+                <td class="py-3 px-3.5 text-slate-300">Point differential adjusted for opponent strength, venue location, and game state. Rating difference represents expected neutral field point spread.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Vegas Neutral Spread</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">9</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">CFB Graphs / CollegeFootballData (PPA)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 font-mono">Analytical Metric Site</span></td>
-              <td class="py-3 px-3.5 text-emerald-400 font-mono font-bold">Open Methodology &amp; Public API</td>
-              <td class="py-3 px-3.5 text-slate-300">Uses Predicted Points Added (PPA) per play based on down, distance, and field position on an open-source model with full public API availability.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 font-mono text-[10px]">Per-Play Net PPA</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">8</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">Colley’s Bias-Free Matrix</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 font-mono">Résumé Computer</span></td>
+                <td class="py-3 px-3.5 text-emerald-400 font-mono font-bold">Fully Open Source Math</td>
+                <td class="py-3 px-3.5 text-slate-300">Solves linear equation system (r = M⁻¹ b). Completely ignores point margins, assessing purely wins, losses, and opponent win percentages.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 font-mono text-[10px]">Pure Matrix W-L (r=M⁻¹b)</span>
+                </td>
+              </tr>
 
-            <tr class="hover:bg-slate-800/40">
-              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">10</td>
-              <td class="py-3 px-3.5 font-bold text-white font-display">Massey Ratings (Kenneth Massey)</td>
-              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Composite / Computer</span></td>
-              <td class="py-3 px-3.5 text-slate-400 font-mono">Mathematical Formulation Published</td>
-              <td class="py-3 px-3.5 text-slate-300">Least-squares linear model balancing scoring differential and game outcomes against strength of schedule. Also hosts the Massey Composite of 100+ computer ratings.</td>
-              <td class="py-3 px-3.5 text-right">
-                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Least-Squares Composite</span>
-              </td>
-            </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">9</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">CFB Graphs / CollegeFootballData (PPA)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 font-mono">Analytical Metric Site</span></td>
+                <td class="py-3 px-3.5 text-emerald-400 font-mono font-bold">Open Methodology &amp; Public API</td>
+                <td class="py-3 px-3.5 text-slate-300">Uses Predicted Points Added (PPA) per play based on down, distance, and field position on an open-source model with full public API availability.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 font-mono text-[10px]">Per-Play Net PPA</span>
+                </td>
+              </tr>
 
-          </tbody>
-        </table>
+              <tr class="hover:bg-slate-800/40">
+                <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">10</td>
+                <td class="py-3 px-3.5 font-bold text-white font-display">Massey Ratings (Kenneth Massey)</td>
+                <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Composite / Computer</span></td>
+                <td class="py-3 px-3.5 text-slate-400 font-mono">Mathematical Formulation Published</td>
+                <td class="py-3 px-3.5 text-slate-300">Least-squares linear model balancing scoring differential and game outcomes against strength of schedule. Also hosts the Massey Composite of 100+ computer ratings.</td>
+                <td class="py-3 px-3.5 text-right">
+                  <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Least-Squares Composite</span>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ACFC Synthesis Callout -->
+        <div class="bg-cyan-950/30 border border-cyan-500/40 p-4 rounded-xl space-y-2">
+          <h4 class="font-bold text-cyan-400 text-sm font-display flex items-center gap-2">
+            <i class="fa-solid fa-code-merge"></i> How ACFC Unifies All 10 Systems
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            ACFC resolves the historic tension in college football rankings by mathematically synthesizing <strong>Resume Merit (Colley Matrix, SOR, Game Control, Schedule Difficulty)</strong> with <strong>Predictive Efficiency (SP+ Success Rates, CFBD Net PPA/EPA, Finishing Drives, Roster Talent)</strong> in equal 50/50 equilibrium, anchored by a 40% Bayesian Roster &amp; Coaching Prior to eliminate early-season small sample distortions.
+          </p>
+        </div>
+
       </div>
 
-      <!-- ACFC Synthesis Callout -->
-      <div class="bg-cyan-950/30 border border-cyan-500/40 p-4 rounded-xl space-y-2">
-        <h4 class="font-bold text-cyan-400 text-sm font-display flex items-center gap-2">
-          <i class="fa-solid fa-code-merge"></i> How ACFC Unifies All 10 Systems
-        </h4>
-        <p class="text-xs text-slate-300 leading-relaxed">
-          ACFC resolves the conflict by mathematically isolating <strong>Resume Merit (Colley Matrix, SOR, Game Control, Schedule Difficulty)</strong> on one side and <strong>Predictive Efficiency (SP+ Success Rates, CFBD Net PPA/EPA, Finishing Drives, Roster Talent)</strong> on the other, giving you complete real-time slider control to emulate any philosophy.
-        </p>
+      <!-- TAB 2: PREMIER CFB ANALYTICS HUBS & DATA SOURCES -->
+      <div id="compendium-tab-hubs" class="space-y-6 hidden">
+        
+        <!-- Hubs Intro Banner -->
+        <div class="bg-slate-950/80 border border-cyan-500/30 p-4 rounded-xl space-y-2">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-white text-sm font-display flex items-center gap-2">
+              <i class="fa-solid fa-network-wired text-cyan-400"></i>
+              The Premier College Football Analytics Architecture
+            </h4>
+            <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60 text-[10px] font-mono font-bold">
+              8 Core Platforms
+            </span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Modern college football analysis has evolved far beyond raw yardage and traditional box scores. The ACFC algorithm directly leverages mathematical concepts, play-by-play distributions, and drive-level state modeling pioneered across these eight definitive industry platforms.
+          </p>
+        </div>
+
+        <!-- 8 Platforms Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <!-- Hub 1: CollegeFootballData (CFBD) -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <i class="fa-solid fa-database text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">CollegeFootballData (CFBD)</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">collegefootballdata.com</span>
+                  </div>
+                </div>
+                <a href="https://collegefootballdata.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-cyan-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/50 text-[10px] font-mono font-semibold">
+                Best For: Foundational Open-Data Hub for CFB Analytics &amp; APIs
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                The open-data backbone of modern CFB analysis, providing play-by-play Expected Points Added (EPA), down-and-distance success rates, and programmatic API access.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Play-by-play EPA</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Success Rate</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Havoc Rate</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Post-Game Win Prob</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-cyan-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Forms the mathematical baseline for PES down-to-down success rates and net EPA.
+            </div>
+          </div>
+
+          <!-- Hub 2: Game on Paper -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                    <i class="fa-solid fa-chart-mixed text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">Game on Paper</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">gameonpaper.com/cfb</span>
+                  </div>
+                </div>
+                <a href="https://gameonpaper.com/cfb" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-purple-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/50 text-[10px] font-mono font-semibold">
+                Best For: Post-Game Visual Profiles &amp; Cumulative EPA Flow
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                State-of-the-art interactive charts visualizing matchup-level cumulative EPA, passing vs. rushing efficiency splits, and in-game win probability curves.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">EPA per Dropback</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">EPA per Rush</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Cumulative EPA Charts</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Success Distributions</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-purple-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Calibrates dropback vs. rush balance and game control win curves.
+            </div>
+          </div>
+
+          <!-- Hub 3: BCF Toys (Brian Fremeau) -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <i class="fa-solid fa-tachometer-fast text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">BCF Toys (Brian Fremeau)</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">bcftoys.com</span>
+                  </div>
+                </div>
+                <a href="https://www.bcftoys.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-emerald-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/50 text-[10px] font-mono font-semibold">
+                Best For: Drive-Efficiency Ratings (FEI) &amp; Possession Metrics
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                The definitive authority on possession efficiency, evaluating Fremeau Efficiency Index (FEI), available drive rates, value drives, and garbage-time-filtered drive stats.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">FEI Ratings</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Available Drive Rate</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Value Drives</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Garbage-Time Filtering</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-emerald-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Directly inspires ACFC's drive finishing thresholds and possession value modeling.
+            </div>
+          </div>
+
+          <!-- Hub 4: ESPN SP+ & FPI -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                    <i class="fa-solid fa-shield-halved text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">ESPN SP+ &amp; FPI</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">espn.com/college-football</span>
+                  </div>
+                </div>
+                <a href="https://www.espn.com/college-football/" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-amber-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/50 text-[10px] font-mono font-semibold">
+                Best For: Industry Standard Predictive Power Models
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Bill Connelly's tempo- and opponent-adjusted SP+ (efficiency, explosiveness, field position, finishing drives, turnovers) paired with ESPN's FPI predictive rating and playoff leverage.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Connelly 5 Factors</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">FPI Predictive</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Opponent Adjustment</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Playoff Leverage</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-amber-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Forms the primary predictive benchmark for our 50% PES predictive engine.
+            </div>
+          </div>
+
+          <!-- Hub 5: CFB-Graphs (Parker Fleming) -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                    <i class="fa-solid fa-chart-scatter text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">CFB-Graphs (Parker Fleming)</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">cfb-graphs.com</span>
+                  </div>
+                </div>
+                <a href="https://cfb-graphs.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-blue-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-blue-950/60 text-blue-300 border border-blue-800/50 text-[10px] font-mono font-semibold">
+                Best For: Interactive Dashboards &amp; Efficiency Tier Visualizations
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Celebrated interactive tier plots contrasting EPA/play against Success Rates, isolating early-down rushing efficiency from late-down pass passing necessity.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">EPA vs SR Scatter</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Early vs Late Down</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Explosiveness Tiers</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Schedule Tiers</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-blue-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Informs the 5-axis radar polygon charts and down-to-down weights in ACFC team modals.
+            </div>
+          </div>
+
+          <!-- Hub 6: Beta_Rank (Rob Henderson) -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400">
+                    <i class="fa-solid fa-dice-d20 text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">Beta_Rank (Rob Henderson)</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">betarank-cfb.com</span>
+                  </div>
+                </div>
+                <a href="https://www.betarank-cfb.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-rose-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-rose-950/60 text-rose-300 border border-rose-800/50 text-[10px] font-mono font-semibold">
+                Best For: Model-Based Drive Simulation &amp; Vegas Spread Projections
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Pioneering drive-state simulation engine mapping offensive/defensive state transitions, explosive drive probabilities, and game-spread distributions.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Drive State Models</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Explosive Likelihood</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Spread Projections</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Monte Carlo Sim</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-rose-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Underpins the head-to-head score projection engine inside ACFC Matchup Arena.
+            </div>
+          </div>
+
+          <!-- Hub 7: cfbstats -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400">
+                    <i class="fa-solid fa-filter-list text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">cfbstats</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">cfbstats.com</span>
+                  </div>
+                </div>
+                <a href="http://www.cfbstats.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-teal-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-teal-950/60 text-teal-300 border border-teal-800/50 text-[10px] font-mono font-semibold">
+                Best For: Situational Splits &amp; Down-and-Distance Filters
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                The definitive historical reference for granular situational splits: third-down conversions by distance bucket (3rd &amp; short vs 3rd &amp; long), red-zone TD percentages, and half splits.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">3rd Down by Bucket</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Red Zone TD %</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Half / Quarter Splits</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Garbage Filtering</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-teal-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Supplies situational down-and-distance filters and red-zone finish ratings.
+            </div>
+          </div>
+
+          <!-- Hub 8: Pro Football Focus (PFF College) -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3 flex flex-col justify-between hover:border-cyan-500/40 transition">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+                    <i class="fa-solid fa-user-check text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-white text-sm font-display">Pro Football Focus (PFF College)</h5>
+                    <span class="text-[10px] text-slate-400 font-mono">pff.com/college</span>
+                  </div>
+                </div>
+                <a href="https://www.pff.com/college" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-indigo-500 hover:text-black text-slate-300 text-xs font-mono font-bold transition flex items-center gap-1">
+                  <span>Visit</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+              </div>
+              <div class="inline-block px-2 py-0.5 rounded bg-indigo-950/60 text-indigo-300 border border-indigo-800/50 text-[10px] font-mono font-semibold">
+                Best For: Film-Graded Player Charting &amp; Individual Execution
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Play-by-play film charting grading individual player performance: adjusted completion rate, turnover-worthy plays (TWP), pressure rate, pass-rush win rate, and tackle breaking.
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Turnover-Worthy Plays</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Pressure Rate</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Adjusted Comp %</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-[10px] font-mono text-slate-300">Pass-Rush Win Rate</span>
+              </div>
+            </div>
+            <div class="pt-2 border-t border-slate-800/80 text-[11px] text-indigo-400 font-mono">
+              <i class="fa-solid fa-code-commit text-[10px] mr-1"></i> <strong>ACFC Integration:</strong> Informs our Bayesian talent priors, blue-chip ratios, and turnover-luck neutralization.
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
@@ -1248,6 +1572,30 @@
       });
       top10Modal.addEventListener("click", (e) => {
         if (e.target === top10Modal) top10Modal.classList.add("opacity-0", "pointer-events-none");
+      });
+
+      // Compendium Modal Tabs Switcher
+      const compendiumTabBtnPolls = document.getElementById("compendium-tab-btn-polls");
+      const compendiumTabBtnHubs = document.getElementById("compendium-tab-btn-hubs");
+      const compendiumTabPolls = document.getElementById("compendium-tab-polls");
+      const compendiumTabHubs = document.getElementById("compendium-tab-hubs");
+
+      compendiumTabBtnPolls.addEventListener("click", () => {
+        compendiumTabBtnPolls.classList.add("bg-purple-500", "text-black", "border-purple-400");
+        compendiumTabBtnPolls.classList.remove("bg-slate-800", "text-slate-300", "border-slate-700");
+        compendiumTabBtnHubs.classList.remove("bg-purple-500", "text-black", "border-purple-400");
+        compendiumTabBtnHubs.classList.add("bg-slate-800", "text-slate-300", "border-slate-700");
+        compendiumTabPolls.classList.remove("hidden");
+        compendiumTabHubs.classList.add("hidden");
+      });
+
+      compendiumTabBtnHubs.addEventListener("click", () => {
+        compendiumTabBtnHubs.classList.add("bg-purple-500", "text-black", "border-purple-400");
+        compendiumTabBtnHubs.classList.remove("bg-slate-800", "text-slate-300", "border-slate-700");
+        compendiumTabBtnPolls.classList.remove("bg-purple-500", "text-black", "border-purple-400");
+        compendiumTabBtnPolls.classList.add("bg-slate-800", "text-slate-300", "border-slate-700");
+        compendiumTabHubs.classList.remove("hidden");
+        compendiumTabPolls.classList.add("hidden");
       });
 
       function generateSvgRadarChart(team) {

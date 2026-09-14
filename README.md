@@ -1,6 +1,6 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.3.3-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.3.4-cyan?style=for-the-badge&logo=github)
 ![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
 ![Season](https://img.shields.io/badge/Season-2026--27_Calibrated_Baseline-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
@@ -8,7 +8,7 @@
 
 **🚀 Live Web Application:** [https://xikarzr2026.github.io/cfb-top-25-ai/](https://xikarzr2026.github.io/cfb-top-25-ai/)
 
-An advanced, responsive, client-side analytical ranking engine for College Football that decouples **Predictive Power** from **Resume Merit**, calibrated with **Bayesian Prior Blending** and benchmarking against the **Top 10 College Football Ranking Systems**.
+An advanced, responsive, client-side analytical ranking engine for College Football that decouples **Predictive Power** from **Resume Merit**, calibrated with **Bayesian Prior Blending** and benchmarking against the **Top 10 College Football Ranking Systems** and the **8 Premier College Football Analytics Hubs**.
 
 ---
 
@@ -16,7 +16,7 @@ An advanced, responsive, client-side analytical ranking engine for College Footb
 
 College football ranking systems divide into two distinct categories: **Human Consensus Polls** (measuring subjective merit/résumé) and **Algorithmic/Computer Models** (measuring predictive power or mathematically balanced schedules).
 
-In ACFC v0.3.3, users can review the methodologies of each benchmark system inside the Compendium modal:
+In ACFC v0.3.4, users can review the methodologies of each benchmark system inside the Compendium modal:
 
 | # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | Primary Analytical Focus |
 | :-: | :--- | :--- | :--- | :--- | :--- |
@@ -33,7 +33,24 @@ In ACFC v0.3.3, users can review the methodologies of each benchmark system insi
 
 ---
 
-## 2. The ACFC Synthesis: Unifying Predictive & Résumé
+## 2. Premier College Football Analytics Hubs & Advanced Data Sources
+
+The ACFC engine synthesizes metrics, distributions, and foundational data structures pioneered across the **8 premier analytics platforms** in modern college football:
+
+| # | Platform | URL | Primary Strength ("Best For") | Key Metrics & Concepts | ACFC Engine Synthesis |
+| :-: | :--- | :--- | :--- | :--- | :--- |
+| **1** | **CollegeFootballData (CFBD)** | [collegefootballdata.com](https://collegefootballdata.com) | Foundational Open-Data Hub & APIs | Play-by-play EPA, Success Rate, Havoc Rate, Finishing Drives, Post-Game Win Probabilities, Python/R API. | Supplies the foundational data baseline for down-to-down success rates, Net EPA, and predictive metric models. |
+| **2** | **Game on Paper** | [gameonpaper.com/cfb](https://gameonpaper.com/cfb) | Post-Game Visual Profiles & EPA Flows | EPA per dropback/rush, cumulative EPA charts, success rate distributions, and in-game win probability flows. | Calibrates rush vs. pass efficiency weighting and game control curve dampening. |
+| **3** | **BCF Toys (Brian Fremeau)** | [bcftoys.com](https://www.bcftoys.com) | Drive-Efficiency Ratings & Possession Stats | FEI (Fremeau Efficiency Index), available drive rate, value drives, first down rate, garbage-time filtering. | Serves as the architectural standard for ACFC drive finishing, garbage-time filtering, and possession value modeling. |
+| **4** | **ESPN SP+ & FPI** | [espn.com/college-football](https://www.espn.com/college-football/) | Industry-Standard Predictive Power Models | Connelly's 5 Factors (efficiency, explosiveness, field position, finishing drives, turnovers), FPI ratings, SOS. | Primary benchmark for our 50% PES predictive engine and tempo/opponent strength adjustments. |
+| **5** | **CFB-Graphs (Parker Fleming)** | [cfb-graphs.com](https://cfb-graphs.com) | Interactive Dashboards & Efficiency Tiers | EPA/play vs. Success Rate scatterplots, early-down vs. late-down efficiency, explosive play rates, schedule tiers. | Informs the 5-axis radar polygon charts and down-and-distance situational weights in team deep dives. |
+| **6** | **Beta_Rank (Rob Henderson)** | [betarank-cfb.com](https://www.betarank-cfb.com) | Drive-Level State Simulation & Spreads | Model-based drive simulation, offensive/defensive state transitions, explosive drive likelihood, Vegas line projections. | Drives score projection algorithms and expected spread distributions in the ACFC Matchup Arena. |
+| **7** | **cfbstats** | [cfbstats.com](http://www.cfbstats.com) | Situational Splits & Down-and-Distance Filters | Third-down conversions by yardage bucket (short/med/long), red zone TD %, half/quarter splits, raw situations. | Provides foundational baselines for red zone conversion thresholds and situational execution indicators. |
+| **8** | **Pro Football Focus (PFF College)** | [pff.com/college](https://pff.com/college) | Film-Graded Charting & Player Execution | Adjusted completion rate, turnover-worthy plays (TWP), pressure rate, pass-rush win rate, tackle breaking. | Informs Bayesian talent priors, blue-chip ratio weights, and QB turnover-luck normalization. |
+
+---
+
+## 3. The ACFC Synthesis: Unifying Predictive & Résumé
 
 $$\text{ACFC Index} = w_{\text{resume}} \cdot \text{RMS} + (1 - w_{\text{resume}}) \cdot \text{PES}$$
 
@@ -65,17 +82,17 @@ $$\text{ACFC Index} = w_{\text{resume}} \cdot \text{RMS} + (1 - w_{\text{resume}
 
 ---
 
-## 3. On-Demand Algorithm Execution & Live Recalculation Engine
+## 4. On-Demand Algorithm Execution & Live Recalculation Engine
 
-In ACFC v0.3.3, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
+In ACFC v0.3.4, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
 * **`⚡ Run Algorithm & Update Rankings`**: Triggers real-time computation of the full ACFC composite matrix across all 25 teams.
 * **Live Calculation Telemetry**: Instant millisecond feedback badge (e.g. `⚡ Recalculated in 1.1ms`) confirming on-the-fly execution.
-* **Tamper-Proof Integrity**: Runs against calibrated mathematical weights (50% RMS / 50% PES with 40% Bayesian prior), ensuring objective rankings without subjective voter bias or arbitrary tampering.
+* **Tamper-Proof Integrity**: Operates on fixed mathematical weights (50% RMS / 50% PES with 40% Bayesian prior), ensuring objective rankings without subjective voter bias or arbitrary tampering.
 * **Matchup Arena**: Interactive head-to-head simulator comparing any two FBS teams on neutral or home fields using component ratings, roster talent, and coach grades.
 
 ---
 
-## 4. Official Model Calibration & Fixed Parameters
+## 5. Official Model Calibration & Fixed Parameters
 
 To maintain objective, tamper-proof ranking integrity, the ACFC ranking algorithm operates on fixed, scientifically calibrated parameters:
 1. **Bayesian Prior Weight (40% Baseline):** Blends 247 Talent Composite (50%), Returning Production (25%), and Coaching Pedigree (25%) to neutralize early-season sample bias.
@@ -85,7 +102,7 @@ To maintain objective, tamper-proof ranking integrity, the ACFC ranking algorith
 
 ---
 
-## 5. Local Setup & Deployment
+## 6. Local Setup & Deployment
 
 ```bash
 # Windows
@@ -105,5 +122,5 @@ python -m http.server 8000
 
 ---
 
-## 6. License
+## 7. License
 Distributed under the MIT License.
