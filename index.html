@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACFC Top 25 | 2026-27 College Football Composite Ranking Engine</title>
+  <meta name="description" content="2026-27 College Football Top 25 Ranking Engine with Bayesian Roster Talent, Coaching, and In-Season Efficiency Decoupling.">
+
+  <!-- Google Fonts: Outfit, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slate: {
+              950: '#070a13',
+              900: '#0c1120',
+              850: '#11172a',
+              800: '#172036',
+              750: '#1e2946',
+              700: '#273456'
+            },
+            cyan: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+              glow: '#00f0ff'
+            },
+            amber: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              glow: '#ffb800'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #070a13;
+      color: #f1f5f9;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .glass-panel {
+      background: rgba(17, 23, 42, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .glass-card {
+      background: rgba(23, 32, 54, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .glass-card:hover {
+      background: rgba(30, 41, 70, 0.9);
+      border-color: rgba(6, 182, 212, 0.35);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px -3px rgba(6, 182, 212, 0.2);
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #1e2946;
+      border-radius: 9999px;
+      height: 8px;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #06b6d4;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.7);
+      border: 2px solid #ffffff;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: #22d3ee;
+    }
+
+    .delta-positive {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .delta-negative {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fb7185;
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .delta-neutral {
+      background: rgba(148, 163, 184, 0.1);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0c1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e2946;
+      border-radius: 4px;
+    }
+
+    .radar-polygon {
+      transition: all 0.4s ease;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased selection:bg-cyan-500 selection:text-black">
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-cyan-500 to-amber-400 p-[2px] shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+            <i class="fa-solid fa-football text-xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-400"></i>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="text-xl sm:text-2xl font-black font-display tracking-tight text-white flex items-center gap-2">
+              ACFC <span class="text-cyan-400">TOP 25</span>
+            </h1>
+            <span id="header-version-badge" class="px-2 py-0.5 text-xs font-mono font-bold rounded-md bg-cyan-950 text-cyan-400 border border-cyan-800/50">
+              v0.3.0
+            </span>
+            <span class="px-2 py-0.5 text-[11px] font-semibold rounded-md bg-amber-950/60 text-amber-300 border border-amber-800/40 hidden md:inline-flex items-center gap-1">
+              <i class="fa-solid fa-calendar-check text-[10px]"></i> 2026-27 Season &bull; Week 3
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block font-medium">
+            Advanced College Football Composite &bull; Bayesian Roster Talent, Coaches &amp; In-Season Efficiency
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="btn-top10-systems" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 transition flex items-center gap-2">
+          <i class="fa-solid fa-layer-group text-purple-400"></i>
+          <span class="hidden md:inline">Top 10 Systems</span>
+          <span class="md:hidden">Systems</span>
+        </button>
+        <button id="btn-matchup-simulator" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-750 text-slate-200 hover:text-white border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-swords text-cyan-400"></i>
+          <span>Matchup Arena</span>
+        </button>
+        <button id="btn-open-methodology" class="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center gap-2">
+          <i class="fa-solid fa-square-root-variable"></i>
+          <span class="hidden sm:inline">The Math</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- KPI / HIGHLIGHT BANNER (2026 Snapshot) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+      <!-- Card 1: #1 Team -->
+      <div class="glass-panel rounded-2xl p-4 flex items-center justify-between border-l-4 border-l-cyan-400">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">2026 #1 COMPOSITE</span>
+          <h3 id="kpi-top-team-name" class="text-lg font-bold font-display text-white mt-0.5">Texas Longhorns</h3>
+          <p id="kpi-top-team-score" class="text-xs text-cyan-400 font-mono mt-0.5">Index: 0.985 (2-0)</p>
+        </div>
+        <div id="kpi-top-team-logo" class="w-12 h-12 rounded-full bg-slate-800/80 p-2 flex items-center justify-center border border-slate-700">
+          <img src="https://a.espncdn.com/i/teamlogos/ncaa/500/251.png" alt="Texas" class="w-8 h-8 object-contain">
+        </div>
+      </div>
+
+      <!-- Card 2: Highest Roster Talent & PES -->
+      <div class="glass-panel rounded-2xl p-4 flex items-center justify-between border-l-4 border-l-purple-400">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">TOP TALENT &amp; PES</span>
+          <h3 id="kpi-top-pes-name" class="text-lg font-bold font-display text-white mt-0.5">Georgia Bulldogs</h3>
+          <p id="kpi-top-pes-detail" class="text-xs text-purple-300 font-mono mt-0.5">99.0% Blue-Chip | Kirby Smart</p>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-lg">
+          <i class="fa-solid fa-users-crown"></i>
+        </div>
+      </div>
+
+      <!-- Card 3: Top Resume Merit (Early Wins) -->
+      <div class="glass-panel rounded-2xl p-4 flex items-center justify-between border-l-4 border-l-amber-400">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">BEST 2026 RESUME (RMS)</span>
+          <h3 id="kpi-top-rms-name" class="text-lg font-bold font-display text-white mt-0.5">Tennessee Vols</h3>
+          <p id="kpi-top-rms-detail" class="text-xs text-amber-300 font-mono mt-0.5">SOR: 0.935 | +33.5 SAM</p>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-lg">
+          <i class="fa-solid fa-trophy"></i>
+        </div>
+      </div>
+
+      <!-- Card 4: Top Analytics Darling -->
+      <div class="glass-panel rounded-2xl p-4 flex items-center justify-between border-l-4 border-l-emerald-400">
+        <div>
+          <span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">POLL DIVERGENCE (WEEK 3)</span>
+          <h3 id="kpi-biggest-delta-name" class="text-lg font-bold font-display text-white mt-0.5">Ohio State &amp; Oregon</h3>
+          <p class="text-xs text-emerald-400 font-mono mt-0.5">High Efficiency despite 1-1</p>
+        </div>
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg">
+          <i class="fa-solid fa-bolt"></i>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OFFICIAL MODEL ARCHITECTURE & CALIBRATION DECK (FIXED WEIGHTS) -->
+    <section class="glass-panel rounded-2xl p-5 sm:p-6 border border-slate-800 shadow-xl space-y-5">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h2 class="text-lg font-bold font-display text-white flex items-center gap-2">
+              <i class="fa-solid fa-microchip text-cyan-400"></i>
+              2026-27 ACFC Algorithmic Model Architecture
+            </h2>
+            <span class="px-2.5 py-0.5 rounded-md bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 text-[11px] font-mono font-bold flex items-center gap-1.5 shadow-sm">
+              <i class="fa-solid fa-lock text-[10px]"></i> Fixed Calibration
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 mt-1">
+            Official Week 3 mathematical calibration decoupling Resume Merit (RMS) from Predictive Efficiency (PES) stabilized with Bayesian Roster Priors.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs font-mono text-slate-400 bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
+          <i class="fa-solid fa-calculator text-cyan-400"></i>
+          <span>Formula: <strong class="text-white font-sans">0.50 RMS + 0.50 PES</strong></span>
+        </div>
+      </div>
+
+      <!-- 4 Fixed Calibration Parameter Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Pillar 1: Bayesian Prior Weight (40% Fixed) -->
+        <div class="space-y-2 bg-slate-900/70 p-4 rounded-xl border border-slate-800 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-brain-circuit text-emerald-400"></i>
+              Bayesian Prior Blend
+            </span>
+            <span class="font-mono font-bold text-emerald-400 text-xs px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-800/40">40% Fixed</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-snug">
+            Stabilizes early-season sample with 247 Talent Composite (50%), Returning Production (25%), and Coaching Pedigree (25%).
+          </p>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-2">
+            <div class="bg-emerald-400 h-full rounded-full" style="width: 40%"></div>
+          </div>
+        </div>
+
+        <!-- Pillar 2: Resume vs Efficiency (50/50 Fixed) -->
+        <div class="space-y-2 bg-slate-900/70 p-4 rounded-xl border border-slate-800 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-scale-balanced text-cyan-400"></i>
+              Dual Engine Balance
+            </span>
+            <span class="font-mono font-bold text-cyan-400 text-xs px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/40">50% RMS / 50% PES</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-snug">
+            Perfect equilibrium between on-field resume merit (what you earned) and per-play efficiency (neutral-field power).
+          </p>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-2 flex">
+            <div class="bg-amber-400 h-full" style="width: 50%"></div>
+            <div class="bg-cyan-400 h-full" style="width: 50%"></div>
+          </div>
+        </div>
+
+        <!-- Pillar 3: Margin S-Curve (+24 pt Cap) -->
+        <div class="space-y-2 bg-slate-900/70 p-4 rounded-xl border border-slate-800 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-gauge-high text-amber-400"></i>
+              Margin S-Curve (SAM)
+            </span>
+            <span class="font-mono font-bold text-amber-400 text-xs px-2 py-0.5 rounded bg-amber-950/60 border border-amber-800/40">+24 Pt Cap</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-snug">
+            Logistic sigmoid diminishing-returns curve on point differentials. Eliminates blowout incentives against weak opponents.
+          </p>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-2">
+            <div class="bg-amber-400 h-full rounded-full" style="width: 70%"></div>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Schedule Multiplier (1.0x Baseline) -->
+        <div class="space-y-2 bg-slate-900/70 p-4 rounded-xl border border-slate-800 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved text-purple-400"></i>
+              Schedule Difficulty
+            </span>
+            <span class="font-mono font-bold text-purple-400 text-xs px-2 py-0.5 rounded bg-purple-950/60 border border-purple-800/40">1.0x Baseline</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-snug">
+            Dynamically scales merit by opponent win rate network and Top-25 marquee wins anchored to a 0.78 national SOS baseline.
+          </p>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden mt-2">
+            <div class="bg-purple-400 h-full rounded-full" style="width: 50%"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FILTER & SEARCH BAR -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+      
+      <!-- Conference & Analytical Filter Pills -->
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none" id="conference-filters">
+        <button data-conf="ALL" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-black border border-cyan-400 whitespace-nowrap">
+          All Top 25
+        </button>
+        <button data-conf="DARLINGS" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-cyan-950 text-cyan-300 border border-cyan-800/40 whitespace-nowrap flex items-center gap-1.5">
+          <i class="fa-solid fa-sparkles text-[10px]"></i> Analytics Darlings
+        </button>
+        <button data-conf="INERTIA" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-rose-950 text-rose-300 border border-rose-800/40 whitespace-nowrap flex items-center gap-1.5">
+          <i class="fa-solid fa-triangle-exclamation text-[10px]"></i> Poll Inertia
+        </button>
+        <button data-conf="SEC" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap">
+          SEC
+        </button>
+        <button data-conf="Big Ten" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap">
+          Big Ten
+        </button>
+        <button data-conf="Big 12" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap">
+          Big 12
+        </button>
+        <button data-conf="ACC" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap">
+          ACC
+        </button>
+        <button data-conf="Group of 5 / Ind" class="conf-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 whitespace-nowrap">
+          G5 / Ind
+        </button>
+      </div>
+
+      <!-- Search Box & View Mode Toggle -->
+      <div class="flex items-center gap-3">
+        <div class="relative w-full sm:w-64">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+          <input type="text" id="search-input" placeholder="Search team, coach, player..." class="w-full pl-8 pr-3 py-1.5 rounded-lg text-xs bg-slate-900 border border-slate-800 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 transition">
+        </div>
+
+        <!-- View Switcher -->
+        <div class="flex items-center bg-slate-900 p-1 rounded-lg border border-slate-800">
+          <button id="view-table-btn" class="px-2.5 py-1 rounded text-xs text-cyan-400 bg-slate-800 transition" title="Table View">
+            <i class="fa-solid fa-list"></i>
+          </button>
+          <button id="view-card-btn" class="px-2.5 py-1 rounded text-xs text-slate-400 hover:text-slate-200 transition" title="Card Grid View">
+            <i class="fa-solid fa-grid-2"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RANKINGS DISPLAY SECTION -->
+    <section id="rankings-container" class="space-y-4">
+      
+      <!-- TABLE VIEW -->
+      <div id="table-view-wrapper" class="glass-panel rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 bg-slate-950/80 text-[11px] uppercase tracking-wider font-mono text-slate-400">
+                <th class="py-3.5 px-4 text-center w-14">Rank</th>
+                <th class="py-3.5 px-4">2026 Team &amp; Coach</th>
+                <th class="py-3.5 px-4 text-center w-24">ACFC Index</th>
+                <th class="py-3.5 px-4 text-center w-28">Prior vs PES</th>
+                <th class="py-3.5 px-4 text-center w-20">vs AP</th>
+                <th class="py-3.5 px-4 text-center w-20">vs Sideline</th>
+                <th class="py-3.5 px-4 hidden md:table-cell">Roster &amp; 2026 Schedule</th>
+                <th class="py-3.5 px-4 hidden lg:table-cell">Analytical Badges</th>
+                <th class="py-3.5 px-4 text-right">Details</th>
+              </tr>
+            </thead>
+            <tbody id="rankings-table-body" class="divide-y divide-slate-800/60 text-sm">
+              <!-- Dynamically populated via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- CARD GRID VIEW (Hidden by default) -->
+      <div id="card-view-wrapper" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 hidden">
+        <!-- Dynamically populated via JS -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- TOP 10 CFB RANKING SYSTEMS BENCHMARK MODAL -->
+  <div id="top10-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-250">
+    <div class="bg-slate-900 border border-slate-750 rounded-2xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 space-y-6">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+            <i class="fa-solid fa-layer-group text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold font-display text-white">Top 10 College Football Ranking Systems Compendium</h3>
+            <p class="text-xs text-slate-400">Predictive Computer Engines vs. Human Consensus Polls &amp; How ACFC Synthesizes Them</p>
+          </div>
+        </div>
+        <button id="btn-close-top10" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Key Concept Banner -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-purple-950/20 border border-purple-800/40 p-4 rounded-xl space-y-1.5">
+          <span class="text-xs font-bold text-purple-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
+            <i class="fa-solid fa-chart-line-up"></i> Predictive Models (SP+, FPI, Sagarin Predictor)
+          </span>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Measure <em>who would win on a neutral field tomorrow</em> using per-play success rates, net EPA, and roster talent. May rank a 1-loss dominant team over an unblemished team with a weak schedule.
+          </p>
+        </div>
+        <div class="bg-amber-950/20 border border-amber-800/40 p-4 rounded-xl space-y-1.5">
+          <span class="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono flex items-center gap-1.5">
+            <i class="fa-solid fa-trophy"></i> Résumé &amp; Merit Systems (CFP, AP, Colley Matrix)
+          </span>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Measure <em>what a team has earned on the field</em> based strictly on wins, losses, opponent difficulty, and game control, disregarding margin-of-victory blowout style points.
+          </p>
+        </div>
+      </div>
+
+      <!-- Systems Table -->
+      <div class="overflow-x-auto rounded-xl border border-slate-800">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-950 text-slate-400 font-mono uppercase text-[10px] tracking-wider border-b border-slate-800">
+              <th class="py-3 px-3.5 text-center w-10">#</th>
+              <th class="py-3 px-3.5 w-48">System / Site</th>
+              <th class="py-3 px-3.5 w-36">Type</th>
+              <th class="py-3 px-3.5 w-40">Transparency Level</th>
+              <th class="py-3 px-3.5">Methodology &amp; How It Is Calculated</th>
+              <th class="py-3 px-3.5 text-right w-44">Primary Focus</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 bg-slate-900/50">
+            
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">1</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">College Football Playoff (CFP)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Committee</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Principles Published, Math N/A</td>
+              <td class="py-3 px-3.5 text-slate-300">13-member selection committee voting in secret balloting rounds evaluating head-to-head, SOS, and conference championships. Consensus voting without fixed formulas.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">Secret Consensus</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">2</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">Associated Press (AP) Top 25</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Media Poll</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Public Voter Ballots</td>
+              <td class="py-3 px-3.5 text-slate-300">60+ sports journalists submit 1–25 ballots weekly (25 pts for #1 to 1 pt for #25). Fully public voter ballots published weekly on AP News.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">25-to-1 Media Votes</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">3</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">US LBM Coaches Poll (USA Today)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-800/40 font-mono">Human Coaches Poll</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Public Voter Ballots</td>
+              <td class="py-3 px-3.5 text-slate-300">Active FBS head coaches submit weekly 1–25 ballots (25 pts to 1 pt). Published by USA Today with individual final ballots disclosed.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono text-[10px]">Coaches Consensus</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">4</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">ESPN Football Power Index (FPI)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Concepts Explained, Code Proprietary</td>
+              <td class="py-3 px-3.5 text-slate-300">Evaluates Expected Points Added (EPA) per play, returning production, recruiting ratings, and component efficiencies. Regression weights are proprietary.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">EPA / Drive Regressions</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">5</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">SP+ (Bill Connelly / ESPN)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Full Conceptual Breakdown</td>
+              <td class="py-3 px-3.5 text-slate-300">Three pillars: Play-by-play Success Rate, Explosiveness (yards per successful play), and Finishing Drives. Integrates recruiting and returning production priors.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Success &amp; Explosiveness</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">6</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">Sagarin Ratings (Jeff Sagarin)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive &amp; Elo</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Fully Explained Principles</td>
+              <td class="py-3 px-3.5 text-slate-300">Linear algebra &amp; network theory modeling with diminishing-returns point margins. Publishes Elo-Chess vs Predictor ratings and exact home-field adjustments.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Diminishing Margin SAM</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">7</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">TeamRankings Predictive Ratings</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Predictive Computer</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Inputs &amp; Mechanics Published</td>
+              <td class="py-3 px-3.5 text-slate-300">Point differential adjusted for opponent strength, venue location, and game state. Rating difference represents expected neutral field point spread.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Vegas Neutral Spread</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">8</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">Colley’s Bias-Free Matrix</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 font-mono">Résumé Computer</span></td>
+              <td class="py-3 px-3.5 text-emerald-400 font-mono font-bold">Fully Open Source Math</td>
+              <td class="py-3 px-3.5 text-slate-300">Solves linear equation system (r = M⁻¹ b). Completely ignores point margins, assessing purely wins, losses, and opponent win percentages.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 font-mono text-[10px]">Pure Matrix W-L (r=M⁻¹b)</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">9</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">CFB Graphs / CollegeFootballData (PPA)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 font-mono">Analytical Metric Site</span></td>
+              <td class="py-3 px-3.5 text-emerald-400 font-mono font-bold">Open Methodology &amp; Public API</td>
+              <td class="py-3 px-3.5 text-slate-300">Uses Predicted Points Added (PPA) per play based on down, distance, and field position on an open-source model with full public API availability.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-300 border border-cyan-800/40 font-mono text-[10px]">Per-Play Net PPA</span>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-800/40">
+              <td class="py-3 px-3.5 text-center font-mono font-bold text-cyan-400">10</td>
+              <td class="py-3 px-3.5 font-bold text-white font-display">Massey Ratings (Kenneth Massey)</td>
+              <td class="py-3 px-3.5"><span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono">Composite / Computer</span></td>
+              <td class="py-3 px-3.5 text-slate-400 font-mono">Mathematical Formulation Published</td>
+              <td class="py-3 px-3.5 text-slate-300">Least-squares linear model balancing scoring differential and game outcomes against strength of schedule. Also hosts the Massey Composite of 100+ computer ratings.</td>
+              <td class="py-3 px-3.5 text-right">
+                <span class="px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 font-mono text-[10px]">Least-Squares Composite</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ACFC Synthesis Callout -->
+      <div class="bg-cyan-950/30 border border-cyan-500/40 p-4 rounded-xl space-y-2">
+        <h4 class="font-bold text-cyan-400 text-sm font-display flex items-center gap-2">
+          <i class="fa-solid fa-code-merge"></i> How ACFC Unifies All 10 Systems
+        </h4>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          ACFC resolves the conflict by mathematically isolating <strong>Resume Merit (Colley Matrix, SOR, Game Control, Schedule Difficulty)</strong> on one side and <strong>Predictive Efficiency (SP+ Success Rates, CFBD Net PPA/EPA, Finishing Drives, Roster Talent)</strong> on the other, giving you complete real-time slider control to emulate any philosophy.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TEAM DEEP DIVE MODAL / DRAWER -->
+  <div id="team-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-250">
+    <div id="team-modal-content" class="bg-slate-900 border border-slate-750 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-250 p-6 space-y-6">
+      <!-- Modal Content Injected via JS -->
+    </div>
+  </div>
+
+  <!-- MATCHUP SIMULATOR MODAL -->
+  <div id="matchup-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-250">
+    <div class="bg-slate-900 border border-slate-750 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+            <i class="fa-solid fa-swords text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold font-display text-white">2026-27 Matchup Simulator Arena</h3>
+            <p class="text-xs text-slate-400">Neutral &amp; Home venue simulations calibrated with 2026 roster talent and coaching edges</p>
+          </div>
+        </div>
+        <button id="btn-close-matchup" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Team Selectors -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Team A (Home / Favorite)</label>
+          <select id="sim-team-a" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Team B (Away / Underdog)</label>
+          <select id="sim-team-b" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500">
+            <!-- Populated via JS -->
+          </select>
+        </div>
+      </div>
+
+      <!-- 3-Way Venue Selector -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-950/60 p-3 rounded-xl border border-slate-800 gap-2">
+        <span class="text-xs font-semibold text-slate-300">Venue Setting:</span>
+        <div class="flex items-center gap-1.5" id="sim-venue-group">
+          <button id="sim-venue-homeA" class="sim-venue-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition" data-venue="homeA">Team A Home (+2.5)</button>
+          <button id="sim-venue-neutral" class="sim-venue-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-cyan-500 text-black transition" data-venue="neutral">Neutral Field</button>
+          <button id="sim-venue-homeB" class="sim-venue-btn px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-400 hover:text-white transition" data-venue="homeB">Team B Home (+2.5)</button>
+        </div>
+      </div>
+
+      <!-- Simulation Result Output Container -->
+      <div id="matchup-result-container" class="space-y-4">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- METHODOLOGY MODAL -->
+  <div id="methodology-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-250">
+    <div class="bg-slate-900 border border-slate-750 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <i class="fa-solid fa-square-root-variable text-lg"></i>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold font-display text-white">2026-27 Mathematical Engine</h3>
+            <p class="text-xs text-slate-400">Bayesian Priors + Early In-Season Decoupling</p>
+          </div>
+        </div>
+        <button id="btn-close-methodology" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="space-y-5 text-sm text-slate-300 leading-relaxed">
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+          <h4 class="font-bold text-white text-base font-display">Early Season Composite Calibration</h4>
+          <p class="font-mono text-cyan-400 text-sm bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+            ACFC Index = (wResume &times; RMS) + (wEfficiency &times; PES)
+          </p>
+          <p class="text-xs text-slate-400">
+            With small early-season game sample (Weeks 1-3), the model incorporates a Bayesian Prior composed of <strong>Roster Talent Index (50%)</strong>, <strong>Returning Production (25%)</strong>, and <strong>Coaching Staff Pedigree (25%)</strong>, which seamlessly stabilizes early rankings against voter inertia.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+              <i class="fa-solid fa-trophy"></i>
+              <span>1. Resume Merit Score (RMS)</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-slate-300 list-disc list-inside">
+              <li><strong class="text-white">Strength of Record (SOR):</strong> 35%</li>
+              <li><strong class="text-white">Game Control &amp; Quality Wins:</strong> 25%</li>
+              <li><strong class="text-white">Colley Matrix Iteration:</strong> 20%</li>
+              <li><strong class="text-white">Schedule-Adjusted Margin (SAM):</strong> 20% (logistic S-curve capped at +24)</li>
+            </ul>
+          </div>
+
+          <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
+            <div class="flex items-center gap-2 text-cyan-400 font-bold text-sm">
+              <i class="fa-solid fa-chart-line-up"></i>
+              <span>2. Predictive Efficiency Score (PES)</span>
+            </div>
+            <ul class="text-xs space-y-1.5 text-slate-300 list-disc list-inside">
+              <li><strong class="text-white">Play Success Rate (SR):</strong> 30%</li>
+              <li><strong class="text-white">Drive Finishing (Inside-40):</strong> 35%</li>
+              <li><strong class="text-white">Explosiveness &amp; Net EPA:</strong> 35% (turnover luck neutralized)</li>
+              <li><strong class="text-white">Roster/Coaching Prior Blend</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Analytical References -->
+        <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800 space-y-2">
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider">Methodology References &amp; Poll Benchmarks</h4>
+          <p class="text-xs text-slate-400">
+            Rankings and metrics are continually benchmarked against official and independent analytics sources:
+            <strong class="text-slate-300">AP Top 25</strong>, <strong class="text-slate-300">AFCA Coaches Poll</strong>, <strong class="text-slate-300">The Sideline Composite</strong>, <strong class="text-slate-300">CFBTrack</strong>, and <strong class="text-slate-300">ESPN FPI/SP+</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800/80 bg-slate-950/90 py-8 text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="font-display font-bold text-slate-400">ACFC Ranking Engine</span>
+        <span class="text-slate-600">&bull;</span>
+        <span id="footer-version-stamp" class="font-mono text-cyan-400 font-semibold">v0.3.0</span>
+        <span class="text-slate-600">&bull;</span>
+        <span>2026-27 Season Edition (Week 3)</span>
+      </div>
+      <p class="text-slate-500 text-center sm:text-right">
+        Bayesian Roster &amp; Early In-Season Model &bull; Self-Contained Client-Side Web App
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="data.js"></script>
+  <script src="algorithm.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const engine = new ACFCAlgorithmEngine(FBS_DATASET);
+      let currentFilter = "ALL";
+      let searchQuery = "";
+      let isCardView = false;
+      let isSimHome = false;
+
+      try {
+        const res = await fetch("version.json");
+        if (res.ok) {
+          const vData = await res.json();
+          document.getElementById("header-version-badge").textContent = `v${vData.version}`;
+          document.getElementById("footer-version-stamp").textContent = `v${vData.version}`;
+        }
+      } catch (e) {
+        console.warn("version.json read via fetch fallback:", e);
+      }
+
+      // Calibrated Engine Configuration (Fixed Weights)
+      engine.setConfig({
+        priorWeight: 0.40,
+        resumeWeight: 0.50,
+        movSensitivity: 0.70,
+        movCap: 24.0,
+        sosMultiplier: 1.00
+      });
+
+      const tableBody = document.getElementById("rankings-table-body");
+      const cardWrapper = document.getElementById("card-view-wrapper");
+      const tableViewWrapper = document.getElementById("table-view-wrapper");
+
+      const searchInput = document.getElementById("search-input");
+      const viewTableBtn = document.getElementById("view-table-btn");
+      const viewCardBtn = document.getElementById("view-card-btn");
+
+      const top10Modal = document.getElementById("top10-modal");
+      const teamModal = document.getElementById("team-modal");
+      const teamModalContent = document.getElementById("team-modal-content");
+      const matchupModal = document.getElementById("matchup-modal");
+      const methodologyModal = document.getElementById("methodology-modal");
+
+      const simTeamA = document.getElementById("sim-team-a");
+      const simTeamB = document.getElementById("sim-team-b");
+      const simVenueNeutral = document.getElementById("sim-venue-neutral");
+      const simVenueHome = document.getElementById("sim-venue-home");
+      const matchupResultContainer = document.getElementById("matchup-result-container");
+
+      function populateMatchupSelectors(teams) {
+        simTeamA.innerHTML = teams.map(t => `<option value="${t.id}">${t.name} (${t.record.wins}-${t.record.losses}) - ${t.coaching.headCoach}</option>`).join("");
+        simTeamB.innerHTML = teams.map(t => `<option value="${t.id}">${t.name} (${t.record.wins}-${t.record.losses}) - ${t.coaching.headCoach}</option>`).join("");
+        if (teams.length >= 2) {
+          simTeamA.selectedIndex = 0;
+          simTeamB.selectedIndex = 1;
+        }
+      }
+
+      function renderRankings() {
+        const rankings = engine.calculateRankings();
+        
+        if (rankings.length > 0) {
+          const top1 = rankings[0];
+          document.getElementById("kpi-top-team-name").textContent = `${top1.name} ${top1.mascot}`;
+          document.getElementById("kpi-top-team-score").textContent = `ACFC Index: ${top1.acfcIndexFormatted} (${top1.record.wins}-${top1.record.losses})`;
+          document.getElementById("kpi-top-team-logo").innerHTML = `<img src="${top1.logo}" alt="${top1.name}" class="w-8 h-8 object-contain">`;
+        }
+
+        const filtered = rankings.filter(team => {
+          const matchConf = currentFilter === "ALL" ? true :
+            currentFilter === "DARLINGS" ? team.badges.some(b => b.id === "analytics-darling") :
+            currentFilter === "INERTIA" ? team.badges.some(b => b.id === "poll-inertia") :
+            currentFilter === "Group of 5 / Ind" ? (team.conference !== "SEC" && team.conference !== "Big Ten" && team.conference !== "Big 12" && team.conference !== "ACC") :
+            team.conference === currentFilter;
+          
+          const matchSearch = searchQuery === "" || 
+            team.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+            team.mascot.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            team.coaching.headCoach.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            team.roster.keyPlayers.some(p => p.toLowerCase().includes(searchQuery.toLowerCase())) ||
+            team.conference.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            team.abbrev.toLowerCase().includes(searchQuery.toLowerCase());
+
+          return matchConf && matchSearch;
+        });
+
+        tableBody.innerHTML = filtered.map(team => {
+          const apDeltaHtml = renderDeltaBadge(team.apDelta, team.apRank);
+          const sidelineDeltaHtml = renderDeltaBadge(team.sidelineDelta, team.sidelineRank);
+
+          const badgePills = team.badges.map(b => {
+            const colorClass = b.type === "cyan" ? "bg-cyan-950 text-cyan-400 border-cyan-800/60" :
+                               b.type === "amber" ? "bg-amber-950 text-amber-400 border-amber-800/60" :
+                               b.type === "emerald" ? "bg-emerald-950 text-emerald-400 border-emerald-800/60" :
+                               b.type === "purple" ? "bg-purple-950 text-purple-400 border-purple-800/60" :
+                               "bg-rose-950 text-rose-400 border-rose-800/60";
+            return `<span class="px-2 py-0.5 rounded text-[10px] font-semibold border ${colorClass} inline-flex items-center gap-1" title="${b.tooltip}">
+              ${b.label}
+            </span>`;
+          }).join(" ");
+
+          const rankColorClass = team.rank === 1 ? "bg-amber-500 text-black font-black" :
+                                 team.rank <= 4 ? "bg-cyan-500 text-black font-bold" :
+                                 team.rank <= 12 ? "bg-slate-800 text-cyan-300 font-bold border border-cyan-500/30" :
+                                 "bg-slate-900 text-slate-400 border border-slate-800";
+
+          return `
+            <tr class="hover:bg-slate-800/40 transition group cursor-pointer" onclick="window.showTeamDetails('${team.id}')">
+              
+              <td class="py-3.5 px-4 text-center">
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl ${rankColorClass} text-xs font-mono">
+                  #${team.rank}
+                </span>
+              </td>
+
+              <td class="py-3.5 px-4">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-slate-900 border border-slate-800 p-1 flex items-center justify-center shrink-0">
+                    <img src="${team.logo}" alt="${team.name}" class="w-7 h-7 object-contain">
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-white group-hover:text-cyan-300 transition text-sm sm:text-base font-display">
+                        ${team.name}
+                      </span>
+                      <span class="text-xs text-slate-400 font-normal">(${team.record.wins}-${team.record.losses})</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-slate-400">
+                      <span class="px-1.5 py-0.2 rounded bg-slate-800 text-[10px] text-slate-300">${team.conference}</span>
+                      <span class="text-slate-400">&bull; HC: <span class="text-slate-300">${team.coaching.headCoach}</span></span>
+                    </div>
+                  </div>
+                </div>
+              </td>
+
+              <td class="py-3.5 px-4 text-center">
+                <div class="inline-flex flex-col items-center">
+                  <span class="font-mono font-bold text-cyan-400 text-sm">${team.acfcIndexFormatted}</span>
+                  <div class="w-16 h-1.5 bg-slate-800 rounded-full overflow-hidden mt-1">
+                    <div class="h-full bg-gradient-to-r from-cyan-500 to-amber-400 rounded-full" style="width: ${(team.acfcIndex * 100).toFixed(0)}%"></div>
+                  </div>
+                </div>
+              </td>
+
+              <td class="py-3.5 px-4 text-center">
+                <div class="flex items-center justify-center gap-2 text-xs font-mono">
+                  <span class="px-1.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/40 text-[11px]" title="Bayesian Roster/Coach Prior">
+                    P: ${team.prior.score.toFixed(3)}
+                  </span>
+                  <span class="px-1.5 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-800/40 text-[11px]" title="Predictive Efficiency Score">
+                    E: ${team.pes.score.toFixed(3)}
+                  </span>
+                </div>
+              </td>
+
+              <td class="py-3.5 px-4 text-center">
+                ${apDeltaHtml}
+              </td>
+
+              <td class="py-3.5 px-4 text-center">
+                ${sidelineDeltaHtml}
+              </td>
+
+              <td class="py-3.5 px-4 hidden md:table-cell">
+                <div class="text-xs space-y-0.5">
+                  <div class="flex items-center gap-1.5 text-slate-300">
+                    <span class="text-purple-400 font-mono font-bold">${(team.roster.talentComposite * 100).toFixed(0)}% Talent</span>
+                    <span class="text-slate-500">&bull;</span>
+                    <span class="text-emerald-400 font-mono">${(team.roster.returningProduction * 100).toFixed(0)}% Ret.</span>
+                  </div>
+                  <div class="text-[11px] text-slate-400 truncate max-w-xs" title="${team.stats.bestWin}">
+                    Best: <span class="text-slate-300">${team.stats.bestWin}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td class="py-3.5 px-4 hidden lg:table-cell">
+                <div class="flex flex-wrap gap-1.5">
+                  ${badgePills || '<span class="text-xs text-slate-400 font-mono">-</span>'}
+                </div>
+              </td>
+
+              <td class="py-3.5 px-4 text-right">
+                <button class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-black text-slate-400 flex items-center justify-center transition" title="Deep Dive Analytics">
+                  <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+              </td>
+
+            </tr>
+          `;
+        }).join("");
+
+        cardWrapper.innerHTML = filtered.map(team => {
+          const apDeltaHtml = renderDeltaBadge(team.apDelta, team.apRank);
+          return `
+            <div class="glass-card rounded-2xl p-5 cursor-pointer border border-slate-800 space-y-4" onclick="window.showTeamDetails('${team.id}')">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 font-mono font-bold text-xs text-cyan-400 flex items-center justify-center">
+                    #${team.rank}
+                  </span>
+                  <div>
+                    <h4 class="font-bold text-white font-display text-base">${team.name}</h4>
+                    <span class="text-xs text-slate-400">${team.conference} &bull; HC: ${team.coaching.headCoach}</span>
+                  </div>
+                </div>
+                <img src="${team.logo}" alt="${team.name}" class="w-10 h-10 object-contain">
+              </div>
+
+              <div class="bg-slate-950/70 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] uppercase text-slate-400 font-mono">ACFC INDEX</span>
+                  <div class="text-lg font-bold font-mono text-cyan-400">${team.acfcIndexFormatted}</div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[10px] uppercase text-slate-400 font-mono">VS AP POLL</span>
+                  <div>${apDeltaHtml}</div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+                <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                  <span class="text-slate-400 text-[10px]">Roster Talent:</span>
+                  <div class="text-purple-400 font-bold">${(team.roster.talentComposite * 100).toFixed(1)}%</div>
+                </div>
+                <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                  <span class="text-slate-400 text-[10px]">PES (Efficiency):</span>
+                  <div class="text-cyan-400 font-bold">${team.pes.score.toFixed(3)}</div>
+                </div>
+              </div>
+
+              <div class="flex flex-wrap gap-1">
+                ${team.badges.map(b => `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-cyan-300 border border-slate-700">${b.label}</span>`).join("")}
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function renderDeltaBadge(delta, pollRank) {
+        if (pollRank === null || pollRank === undefined || pollRank > 25) {
+          return `<span class="px-2 py-0.5 rounded text-xs font-mono delta-neutral" title="Unranked in Traditional Poll">NR</span>`;
+        }
+        if (delta > 0) {
+          return `<span class="px-2 py-0.5 rounded text-xs font-mono font-bold delta-positive" title="Ranked ${delta} spots higher by ACFC than traditional poll">
+            ▲ +${delta}
+          </span>`;
+        } else if (delta < 0) {
+          return `<span class="px-2 py-0.5 rounded text-xs font-mono font-bold delta-negative" title="Ranked ${Math.abs(delta)} spots lower by ACFC than traditional poll">
+            ▼ ${delta}
+          </span>`;
+        } else {
+          return `<span class="px-2 py-0.5 rounded text-xs font-mono delta-neutral" title="Identical to traditional poll rank">
+            ═ 0
+          </span>`;
+        }
+      }
+
+      window.showTeamDetails = function(teamId) {
+        const rankings = engine.calculateRankings();
+        const team = rankings.find(t => t.id === teamId);
+        if (!team) return;
+
+        const { stats, record, rms, pes, prior, coaching, roster, schedule2026 } = team;
+
+        const gamesListHtml = schedule2026.gamesPlayed.map(g => `
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950/70 border border-slate-800/80 text-xs">
+            <span class="text-slate-400 font-mono">Wk ${g.week}: <strong class="text-slate-200 font-sans">${g.opponent}</strong></span>
+            <span class="font-bold font-mono ${g.result.startsWith('W') ? 'text-emerald-400' : g.result.startsWith('L') ? 'text-rose-400' : 'text-slate-400'}">${g.result}</span>
+          </div>
+        `).join("");
+
+        teamModalContent.innerHTML = `
+          <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-slate-950 border border-slate-800 p-2 flex items-center justify-center shrink-0 shadow-lg">
+                <img src="${team.logo}" alt="${team.name}" class="w-10 h-10 object-contain">
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xl font-black font-display text-white">${team.name} ${team.mascot}</h3>
+                  <span class="px-2 py-0.5 rounded-md bg-slate-800 text-xs font-mono text-cyan-400 font-bold">#${team.rank} ACFC</span>
+                </div>
+                <div class="text-xs text-slate-400 mt-0.5">
+                  <span>${team.conference}</span> &bull; <span>${record.wins}-${record.losses} in 2026</span>
+                </div>
+              </div>
+            </div>
+            <button onclick="window.closeTeamModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Poll Comparisons Grid -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-950/60 p-3 rounded-xl border border-slate-800 font-mono text-xs text-center">
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400 text-[10px] block">AP POLL</span>
+              <strong class="text-white text-sm">#${team.apRank || 'NR'}</strong>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400 text-[10px] block">COACHES POLL</span>
+              <strong class="text-white text-sm">#${team.coachesRank || 'NR'}</strong>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400 text-[10px] block">SIDELINE COMP.</span>
+              <strong class="text-cyan-400 text-sm">#${team.sidelineRank || 'NR'}</strong>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400 text-[10px] block">SIMULATED BCS</span>
+              <strong class="text-amber-400 text-sm">#${team.bcsRank || 'NR'}</strong>
+            </div>
+          </div>
+
+          <!-- Coaching & Roster Overview -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] uppercase tracking-wider text-slate-400 font-mono">Head Coach &amp; Staff</span>
+              <div class="text-base font-bold text-white mt-0.5">${coaching.headCoach}</div>
+              <div class="text-[11px] text-amber-400 font-mono mt-0.5">Grade: ${(coaching.coachingGrade * 100).toFixed(0)}% &bull; ${coaching.tenureYears} yrs</div>
+            </div>
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] uppercase tracking-wider text-slate-400 font-mono">Roster Talent Index</span>
+              <div class="text-base font-bold text-purple-400 mt-0.5">${(roster.talentComposite * 100).toFixed(1)}% Percentile</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">${(roster.blueChipRatio * 100).toFixed(0)}% Blue-Chip &bull; ${(roster.returningProduction * 100).toFixed(0)}% Ret.</div>
+            </div>
+            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
+              <span class="text-[10px] uppercase tracking-wider text-slate-400 font-mono">ACFC Index (Week 3)</span>
+              <div class="text-xl font-bold font-mono text-cyan-400 mt-0.5">${team.acfcIndexFormatted}</div>
+              <div class="text-[11px] text-slate-400 mt-0.5">Prior: ${prior.score.toFixed(3)} | PES: ${pes.score.toFixed(3)}</div>
+            </div>
+          </div>
+
+          <!-- Key 2026 Playmakers -->
+          <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+            <span class="text-[10px] uppercase font-mono tracking-wider text-slate-400 font-semibold block">Key 2026 Stars &amp; Playmakers</span>
+            <div class="flex flex-wrap gap-2">
+              ${roster.keyPlayers.map(p => `<span class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-900 text-slate-200 border border-slate-755 flex items-center gap-1.5"><i class="fa-solid fa-star text-amber-400 text-[10px]"></i> ${p}</span>`).join("")}
+            </div>
+          </div>
+
+          <!-- Radar Chart Visualization & Advanced Metrics Breakdown -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
+            
+            <div class="flex flex-col items-center justify-center space-y-2">
+              <span class="text-xs font-semibold text-slate-300 font-mono uppercase tracking-wider">2026 Five-Axis Radar</span>
+              ${generateSvgRadarChart(team)}
+            </div>
+
+            <div class="space-y-3">
+              <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">2026 On-Field &amp; Talent Bars</h4>
+              
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-400">Offensive Drive Efficiency</span>
+                  <span class="font-mono text-white font-bold">${(stats.offEfficiency * 100).toFixed(1)}%</span>
+                </div>
+                <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-cyan-400 rounded-full" style="width: ${(stats.offEfficiency * 100).toFixed(0)}%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-400">Defensive Stop Efficiency</span>
+                  <span class="font-mono text-white font-bold">${(stats.defEfficiency * 100).toFixed(1)}%</span>
+                </div>
+                <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-400 rounded-full" style="width: ${(stats.defEfficiency * 100).toFixed(0)}%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-400">Play Success Rate (Down-to-Down)</span>
+                  <span class="font-mono text-white font-bold">${(stats.successRate * 100).toFixed(1)}%</span>
+                </div>
+                <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-purple-400 rounded-full" style="width: ${(stats.successRate / 0.60 * 100).toFixed(0)}%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-400">Finishing Drives (Pts / Trip Inside 40)</span>
+                  <span class="font-mono text-white font-bold">${stats.finishingDrives.toFixed(2)} pts</span>
+                </div>
+                <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-400 rounded-full" style="width: ${(stats.finishingDrives / 5.5 * 100).toFixed(0)}%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-slate-400">Schedule-Adjusted Margin (SAM)</span>
+                  <span class="font-mono text-white font-bold">+${stats.sam.toFixed(1)} pts</span>
+                </div>
+                <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-400 rounded-full" style="width: ${(Math.min(35, stats.sam) / 35 * 100).toFixed(0)}%"></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- 2026 Game Results & Upcoming Path -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">2026 Early Results (Weeks 1-3)</span>
+              <div class="space-y-1.5">
+                ${gamesListHtml}
+              </div>
+            </div>
+            <div class="space-y-2">
+              <span class="text-xs font-bold text-slate-300 uppercase tracking-wider font-mono">2026 Upcoming Gauntlet</span>
+              <div class="p-3 bg-slate-950/70 border border-slate-800 rounded-xl space-y-2">
+                <p class="text-xs text-white"><strong class="text-cyan-400">Marquee Tests:</strong> ${schedule2026.upcomingMarquee}</p>
+                <p class="text-xs text-slate-400"><strong class="text-slate-300">Projected Full SOS:</strong> #${schedule2026.projectedSosRank} nationally</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why Ranked Here Algorithmic Explanation -->
+          <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+            <h4 class="text-xs font-bold text-cyan-400 font-mono uppercase tracking-wider flex items-center gap-1.5">
+              <i class="fa-solid fa-microchip-ai"></i>
+              Why ACFC Ranks ${team.name} #${team.rank} in 2026
+            </h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              ${generateAlgorithmicRationale(team)}
+            </p>
+          </div>
+        `;
+
+        teamModal.classList.remove("opacity-0", "pointer-events-none");
+        teamModal.querySelector("div").classList.remove("scale-95");
+      };
+
+      window.closeTeamModal = function() {
+        teamModal.classList.add("opacity-0", "pointer-events-none");
+        teamModal.querySelector("div").classList.add("scale-95");
+      };
+
+      teamModal.addEventListener("click", (e) => {
+        if (e.target === teamModal) window.closeTeamModal();
+      });
+
+      // Top 10 Systems Modal Handlers
+      document.getElementById("btn-top10-systems").addEventListener("click", () => {
+        top10Modal.classList.remove("opacity-0", "pointer-events-none");
+      });
+      document.getElementById("btn-close-top10").addEventListener("click", () => {
+        top10Modal.classList.add("opacity-0", "pointer-events-none");
+      });
+      top10Modal.addEventListener("click", (e) => {
+        if (e.target === top10Modal) top10Modal.classList.add("opacity-0", "pointer-events-none");
+      });
+
+      function generateSvgRadarChart(team) {
+        const { stats, roster } = team;
+        const vOff = stats.offEfficiency;
+        const vDef = stats.defEfficiency;
+        const vSR = Math.min(1.0, (stats.successRate - 0.40) / 0.16);
+        const vTalent = roster.talentComposite;
+        const vSOR = stats.sor;
+
+        const values = [vOff, vDef, vSR, vTalent, vSOR];
+        const labels = ["Offense", "Defense", "Success", "Talent", "SOR"];
+        const size = 180;
+        const center = size / 2;
+        const radius = 65;
+
+        const points = values.map((val, i) => {
+          const angle = (Math.PI * 2 / 5) * i - Math.PI / 2;
+          const r = radius * val;
+          const x = center + r * Math.cos(angle);
+          const y = center + r * Math.sin(angle);
+          return `${x.toFixed(1)},${y.toFixed(1)}`;
+        }).join(" ");
+
+        return `
+          <svg width="${size}" height="${size}" class="overflow-visible">
+            <polygon points="${getRingPoints(center, radius * 1.0)}" fill="none" stroke="#1e2946" stroke-width="1" />
+            <polygon points="${getRingPoints(center, radius * 0.75)}" fill="none" stroke="#1e2946" stroke-width="1" />
+            <polygon points="${getRingPoints(center, radius * 0.50)}" fill="none" stroke="#1e2946" stroke-width="1" />
+            <polygon points="${getRingPoints(center, radius * 0.25)}" fill="none" stroke="#1e2946" stroke-width="1" />
+            
+            ${[0, 1, 2, 3, 4].map(i => {
+              const angle = (Math.PI * 2 / 5) * i - Math.PI / 2;
+              const x2 = center + radius * Math.cos(angle);
+              const y2 = center + radius * Math.sin(angle);
+              return `<line x1="${center}" y1="${center}" x2="${x2}" y2="${y2}" stroke="#1e2946" stroke-width="1" />`;
+            }).join("")}
+
+            <polygon points="${points}" fill="rgba(6, 182, 212, 0.35)" stroke="#06b6d4" stroke-width="2" class="radar-polygon" />
+
+            ${labels.map((lbl, i) => {
+              const angle = (Math.PI * 2 / 5) * i - Math.PI / 2;
+              const lx = center + (radius + 18) * Math.cos(angle);
+              const ly = center + (radius + 18) * Math.sin(angle);
+              return `<text x="${lx}" y="${ly}" fill="#94a3b8" font-size="9" font-family="monospace" text-anchor="middle" dominant-baseline="central">${lbl}</text>`;
+            }).join("")}
+          </svg>
+        `;
+      }
+
+      function getRingPoints(center, r) {
+        return [0, 1, 2, 3, 4].map(i => {
+          const angle = (Math.PI * 2 / 5) * i - Math.PI / 2;
+          const x = center + r * Math.cos(angle);
+          const y = center + r * Math.sin(angle);
+          return `${x.toFixed(1)},${y.toFixed(1)}`;
+        }).join(" ");
+      }
+
+      function generateAlgorithmicRationale(team) {
+        let text = `${team.name} is ranked #${team.rank} in the 2026 ACFC Index (${team.acfcIndexFormatted}). `;
+        text += `With Head Coach ${team.coaching.headCoach} and a ${(team.roster.talentComposite * 100).toFixed(0)}th percentile roster talent composite, `;
+        if (team.apDelta && team.apDelta > 2) {
+          text += `the ACFC model values their down-to-down success rate (${(team.stats.successRate*100).toFixed(1)}%) and schedule margin (+${team.stats.sam} pts) ${team.apDelta} spots higher than the traditional AP Poll (#${team.apRank}).`;
+        } else if (team.apDelta && team.apDelta < -2) {
+          text += `the model slightly docks them compared to their AP #${team.apRank} rank due to early strength of schedule (${team.stats.sos.toFixed(2)}) pending marquee tests.`;
+        } else {
+          text += `their early 2026 on-field execution aligns closely with their elite talent composite and resume indicators.`;
+        }
+        return text;
+      }
+
+      // Calibrated engine uses fixed official weights with no user slider manipulation.
+
+      document.querySelectorAll(".conf-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".conf-btn").forEach(b => {
+            b.classList.remove("bg-cyan-500", "text-black", "border-cyan-400");
+            b.classList.add("bg-slate-800", "text-slate-300", "border-slate-700");
+          });
+          btn.classList.add("bg-cyan-500", "text-black", "border-cyan-400");
+          btn.classList.remove("bg-slate-800", "text-slate-300", "border-slate-700");
+          
+          currentFilter = btn.dataset.conf;
+          renderRankings();
+        });
+      });
+
+      searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim();
+        renderRankings();
+      });
+
+      viewTableBtn.addEventListener("click", () => {
+        isCardView = false;
+        viewTableBtn.classList.add("text-cyan-400", "bg-slate-800");
+        viewCardBtn.classList.remove("text-cyan-400", "bg-slate-800");
+        viewCardBtn.classList.add("text-slate-400");
+        tableViewWrapper.classList.remove("hidden");
+        cardWrapper.classList.add("hidden");
+      });
+
+      viewCardBtn.addEventListener("click", () => {
+        isCardView = true;
+        viewCardBtn.classList.add("text-cyan-400", "bg-slate-800");
+        viewTableBtn.classList.remove("text-cyan-400", "bg-slate-800");
+        viewTableBtn.classList.add("text-slate-400");
+        tableViewWrapper.classList.add("hidden");
+        cardWrapper.classList.remove("hidden");
+      });
+
+      document.getElementById("btn-open-methodology").addEventListener("click", () => {
+        methodologyModal.classList.remove("opacity-0", "pointer-events-none");
+      });
+      document.getElementById("btn-close-methodology").addEventListener("click", () => {
+        methodologyModal.classList.add("opacity-0", "pointer-events-none");
+      });
+      methodologyModal.addEventListener("click", (e) => {
+        if (e.target === methodologyModal) methodologyModal.classList.add("opacity-0", "pointer-events-none");
+      });
+
+      document.getElementById("btn-matchup-simulator").addEventListener("click", () => {
+        matchupModal.classList.remove("opacity-0", "pointer-events-none");
+        executeMatchupSimulation();
+      });
+      document.getElementById("btn-close-matchup").addEventListener("click", () => {
+        matchupModal.classList.add("opacity-0", "pointer-events-none");
+      });
+      matchupModal.addEventListener("click", (e) => {
+        if (e.target === matchupModal) matchupModal.classList.add("opacity-0", "pointer-events-none");
+      });
+
+      simTeamA.addEventListener("change", executeMatchupSimulation);
+      simTeamB.addEventListener("change", executeMatchupSimulation);
+
+      let currentSimVenue = "neutral";
+      document.querySelectorAll(".sim-venue-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".sim-venue-btn").forEach(b => {
+            b.classList.remove("bg-cyan-500", "text-black");
+            b.classList.add("bg-slate-800", "text-slate-400");
+          });
+          btn.classList.add("bg-cyan-500", "text-black");
+          btn.classList.remove("bg-slate-800", "text-slate-400");
+          currentSimVenue = btn.dataset.venue;
+          executeMatchupSimulation();
+        });
+      });
+
+      function executeMatchupSimulation() {
+        const idA = simTeamA.value;
+        const idB = simTeamB.value;
+        if (!idA || !idB || idA === idB) {
+          matchupResultContainer.innerHTML = `<div class="p-4 bg-slate-950 text-slate-400 text-center rounded-xl text-xs">Please select two distinct teams to simulate.</div>`;
+          return;
+        }
+
+        const sim = engine.simulateMatchup(idA, idB, currentSimVenue);
+        if (!sim) return;
+
+        const venueLabel = currentSimVenue === "homeA" ? `${sim.teamA.name} Home Field` :
+                           currentSimVenue === "homeB" ? `${sim.teamB.name} Home Field` :
+                           "Neutral Site";
+
+        matchupResultContainer.innerHTML = `
+          <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center space-y-4">
+            <div class="flex items-center justify-around">
+              
+              <div class="flex flex-col items-center space-y-2">
+                <img src="${sim.teamA.logo}" alt="${sim.teamA.name}" class="w-16 h-16 object-contain">
+                <span class="font-bold text-white text-base">${sim.teamA.name}</span>
+                <span class="text-xs text-slate-400">HC: ${sim.teamA.coaching.headCoach}</span>
+                <span class="text-2xl font-black font-mono text-cyan-400">${sim.projectedScoreA}</span>
+                <span class="text-xs font-mono text-slate-400">${sim.winProbA}% Win Prob</span>
+              </div>
+
+              <div class="space-y-1">
+                <span class="text-[10px] uppercase font-mono tracking-widest text-cyan-400 block">${venueLabel}</span>
+                <span class="text-xs uppercase font-mono tracking-widest text-slate-500">2026 SPREAD</span>
+                <div class="text-sm font-bold font-mono text-amber-400 bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">
+                  ${sim.predictedSpread}
+                </div>
+                <div class="text-[11px] text-slate-500">O/U: ${sim.totalProjected} pts</div>
+              </div>
+
+              <div class="flex flex-col items-center space-y-2">
+                <img src="${sim.teamB.logo}" alt="${sim.teamB.name}" class="w-16 h-16 object-contain">
+                <span class="font-bold text-white text-base">${sim.teamB.name}</span>
+                <span class="text-xs text-slate-400">HC: ${sim.teamB.coaching.headCoach}</span>
+                <span class="text-2xl font-black font-mono text-purple-400">${sim.projectedScoreB}</span>
+                <span class="text-xs font-mono text-slate-400">${sim.winProbB}% Win Prob</span>
+              </div>
+
+            </div>
+
+            <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden flex">
+              <div class="h-full bg-cyan-400 transition-all duration-300" style="width: ${sim.winProbA}%"></div>
+              <div class="h-full bg-purple-500 transition-all duration-300" style="width: ${sim.winProbB}%"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+              <span class="text-slate-400 text-[10px] uppercase font-mono">Roster Talent Advantage</span>
+              <div class="text-sm font-bold text-white mt-1">${sim.keyMatchups.talentEdge}</div>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+              <span class="text-slate-400 text-[10px] uppercase font-mono">Coaching Pedigree Edge</span>
+              <div class="text-sm font-bold text-white mt-1">${sim.keyMatchups.coachAdvantage}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      populateMatchupSelectors(FBS_DATASET);
+      renderRankings();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "version": "0.3.0",
+  "name": "Advanced College Football Composite (ACFC) Top 25 Ranking Engine",
+  "releaseDate": "2026-09-14",
+  "versionType": "minor",
+  "season": "2026-27",
+  "week": "Week 3 Early-Season Snapshot",
+  "description": "v0.3.1: Streamlined authoritative model architecture. Sliders removed to lock the engine to the official, mathematically calibrated Week 3 composite formula (40% Bayesian Prior, 50/50 Dual Engine, +24 Margin S-Curve, 1.0x Dynamic SOS baseline).",
+  "versioningProtocol": {
+    "minor": "+0.1: Algorithmic weight tweaks, UI styling refinements, roster/schedule adjustments, heuristic updates",
+    "major": "+1.0: New ranking data models, backend API integration, multi-season archives, or architectural changes"
+  },
+  "author": "ACFC Analytics Group",
+  "license": "MIT"
+}
