@@ -12,3 +12,16 @@ Thumbs.db
 node_modules/
 scratch/
 *.log
+
+# Secrets, Environment & Credentials
+.env
+.env.*
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+credentials.json
+*token*
+*secret*
