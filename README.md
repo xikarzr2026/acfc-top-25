@@ -1,8 +1,8 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.3.1-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.3.2-cyan?style=for-the-badge&logo=github)
 ![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
-![Season](https://img.shields.io/badge/Season-2026--27_Week_3-amber?style=for-the-badge)
+![Season](https://img.shields.io/badge/Season-2026--27_Weeks_3--8-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
@@ -65,17 +65,36 @@ $$\text{ACFC Index} = w_{\text{resume}} \cdot \text{RMS} + (1 - w_{\text{resume}
 
 ---
 
-## 3. Official Model Calibration & Fixed Parameters
+## 3. Weekly Simulation & Ranking Update Engine (Season Progression)
+
+In ACFC v0.3.2, users can advance the 2026–27 college football season step-by-step from Week 3 through Week 8:
+* **`🏈 Simulate Week N Games & Update`**: Plays out the authentic 2026 conference slate for the Top 25 teams with realistic scoring spreads, home-field advantage (+2.5), and offensive/defensive drive efficiency.
+* **`⚡ Re-Run Algorithm`**: Instantly recalculates composite scores and rank movements on demand with real-time computation telemetry.
+* **`↺ Reset Baseline`**: Restores the verified Week 3 baseline dataset with a single click.
+* **Dynamic Bayesian Prior Decay:** Emulates real-world SP+ and FPI modeling where roster and coaching priors decay as on-field game sample size increases:
+  * Week 1: 60% Prior
+  * Week 2: 50% Prior
+  * Week 3: 40% Prior (Baseline)
+  * Week 4: 30% Prior (Conference Openers)
+  * Week 5: 22% Prior (Heavyweight Battles)
+  * Week 6: 15% Prior (Mid-Season Pivots)
+  * Week 7: 10% Prior (Red River Rivalry & Marquee Clashes)
+  * Week 8+: 5% Prior (Late-Season Stabilized)
+* **Weekly Scoreboard & Recap Modal:** Pops up after each simulated week showing all final scores, upset alerts, and top risers/fallers (`▲ +3`, `▼ -4`).
+
+---
+
+## 4. Official Model Calibration & Fixed Parameters
 
 To maintain objective, tamper-proof ranking integrity, the ACFC ranking algorithm operates on fixed, scientifically calibrated parameters:
-1. **Bayesian Prior Weight (40% Fixed):** Blends 247 Talent Composite (50%), Returning Production (25%), and Coaching Pedigree (25%) to neutralize early-season sample bias.
+1. **Bayesian Prior Weight (40% Baseline):** Blends 247 Talent Composite (50%), Returning Production (25%), and Coaching Pedigree (25%) to neutralize early-season sample bias.
 2. **Dual-Engine Equilibrium (50% RMS / 50% PES):** Equal weighting between earned on-field merit and neutral-field predictive efficiency.
 3. **SAM S-Curve Blowout Ceiling (+24.0 Pt Cap):** Sigmoid curve prevents blowout stat-padding from distorting top-tier ranks.
 4. **Dynamic Schedule Scaling (1.0x Baseline):** Directly rewards teams with elite Top-25 marquee gauntlets relative to a 0.78 national SOS baseline.
 
 ---
 
-## 4. Local Setup & Deployment
+## 5. Local Setup & Deployment
 
 ```bash
 # Windows

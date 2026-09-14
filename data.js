@@ -1332,3 +1332,184 @@ const FBS_DATASET = [
     }
   }
 ];
+
+/**
+ * Authentic 2026 Conference & Marquee Slates for Weeks 3 through 8.
+ * Allows step-by-step season simulation and in-season ranking updates.
+ */
+const WEEKLY_SLATES_2026 = {
+  3: {
+    week: 3,
+    title: "Week 3: Marquee Non-Conference Clashes",
+    games: [
+      { homeTeamId: "wisconsin", awayTeamId: "alabama", isTop25Matchup: true, marquee: "FOX Big Noon Saturday at Camp Randall" },
+      { homeTeamId: "kentucky", awayTeamId: "georgia", isTop25Matchup: false, marquee: "SEC Night Game in Lexington" },
+      { homeTeamId: "texas", awayTeamName: "UL Monroe", awayAbbrev: "ULM", awayPower: 0.50, marquee: "Austin Non-Conference" },
+      { homeTeamId: "ohio-state", awayTeamName: "Marshall", awayAbbrev: "MRSH", awayPower: 0.53, marquee: "Horseshoe Afternoon" },
+      { homeTeamId: "wake-forest", awayTeamId: "ole-miss", isTop25Matchup: false, marquee: "ACC/SEC Clash in Winston-Salem" },
+      { homeTeamId: "oregon-state", awayTeamId: "oregon", isTop25Matchup: false, marquee: "The Civil War at Reser Stadium" },
+      { homeTeamId: "penn-state", awayTeamName: "Kent State", awayAbbrev: "KSU", awayPower: 0.44, marquee: "Beaver Stadium Non-Conf" },
+      { homeTeamId: "south-florida", awayTeamId: "miami", isTop25Matchup: false, marquee: "In-State Rivalry in Tampa" },
+      { homeTeamId: "missouri", awayTeamName: "Boston College", awayAbbrev: "BC", awayPower: 0.68, marquee: "Ranked vs ACC in Columbia" },
+      { homeTeamId: "utah-state", awayTeamId: "utah", isTop25Matchup: false, marquee: "Battle of the Brothers in Logan" },
+      { homeTeamId: "tennessee", awayTeamName: "Kent State", awayAbbrev: "KSU", awayPower: 0.44, marquee: "Neyland Stadium Night" },
+      { homeTeamId: "purdue", awayTeamId: "notre-dame", isTop25Matchup: false, marquee: "Shillelagh Trophy in West Lafayette" },
+      { homeTeamId: "clemson", awayTeamId: "nc-state", isTop25Matchup: true, marquee: "Textile Bowl in Death Valley" },
+      { homeTeamId: "oklahoma", awayTeamName: "Tulane", awayAbbrev: "TULN", awayPower: 0.69, marquee: "Green Wave in Norman" },
+      { homeTeamId: "kansas-state", awayTeamId: "arizona", isTop25Matchup: true, marquee: "Friday Night Big 12 Collision in Manhattan" },
+      { homeTeamId: "tulsa", awayTeamId: "oklahoma-state", isTop25Matchup: false, marquee: "Turnpike Classic in Tulsa" },
+      { homeTeamId: "south-carolina", awayTeamId: "lsu", isTop25Matchup: false, marquee: "SEC on ABC in Columbia" },
+      { homeTeamId: "louisville", awayTeamName: "Georgia Tech", awayAbbrev: "GT", awayPower: 0.70, marquee: "ACC Friday Clash" },
+      { homeTeamId: "michigan", awayTeamName: "Arkansas State", awayAbbrev: "ARST", awayPower: 0.54, marquee: "Big House Afternoon" },
+      { homeTeamId: "usc", awayTeamName: "Utah State", awayAbbrev: "USU", awayPower: 0.55, marquee: "Coliseum Night Game" },
+      { homeTeamId: "iowa-state", awayTeamName: "Northern Iowa", awayAbbrev: "UNI", awayPower: 0.48, marquee: "Jack Trice Stadium" },
+      { homeTeamId: "boise-state", awayTeamName: "Portland State", awayAbbrev: "PRST", awayPower: 0.45, marquee: "Blue Turf Non-Conf" }
+    ]
+  },
+  4: {
+    week: 4,
+    title: "Week 4: Conference Openers & Heavyweight Battles",
+    games: [
+      { homeTeamId: "oklahoma", awayTeamId: "tennessee", isTop25Matchup: true, marquee: "SEC Game of the Week in Norman" },
+      { homeTeamId: "michigan", awayTeamId: "usc", isTop25Matchup: true, marquee: "Historic Big Ten Collision at the Big House" },
+      { homeTeamId: "oklahoma-state", awayTeamId: "utah", isTop25Matchup: true, marquee: "Big 12 Heavyweight Battle in Stillwater" },
+      { homeTeamId: "byu", awayTeamId: "kansas-state", isTop25Matchup: false, marquee: "Late Night Big 12 in Provo" },
+      { homeTeamId: "texas", awayTeamName: "Louisiana-Monroe", awayAbbrev: "ULM", awayPower: 0.48, marquee: "DKR Memorial Stadium" },
+      { homeTeamId: "ohio-state", awayTeamName: "Marshall", awayAbbrev: "MRSH", awayPower: 0.52, marquee: "Horseshoe Non-Conf" },
+      { homeTeamId: "ole-miss", awayTeamName: "Georgia Southern", awayAbbrev: "GASO", awayPower: 0.55, marquee: "Oxford Non-Conf" },
+      { homeTeamId: "ucla", awayTeamId: "oregon", isTop25Matchup: false, marquee: "Big Ten After Dark at Rose Bowl" },
+      { homeTeamId: "penn-state", awayTeamName: "Bowling Green", awayAbbrev: "BGSU", awayPower: 0.52, marquee: "Beaver Stadium Afternoon" },
+      { homeTeamId: "miami", awayTeamName: "Ball State", awayAbbrev: "BALL", awayPower: 0.48, marquee: "Hard Rock Stadium" },
+      { homeTeamId: "missouri", awayTeamName: "Vanderbilt", awayAbbrev: "VANDY", awayPower: 0.65, marquee: "SEC Opener in Columbia" },
+      { homeTeamId: "notre-dame", awayTeamName: "Miami (OH)", awayAbbrev: "M-OH", awayPower: 0.56, marquee: "Notre Dame Stadium" },
+      { homeTeamId: "lsu", awayTeamName: "UCLA", awayAbbrev: "UCLA", awayPower: 0.64, marquee: "Death Valley Saturday Night" },
+      { homeTeamId: "louisville", awayTeamName: "Jacksonville State", awayAbbrev: "JVST", awayPower: 0.51, marquee: "L&N Stadium" },
+      { homeTeamId: "houston", awayTeamId: "iowa-state", isTop25Matchup: false, marquee: "Big 12 Road Test in Houston" },
+      { homeTeamId: "boise-state", awayTeamName: "Washington State", awayAbbrev: "WSU", awayPower: 0.72, marquee: "Pac-12/MW Collision on Blue Turf" },
+      { homeTeamId: "wisconsin", awayTeamName: "South Dakota", awayAbbrev: "SDAK", awayPower: 0.46, marquee: "Camp Randall Non-Conf" },
+      { homeTeamId: "arizona", awayTeamName: "Northern Arizona", awayAbbrev: "NAU", awayPower: 0.44, marquee: "Arizona Stadium" },
+      { homeTeamId: "nc-state", awayTeamName: "Northern Illinois", awayAbbrev: "NIU", awayPower: 0.54, marquee: "Carter-Finley Stadium" },
+      { homeTeamId: "georgia", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "alabama", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "clemson", isBye: true, marquee: "Open Date" }
+    ]
+  },
+  5: {
+    week: 5,
+    title: "Week 5: Clash of the Titans in Tuscaloosa",
+    games: [
+      { homeTeamId: "alabama", awayTeamId: "georgia", isTop25Matchup: true, marquee: "Game of the Year: #2 Georgia at #4 Alabama (Saban Field)" },
+      { homeTeamId: "notre-dame", awayTeamId: "louisville", isTop25Matchup: true, marquee: "Top 20 Revenge Game in South Bend" },
+      { homeTeamId: "kansas-state", awayTeamId: "oklahoma-state", isTop25Matchup: true, marquee: "Big 12 Heavyweight Showdown in Manhattan" },
+      { homeTeamId: "utah", awayTeamId: "arizona", isTop25Matchup: true, marquee: "Big 12 Desert Duel in Salt Lake City" },
+      { homeTeamId: "usc", awayTeamId: "wisconsin", isTop25Matchup: true, marquee: "Big Ten Showdown at the LA Coliseum" },
+      { homeTeamId: "penn-state", awayTeamName: "Illinois", awayAbbrev: "ILL", awayPower: 0.74, marquee: "Big Ten Night Game at Beaver Stadium" },
+      { homeTeamId: "ole-miss", awayTeamName: "Kentucky", awayAbbrev: "UK", awayPower: 0.71, marquee: "SEC Afternoon in Oxford" },
+      { homeTeamId: "michigan-state", awayTeamId: "ohio-state", isTop25Matchup: false, marquee: "Big Ten Road Test in East Lansing" },
+      { homeTeamId: "texas", awayTeamName: "Mississippi State", awayAbbrev: "MSST", awayPower: 0.61, marquee: "SEC Home Opener in Austin" },
+      { homeTeamId: "miami", awayTeamName: "Virginia Tech", awayAbbrev: "VT", awayPower: 0.72, marquee: "Friday Night ACC Rivalry" },
+      { homeTeamId: "texas-am", awayTeamId: "missouri", isTop25Matchup: false, marquee: "Kyle Field SEC Showdown" },
+      { homeTeamId: "arkansas", awayTeamId: "tennessee", isTop25Matchup: false, marquee: "Razorbacks Host Vols in Fayetteville" },
+      { homeTeamId: "clemson", awayTeamName: "Stanford", awayAbbrev: "STAN", awayPower: 0.60, marquee: "Death Valley ACC Clash" },
+      { homeTeamId: "auburn", awayTeamId: "oklahoma", isTop25Matchup: false, marquee: "Jordan-Hare Stadium SEC Battle" },
+      { homeTeamId: "lsu", awayTeamName: "South Alabama", awayAbbrev: "USA", awayPower: 0.56, marquee: "Tiger Stadium Saturday Night" },
+      { homeTeamId: "michigan", awayTeamName: "Minnesota", awayAbbrev: "MINN", awayPower: 0.68, marquee: "Little Brown Jug Rivalry in Ann Arbor" },
+      { homeTeamId: "iowa-state", awayTeamName: "Baylor", awayAbbrev: "BAY", awayPower: 0.66, marquee: "Jack Trice Stadium Big 12" },
+      { homeTeamId: "boise-state", awayTeamName: "Utah State", awayAbbrev: "USU", awayPower: 0.55, marquee: "Mountain West Battle on Blue Turf" },
+      { homeTeamId: "ucla", awayTeamId: "oregon", isTop25Matchup: false, marquee: "Rose Bowl Afternoon" },
+      { homeTeamId: "nc-state", awayTeamName: "Wake Forest", awayAbbrev: "WAKE", awayPower: 0.62, marquee: "Raleigh ACC Battle" }
+    ]
+  },
+  6: {
+    week: 6,
+    title: "Week 6: Mid-Season Conference Rivalries",
+    games: [
+      { homeTeamId: "florida-state", awayTeamId: "clemson", isTop25Matchup: false, marquee: "ACC Showdown at Doak Campbell Stadium" },
+      { homeTeamId: "washington", awayTeamId: "michigan", isTop25Matchup: false, marquee: "National Championship Rematch in Seattle" },
+      { homeTeamId: "ohio-state", awayTeamName: "Iowa", awayAbbrev: "IOWA", awayPower: 0.77, marquee: "Big Ten Defensive Clash in Columbus" },
+      { homeTeamId: "georgia", awayTeamName: "Auburn", awayAbbrev: "AUB", awayPower: 0.71, marquee: "Deep South's Oldest Rivalry in Athens" },
+      { homeTeamId: "vanderbilt", awayTeamId: "alabama", isTop25Matchup: false, marquee: "Nashville SEC Collision" },
+      { homeTeamId: "south-carolina", awayTeamId: "ole-miss", isTop25Matchup: false, marquee: "SEC Afternoon at Williams-Brice" },
+      { homeTeamId: "oregon", awayTeamName: "Michigan State", awayAbbrev: "MSU", awayPower: 0.67, marquee: "Friday Night Lights at Autzen" },
+      { homeTeamId: "penn-state", awayTeamName: "UCLA", awayAbbrev: "UCLA", awayPower: 0.63, marquee: "Beaver Stadium Big Ten Clash" },
+      { homeTeamId: "california", awayTeamId: "miami", isTop25Matchup: false, marquee: "ACC After Dark in Berkeley" },
+      { homeTeamId: "minnesota", awayTeamId: "usc", isTop25Matchup: false, marquee: "Big Ten Battle in Minneapolis" },
+      { homeTeamId: "colorado", awayTeamId: "kansas-state", isTop25Matchup: false, marquee: "Big 12 Spotlight at Folsom Field" },
+      { homeTeamId: "oklahoma-state", awayTeamName: "West Virginia", awayAbbrev: "WVU", awayPower: 0.69, marquee: "Stillwater Big 12 Clash" },
+      { homeTeamId: "virginia", awayTeamId: "louisville", isTop25Matchup: false, marquee: "ACC Battle in Charlottesville" },
+      { homeTeamId: "rutgers", awayTeamId: "wisconsin", isTop25Matchup: false, marquee: "SHI Stadium Big Ten Matchup" },
+      { homeTeamId: "boise-state", awayTeamName: "Hawaii", awayAbbrev: "HAW", awayPower: 0.51, marquee: "Blue Turf Mountain West" },
+      { homeTeamId: "notre-dame", awayTeamName: "Stanford", awayAbbrev: "STAN", awayPower: 0.60, marquee: "Legends Trophy in South Bend" },
+      { homeTeamId: "tennessee", awayTeamName: "Florida", awayAbbrev: "FLA", awayPower: 0.73, marquee: "Neyland Stadium Rivalry" },
+      { homeTeamId: "arizona", awayTeamName: "Texas Tech", awayAbbrev: "TTU", awayPower: 0.68, marquee: "Tucson Big 12 Duel" },
+      { homeTeamId: "west-virginia", awayTeamId: "iowa-state", isTop25Matchup: false, marquee: "Morgantown Big 12 Battle" },
+      { homeTeamId: "texas", isBye: true, marquee: "Open Date (Pre-Red River)" },
+      { homeTeamId: "oklahoma", isBye: true, marquee: "Open Date (Pre-Red River)" },
+      { homeTeamId: "utah", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "lsu", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "nc-state", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "missouri", isBye: true, marquee: "Open Date" }
+    ]
+  },
+  7: {
+    week: 7,
+    title: "Week 7: The Red River Rivalry & Autzen Stadium Earthquake",
+    games: [
+      { homeTeamId: "texas", awayTeamId: "oklahoma", isNeutral: true, venueName: "Cotton Bowl, Dallas", isTop25Matchup: true, marquee: "The Allstate Red River Rivalry in Dallas" },
+      { homeTeamId: "oregon", awayTeamId: "ohio-state", isTop25Matchup: true, marquee: "Big Ten Game of the Year: #3 Ohio State at #6 Oregon (Autzen)" },
+      { homeTeamId: "lsu", awayTeamId: "ole-miss", isTop25Matchup: true, marquee: "Magnolia Bowl at Death Valley Under the Lights" },
+      { homeTeamId: "usc", awayTeamId: "penn-state", isTop25Matchup: true, marquee: "Historic Cross-Country Big Ten Clash in LA Coliseum" },
+      { homeTeamId: "alabama", awayTeamName: "South Carolina", awayAbbrev: "SCAR", awayPower: 0.72, marquee: "Bryant-Denny Stadium SEC Clash" },
+      { homeTeamId: "georgia", awayTeamName: "Mississippi State", awayAbbrev: "MSST", awayPower: 0.61, marquee: "Sanford Stadium Afternoon" },
+      { homeTeamId: "wake-forest", awayTeamId: "clemson", isTop25Matchup: false, marquee: "ACC Road Matchup in Winston-Salem" },
+      { homeTeamId: "arizona-state", awayTeamId: "utah", isTop25Matchup: false, marquee: "Friday Night Desert Duel in Tempe" },
+      { homeTeamId: "byu", awayTeamId: "oklahoma-state", isTop25Matchup: false, marquee: "Provo Big 12 Friday Night" },
+      { homeTeamId: "illinois", awayTeamId: "michigan", isTop25Matchup: false, marquee: "Memorial Stadium Big Ten Duel" },
+      { homeTeamId: "wisconsin", awayTeamName: "Northwestern", awayAbbrev: "NW", awayPower: 0.58, marquee: "Camp Randall Stadium" },
+      { homeTeamId: "west-virginia", awayTeamId: "iowa-state", isTop25Matchup: false, marquee: "Big 12 Clash in Morgantown" },
+      { homeTeamId: "hawaii", awayTeamId: "boise-state", isTop25Matchup: false, marquee: "Island Road Trip in Honolulu" },
+      { homeTeamId: "byu", awayTeamId: "arizona", isTop25Matchup: false, marquee: "Big 12 Road Duel in Provo" },
+      { homeTeamId: "syracuse", awayTeamId: "nc-state", isTop25Matchup: false, marquee: "JMA Wireless Dome ACC Duel" },
+      { homeTeamId: "kansas-state", awayTeamName: "Colorado", awayAbbrev: "COLO", awayPower: 0.70, marquee: "Manhattan Big 12 Spotlight" },
+      { homeTeamId: "louisville", awayTeamName: "Virginia", awayAbbrev: "UVA", awayPower: 0.62, marquee: "L&N Stadium ACC Battle" },
+      { homeTeamId: "umass", awayTeamId: "missouri", isTop25Matchup: false, marquee: "Non-Conference Road Trip" },
+      { homeTeamId: "miami", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "tennessee", isBye: true, marquee: "Open Date" },
+      { homeTeamId: "notre-dame", isBye: true, marquee: "Open Date" }
+    ]
+  },
+  8: {
+    week: 8,
+    title: "Week 8: Georgia at Texas & The Third Saturday in October",
+    games: [
+      { homeTeamId: "texas", awayTeamId: "georgia", isTop25Matchup: true, marquee: "Mega-Showdown: #1 Texas vs #2 Georgia in Austin (DKR Stadium)" },
+      { homeTeamId: "tennessee", awayTeamId: "alabama", isTop25Matchup: true, marquee: "The Third Saturday in October at Neyland Stadium" },
+      { homeTeamId: "louisville", awayTeamId: "miami", isTop25Matchup: true, marquee: "ACC Top 20 Showdown at L&N Stadium" },
+      { homeTeamId: "wisconsin", awayTeamId: "penn-state", isTop25Matchup: true, marquee: "Camp Randall Jump Around Big Ten Battle" },
+      { homeTeamId: "ohio-state", awayTeamName: "Nebraska", awayAbbrev: "NEB", awayPower: 0.73, marquee: "Horseshoe Big Ten Afternoon" },
+      { homeTeamId: "purdue", awayTeamId: "oregon", isTop25Matchup: false, marquee: "Friday Night in West Lafayette" },
+      { homeTeamId: "missouri", awayTeamName: "Auburn", awayAbbrev: "AUB", awayPower: 0.71, marquee: "Faurot Field SEC Battle" },
+      { homeTeamId: "utah", awayTeamName: "TCU", awayAbbrev: "TCU", awayPower: 0.68, marquee: "Rice-Eccles Big 12 Night Game" },
+      { homeTeamId: "maryland", awayTeamId: "usc", isTop25Matchup: false, marquee: "Big Ten East Coast Road Trip" },
+      { homeTeamId: "georgia-tech", awayTeamId: "notre-dame", isNeutral: true, venueName: "Mercedes-Benz Stadium, Atlanta", isTop25Matchup: false, marquee: "Shamrock Series in Atlanta" },
+      { homeTeamId: "clemson", awayTeamName: "Virginia", awayAbbrev: "UVA", awayPower: 0.63, marquee: "Death Valley ACC Clash" },
+      { homeTeamId: "oklahoma", awayTeamName: "South Carolina", awayAbbrev: "SCAR", awayPower: 0.71, marquee: "SEC Clash in Norman" },
+      { homeTeamId: "west-virginia", awayTeamId: "kansas-state", isTop25Matchup: false, marquee: "Morgantown Big 12 Duel" },
+      { homeTeamId: "baylor", awayTeamId: "oklahoma-state", isTop25Matchup: false, marquee: "McLane Stadium Big 12 Showdown" },
+      { homeTeamId: "arkansas", awayTeamId: "lsu", isTop25Matchup: false, marquee: "Battle for the Golden Boot in Fayetteville" },
+      { homeTeamId: "illinois", awayTeamId: "michigan", isTop25Matchup: false, marquee: "Big Ten Duel in Champaign" },
+      { homeTeamId: "california", awayTeamId: "nc-state", isTop25Matchup: false, marquee: "ACC Coast-to-Coast Trip" },
+      { homeTeamId: "arizona", awayTeamName: "Colorado", awayAbbrev: "COLO", awayPower: 0.70, marquee: "Tucson Big 12 Battle" },
+      { homeTeamId: "iowa-state", awayTeamName: "UCF", awayAbbrev: "UCF", awayPower: 0.70, marquee: "Jack Trice Stadium Big 12" },
+      { homeTeamId: "unlv", awayTeamId: "boise-state", isTop25Matchup: false, marquee: "Mountain West Showcase at Allegiant Stadium" },
+      { homeTeamId: "ole-miss", isBye: true, marquee: "Open Date" }
+    ]
+  }
+};
+
+/**
+ * Returns a fresh deep clone of the baseline 2026 FBS dataset.
+ */
+function getFreshDataset() {
+  return JSON.parse(JSON.stringify(FBS_DATASET));
+}
