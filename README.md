@@ -1,9 +1,12 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.3.0-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.3.1-cyan?style=for-the-badge&logo=github)
+![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
 ![Season](https://img.shields.io/badge/Season-2026--27_Week_3-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
+
+**🚀 Live Web Application:** [https://xikarzr2026.github.io/cfb-top-25-ai/](https://xikarzr2026.github.io/cfb-top-25-ai/)
 
 An advanced, responsive, client-side analytical ranking engine for College Football that decouples **Predictive Power** from **Resume Merit**, calibrated with **Bayesian Prior Blending** and benchmarking against the **Top 10 College Football Ranking Systems**.
 
