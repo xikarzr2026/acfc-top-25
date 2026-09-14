@@ -349,66 +349,34 @@
       </div>
     </section>
 
-    <!-- SEASON PROGRESSION & ALGORITHM UPDATE CONTROL CENTER -->
-    <section class="glass-panel rounded-2xl p-5 sm:p-6 border border-cyan-500/40 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-2xl space-y-4">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-        
-        <!-- Left: Status, Season Stage & Prior Decay -->
+    <!-- ALGORITHM EXECUTION & UPDATE DOCK -->
+    <div class="glass-panel rounded-2xl p-4 sm:p-5 border border-cyan-500/30 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+          <i class="fa-solid fa-calculator text-lg"></i>
+        </div>
         <div>
-          <div class="flex items-center gap-2.5 flex-wrap">
-            <span class="px-2.5 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-mono font-bold flex items-center gap-1.5 shadow-sm">
-              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              <span id="season-status-label">Season State: Week 3 Baseline</span>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h3 class="text-sm sm:text-base font-bold font-display text-white">ACFC Top 25 Ranking Engine</h3>
+            <span class="px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 text-[11px] font-mono font-bold flex items-center gap-1">
+              <i class="fa-solid fa-circle-check text-[10px]"></i> Week 3 Active Calibration
             </span>
-            <span id="season-prior-badge" class="px-2.5 py-1 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-semibold">
-              <i class="fa-solid fa-brain-circuit mr-1"></i> Bayesian Prior: 40% (Week 3)
-            </span>
-            <span id="recalc-telemetry" class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-mono transition-opacity duration-300 hidden">
-              <i class="fa-solid fa-bolt-lightning text-emerald-400 mr-1"></i> Recalculated in <span id="telemetry-ms">1.2</span>ms
+            <span id="recalc-telemetry" class="px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-mono transition-opacity duration-300 hidden">
+              <i class="fa-solid fa-bolt-lightning text-emerald-400 mr-1"></i> Recalculated in <span id="telemetry-ms">1.1</span>ms
             </span>
           </div>
-          <p class="text-xs text-slate-400 mt-2">
-            Simulate each week's authentic 2026 conference slate with neutral spreads and real scoring variance, or re-run the algorithm on demand.
+          <p class="text-xs text-slate-400 mt-0.5">
+            Decoupled Resume Merit (50% RMS) + Predictive Efficiency (50% PES) with 40% Bayesian Prior.
           </p>
         </div>
-
-        <!-- Right: Control Action Buttons -->
-        <div class="flex items-center gap-2.5 flex-wrap">
-          
-          <!-- Re-Run Algorithm Button -->
-          <button id="btn-recalc-algorithm" class="px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 transition flex items-center gap-2 shadow-md active:scale-95 cursor-pointer">
-            <i class="fa-solid fa-arrows-rotate text-cyan-400"></i>
-            <span>Re-Run Algorithm</span>
-          </button>
-
-          <!-- Simulate Week Button -->
-          <button id="btn-simulate-week" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black shadow-lg shadow-amber-500/25 transition-all transform active:scale-95 flex items-center gap-2 font-display cursor-pointer">
-            <i class="fa-solid fa-football"></i>
-            <span id="btn-simulate-week-label">Simulate Week 3 Games &amp; Update</span>
-          </button>
-
-          <!-- View Week Results Button -->
-          <button id="btn-view-week-results" class="px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 transition flex items-center gap-2 hidden active:scale-95 cursor-pointer">
-            <i class="fa-solid fa-list-check text-purple-400"></i>
-            <span>View Week Scores</span>
-          </button>
-
-          <!-- Reset Season Button -->
-          <button id="btn-reset-season" title="Reset back to official Week 3 baseline" class="px-3 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-rose-300 border border-slate-800 hover:border-rose-900/50 transition flex items-center gap-1.5 active:scale-95 cursor-pointer">
-            <i class="fa-solid fa-rotate-left"></i>
-            <span>Reset Baseline</span>
-          </button>
-        </div>
-
       </div>
 
-      <!-- Season Progress Timeline Stepper -->
-      <div class="pt-3 border-t border-slate-800/80">
-        <div class="flex items-center justify-between gap-1 overflow-x-auto pb-1 scrollbar-none" id="season-timeline-stepper">
-          <!-- Dynamically populated week pills via JS -->
-        </div>
-      </div>
-    </section>
+      <!-- Action Button -->
+      <button id="btn-recalc-algorithm" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black shadow-lg shadow-cyan-500/20 transition-all transform active:scale-95 flex items-center justify-center gap-2 font-display cursor-pointer shrink-0">
+        <i class="fa-solid fa-arrows-rotate text-black"></i>
+        <span>Run Algorithm &amp; Update Rankings</span>
+      </button>
+    </div>
 
     <!-- FILTER & SEARCH BAR -->
     <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
@@ -470,7 +438,7 @@
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="border-b border-slate-800 bg-slate-950/80 text-[11px] uppercase tracking-wider font-mono text-slate-400">
-                <th class="py-3.5 px-4 text-center w-20">Rank / Mov</th>
+                <th class="py-3.5 px-4 text-center w-14">Rank</th>
                 <th class="py-3.5 px-4">2026 Team &amp; Coach</th>
                 <th class="py-3.5 px-4 text-center w-24">ACFC Index</th>
                 <th class="py-3.5 px-4 text-center w-28">Prior vs PES</th>
@@ -736,56 +704,6 @@
     </div>
   </div>
 
-  <!-- WEEKLY SCOREBOARD & RECAP MODAL -->
-  <div id="weekly-results-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-250">
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-6">
-      
-      <!-- Modal Header -->
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-        <div>
-          <div class="flex items-center gap-2.5 flex-wrap">
-            <h2 id="modal-week-title" class="text-xl font-bold font-display text-white">
-              Week 3 Scoreboard &amp; Top 25 Ranking Updates
-            </h2>
-            <span id="modal-week-prior-decay" class="px-2.5 py-0.5 rounded-lg bg-amber-950/70 text-amber-300 border border-amber-800/50 text-xs font-mono font-bold">
-              Prior: 40%
-            </span>
-          </div>
-          <p class="text-xs text-slate-400 mt-1">
-            Simulated results calculated with ACFC spread models, home-field advantage (+2.5), and offensive/defensive drive efficiency.
-          </p>
-        </div>
-        <button id="btn-close-weekly-results" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- Key Storylines Banner (Upsets & Risers) -->
-      <div id="modal-week-storylines" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <!-- Dynamically injected -->
-      </div>
-
-      <!-- Matchups Grid -->
-      <div class="space-y-3">
-        <h3 class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold flex items-center gap-2">
-          <i class="fa-solid fa-football text-cyan-400"></i> Final Scores &amp; Game Results
-        </h3>
-        <div id="modal-week-games-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <!-- Dynamically injected -->
-        </div>
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="flex items-center justify-between border-t border-slate-800 pt-4">
-        <span class="text-xs text-slate-500 font-mono" id="modal-week-timestamp">Simulated at --:--:--</span>
-        <button id="btn-dismiss-week-modal" class="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs font-display transition cursor-pointer">
-          View Updated Top 25 Rankings
-        </button>
-      </div>
-
-    </div>
-  </div>
-
   <!-- METHODOLOGY MODAL -->
   <div id="methodology-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-250">
     <div class="bg-slate-900 border border-slate-750 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 space-y-6">
@@ -962,11 +880,6 @@
         tableBody.innerHTML = filtered.map(team => {
           const apDeltaHtml = renderDeltaBadge(team.apDelta, team.apRank);
           const sidelineDeltaHtml = renderDeltaBadge(team.sidelineDelta, team.sidelineRank);
-          const weeklyDeltaHtml = team.rankDelta > 0 
-            ? `<span class="text-[10px] font-mono font-bold text-emerald-400 mt-0.5" title="Moved up ${team.rankDelta} spots this week">▲ +${team.rankDelta}</span>`
-            : team.rankDelta < 0 
-            ? `<span class="text-[10px] font-mono font-bold text-rose-400 mt-0.5" title="Dropped ${Math.abs(team.rankDelta)} spots this week">▼ ${Math.abs(team.rankDelta)}</span>`
-            : `<span class="text-[10px] font-mono text-slate-500 mt-0.5" title="Unchanged rank this week">—</span>`;
 
           const badgePills = team.badges.map(b => {
             const colorClass = b.type === "cyan" ? "bg-cyan-950 text-cyan-400 border-cyan-800/60" :
@@ -988,12 +901,9 @@
             <tr class="hover:bg-slate-800/40 transition group cursor-pointer" onclick="window.showTeamDetails('${team.id}')">
               
               <td class="py-3.5 px-4 text-center">
-                <div class="inline-flex flex-col items-center justify-center">
-                  <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl ${rankColorClass} text-xs font-mono">
-                    #${team.rank}
-                  </span>
-                  ${weeklyDeltaHtml}
-                </div>
+                <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl ${rankColorClass} text-xs font-mono">
+                  #${team.rank}
+                </span>
               </td>
 
               <td class="py-3.5 px-4">
@@ -1075,22 +985,14 @@
 
         cardWrapper.innerHTML = filtered.map(team => {
           const apDeltaHtml = renderDeltaBadge(team.apDelta, team.apRank);
-          const weeklyDeltaHtml = team.rankDelta > 0 
-            ? `<span class="text-[10px] font-mono font-bold text-emerald-400" title="Moved up ${team.rankDelta} spots this week">▲ +${team.rankDelta}</span>`
-            : team.rankDelta < 0 
-            ? `<span class="text-[10px] font-mono font-bold text-rose-400" title="Dropped ${Math.abs(team.rankDelta)} spots this week">▼ ${Math.abs(team.rankDelta)}</span>`
-            : `<span class="text-[10px] font-mono text-slate-500" title="Unchanged rank this week">—</span>`;
 
           return `
             <div class="glass-card rounded-2xl p-5 cursor-pointer border border-slate-800 space-y-4" onclick="window.showTeamDetails('${team.id}')">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <div class="flex flex-col items-center">
-                    <span class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 font-mono font-bold text-xs text-cyan-400 flex items-center justify-center">
-                      #${team.rank}
-                    </span>
-                    ${weeklyDeltaHtml}
-                  </div>
+                  <span class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 font-mono font-bold text-xs text-cyan-400 flex items-center justify-center">
+                    #${team.rank}
+                  </span>
                   <div>
                     <h4 class="font-bold text-white font-display text-base">${team.name}</h4>
                     <span class="text-xs text-slate-400">${team.conference} &bull; HC: ${team.coaching.headCoach}</span>
@@ -1560,94 +1462,9 @@
         `;
       }
 
-      // --- Weekly Simulation & Algorithm Update Controls ---
+      // --- Algorithm Execution & Live Recalculation Engine ---
       const btnRecalcAlgorithm = document.getElementById("btn-recalc-algorithm");
-      const btnSimulateWeek = document.getElementById("btn-simulate-week");
-      const btnSimulateWeekLabel = document.getElementById("btn-simulate-week-label");
-      const btnViewWeekResults = document.getElementById("btn-view-week-results");
-      const btnResetSeason = document.getElementById("btn-reset-season");
-      const seasonStatusLabel = document.getElementById("season-status-label");
-      const seasonPriorBadge = document.getElementById("season-prior-badge");
       const recalcTelemetry = document.getElementById("recalc-telemetry");
-      const seasonTimelineStepper = document.getElementById("season-timeline-stepper");
-
-      const weeklyResultsModal = document.getElementById("weekly-results-modal");
-      const btnCloseWeeklyResults = document.getElementById("btn-close-weekly-results");
-      const btnDismissWeekModal = document.getElementById("btn-dismiss-week-modal");
-      const modalWeekTitle = document.getElementById("modal-week-title");
-      const modalWeekPriorDecay = document.getElementById("modal-week-prior-decay");
-      const modalWeekStorylines = document.getElementById("modal-week-storylines");
-      const modalWeekGamesGrid = document.getElementById("modal-week-games-grid");
-      const modalWeekTimestamp = document.getElementById("modal-week-timestamp");
-
-      function updateSeasonTimelineUI() {
-        const weeksConfig = [
-          { num: 1, label: "W1", sub: "Done" },
-          { num: 2, label: "W2", sub: "Done" },
-          { num: 3, label: "W3", sub: "Baseline (40% Prior)" },
-          { num: 4, label: "W4", sub: "Openers (30% Prior)" },
-          { num: 5, label: "W5", sub: "Titans (22% Prior)" },
-          { num: 6, label: "W6", sub: "Rivalry (15% Prior)" },
-          { num: 7, label: "W7", sub: "Red River (10% Prior)" },
-          { num: 8, label: "W8", sub: "Showdown (5% Prior)" }
-        ];
-
-        const hasSimulated = engine.weekReports && engine.weekReports.length > 0;
-        const currentWk = engine.currentWeek;
-
-        seasonTimelineStepper.innerHTML = weeksConfig.map(w => {
-          const isCurrent = w.num === currentWk;
-          const isPassed = w.num < currentWk || (w.num === 3 && hasSimulated);
-
-          let badgeClass = "bg-slate-900/60 text-slate-500 border-slate-800";
-          let dotColor = "bg-slate-700";
-
-          if (isCurrent) {
-            badgeClass = "bg-cyan-950/80 text-cyan-300 border-cyan-500/60 shadow-md shadow-cyan-500/10 ring-1 ring-cyan-500/30";
-            dotColor = "bg-cyan-400 animate-pulse";
-          } else if (isPassed) {
-            badgeClass = "bg-emerald-950/40 text-emerald-400/80 border-emerald-800/40";
-            dotColor = "bg-emerald-400";
-          }
-
-          return `
-            <div class="px-2.5 py-1.5 rounded-lg border text-[11px] font-mono flex items-center gap-1.5 whitespace-nowrap ${badgeClass}">
-              <span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>
-              <span class="font-bold">${w.label}</span>
-              <span class="text-[10px] opacity-75 hidden sm:inline">&bull; ${w.sub}</span>
-            </div>
-          `;
-        }).join("");
-
-        // Update status label
-        if (!hasSimulated) {
-          seasonStatusLabel.textContent = "Season State: Week 3 Baseline";
-        } else {
-          seasonStatusLabel.textContent = `Season State: Week ${currentWk} Completed`;
-        }
-
-        // Update Prior Badge
-        const currentPriorPct = (engine.config.priorWeight * 100).toFixed(0);
-        seasonPriorBadge.innerHTML = `<i class="fa-solid fa-brain-circuit mr-1"></i> Bayesian Prior: ${currentPriorPct}% (Week ${currentWk})`;
-
-        // Update button text
-        const nextWeek = !hasSimulated ? 3 : currentWk + 1;
-        if (nextWeek <= 8) {
-          btnSimulateWeekLabel.innerHTML = `Simulate Week ${nextWeek} Games &amp; Update`;
-          btnSimulateWeek.disabled = false;
-          btnSimulateWeek.classList.remove("opacity-50", "cursor-not-allowed");
-        } else {
-          btnSimulateWeekLabel.innerHTML = `<i class="fa-solid fa-trophy mr-1"></i> Season Simulation Complete (Week 8)`;
-          btnSimulateWeek.disabled = true;
-          btnSimulateWeek.classList.add("opacity-50", "cursor-not-allowed");
-        }
-
-        if (hasSimulated) {
-          btnViewWeekResults.classList.remove("hidden");
-        } else {
-          btnViewWeekResults.classList.add("hidden");
-        }
-      }
 
       function flashTelemetry(ms, customText = null) {
         if (customText) {
@@ -1661,119 +1478,6 @@
         }, 3500);
       }
 
-      function showWeekReportModal(report) {
-        if (!report) return;
-
-        modalWeekTitle.textContent = report.title || `Week ${report.week} Scoreboard & Rankings`;
-        modalWeekPriorDecay.textContent = `Bayesian Prior: ${(report.priorWeight * 100).toFixed(0)}%`;
-        modalWeekTimestamp.textContent = `Simulated at ${report.timestamp}`;
-
-        // Storylines: Risers and Upsets
-        const risersHtml = report.topRisers && report.topRisers.length > 0 
-          ? report.topRisers.map(r => `
-              <div class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800">
-                <div class="flex items-center gap-2">
-                  <img src="${r.logo}" class="w-5 h-5 object-contain" alt="${r.name}">
-                  <span class="font-bold text-white text-xs">${r.name}</span>
-                </div>
-                <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 font-mono text-[11px] font-bold border border-emerald-800/50">
-                  ▲ +${r.rankDelta} (#${r.rank})
-                </span>
-              </div>
-            `).join("")
-          : `<div class="text-xs text-slate-500">No major upward movement this week.</div>`;
-
-        const upsetsHtml = report.upsets && report.upsets.length > 0
-          ? report.upsets.map(u => {
-              const winner = u.homeTeam.won ? u.homeTeam : u.awayTeam;
-              const loser = u.homeTeam.won ? u.awayTeam : u.homeTeam;
-              return `
-                <div class="p-2 rounded-lg bg-amber-950/40 border border-amber-800/50 text-xs">
-                  <div class="flex items-center gap-1.5 text-amber-400 font-bold">
-                    <i class="fa-solid fa-triangle-exclamation text-[10px]"></i>
-                    <span>UPSET ALERT</span>
-                  </div>
-                  <div class="text-slate-300 mt-1 font-mono">
-                    <strong>${winner.name}</strong> ${winner.score}, ${loser.name} ${loser.score}
-                  </div>
-                </div>
-              `;
-            }).join("")
-          : `<div class="p-2 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-400">All heavy favorites held serve this week.</div>`;
-
-        modalWeekStorylines.innerHTML = `
-          <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 space-y-2">
-            <h4 class="text-xs uppercase font-mono tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-              <i class="fa-solid fa-arrow-trend-up"></i> Top Ranking Risers
-            </h4>
-            <div class="space-y-1.5">${risersHtml}</div>
-          </div>
-          <div class="bg-slate-900/90 p-3.5 rounded-xl border border-slate-800 space-y-2">
-            <h4 class="text-xs uppercase font-mono tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
-              <i class="fa-solid fa-bolt"></i> Notable Week Highlights
-            </h4>
-            <div class="space-y-1.5">${upsetsHtml}</div>
-          </div>
-        `;
-
-        // Game Scores Grid
-        modalWeekGamesGrid.innerHTML = report.games.map(g => {
-          if (g.isBye) {
-            return `
-              <div class="bg-slate-950/60 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <img src="${g.teamLogo || ''}" class="w-6 h-6 object-contain">
-                  <span class="text-xs font-bold text-white">${g.teamName}</span>
-                </div>
-                <span class="px-2 py-0.5 rounded bg-slate-900 text-slate-400 text-[10px] font-mono border border-slate-800">
-                  ${g.marquee}
-                </span>
-              </div>
-            `;
-          }
-
-          const homeWon = g.homeTeam.won;
-          const awayWon = g.awayTeam.won;
-
-          return `
-            <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2 relative overflow-hidden">
-              ${g.isUpset ? `<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[9px] font-mono font-bold">UPSET</span>` : ''}
-              
-              <div class="flex items-center justify-between pr-10">
-                <div class="flex items-center gap-2">
-                  <img src="${g.awayTeam.logo}" class="w-6 h-6 object-contain">
-                  <span class="text-xs ${awayWon ? 'font-black text-white' : 'font-medium text-slate-400'}">
-                    ${g.awayTeam.rank ? `<span class="text-[10px] text-cyan-400 font-mono">#${g.awayTeam.rank}</span> ` : ''}${g.awayTeam.name}
-                  </span>
-                </div>
-                <span class="font-mono text-sm ${awayWon ? 'font-black text-cyan-400' : 'text-slate-500'}">
-                  ${g.awayTeam.score}
-                </span>
-              </div>
-
-              <div class="flex items-center justify-between pr-10">
-                <div class="flex items-center gap-2">
-                  <img src="${g.homeTeam.logo}" class="w-6 h-6 object-contain">
-                  <span class="text-xs ${homeWon ? 'font-black text-white' : 'font-medium text-slate-400'}">
-                    ${g.homeTeam.rank ? `<span class="text-[10px] text-cyan-400 font-mono">#${g.homeTeam.rank}</span> ` : ''}${g.homeTeam.name}
-                  </span>
-                </div>
-                <span class="font-mono text-sm ${homeWon ? 'font-black text-cyan-400' : 'text-slate-500'}">
-                  ${g.homeTeam.score}
-                </span>
-              </div>
-
-              <div class="pt-1 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 font-mono">
-                <span>${g.marquee || ''}</span>
-                <span class="text-slate-400">Final</span>
-              </div>
-            </div>
-          `;
-        }).join("");
-
-        weeklyResultsModal.classList.remove("opacity-0", "pointer-events-none");
-      }
-
       // Re-Run Algorithm Button
       btnRecalcAlgorithm.addEventListener("click", () => {
         const t0 = performance.now();
@@ -1782,57 +1486,8 @@
         flashTelemetry(elapsed);
       });
 
-      // Simulate Week Slate Button
-      btnSimulateWeek.addEventListener("click", () => {
-        const hasSimulated = engine.weekReports && engine.weekReports.length > 0;
-        const targetWeek = !hasSimulated ? 3 : engine.currentWeek + 1;
-
-        if (targetWeek > 8) return;
-
-        const t0 = performance.now();
-        const report = engine.simulateWeekSlate(targetWeek);
-        const elapsed = performance.now() - t0;
-
-        if (report) {
-          renderRankings();
-          populateMatchupSelectors(engine.dataset);
-          updateSeasonTimelineUI();
-          flashTelemetry(elapsed, `Week ${targetWeek} Slate Simulated &amp; Ranked`);
-          showWeekReportModal(report);
-        }
-      });
-
-      // View Week Results Button
-      btnViewWeekResults.addEventListener("click", () => {
-        const latestReport = engine.weekReports[engine.weekReports.length - 1];
-        if (latestReport) {
-          showWeekReportModal(latestReport);
-        }
-      });
-
-      // Reset Season Button
-      btnResetSeason.addEventListener("click", () => {
-        engine.resetSeason();
-        populateMatchupSelectors(engine.dataset);
-        renderRankings();
-        updateSeasonTimelineUI();
-        flashTelemetry(0.5, "Reset back to Week 3 Baseline");
-      });
-
-      // Close Weekly Results Modal
-      btnCloseWeeklyResults.addEventListener("click", () => {
-        weeklyResultsModal.classList.add("opacity-0", "pointer-events-none");
-      });
-      btnDismissWeekModal.addEventListener("click", () => {
-        weeklyResultsModal.classList.add("opacity-0", "pointer-events-none");
-      });
-      weeklyResultsModal.addEventListener("click", (e) => {
-        if (e.target === weeklyResultsModal) weeklyResultsModal.classList.add("opacity-0", "pointer-events-none");
-      });
-
       populateMatchupSelectors(FBS_DATASET);
       renderRankings();
-      updateSeasonTimelineUI();
     });
   </script>
 </body>

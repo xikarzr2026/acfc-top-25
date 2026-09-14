@@ -1,8 +1,8 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.3.2-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.3.3-cyan?style=for-the-badge&logo=github)
 ![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
-![Season](https://img.shields.io/badge/Season-2026--27_Weeks_3--8-amber?style=for-the-badge)
+![Season](https://img.shields.io/badge/Season-2026--27_Calibrated_Baseline-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
@@ -16,7 +16,7 @@ An advanced, responsive, client-side analytical ranking engine for College Footb
 
 College football ranking systems divide into two distinct categories: **Human Consensus Polls** (measuring subjective merit/résumé) and **Algorithmic/Computer Models** (measuring predictive power or mathematically balanced schedules).
 
-In ACFC v0.3.1, users can review the methodologies of each benchmark system inside the Compendium modal:
+In ACFC v0.3.3, users can review the methodologies of each benchmark system inside the Compendium modal:
 
 | # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | Primary Analytical Focus |
 | :-: | :--- | :--- | :--- | :--- | :--- |
@@ -65,22 +65,13 @@ $$\text{ACFC Index} = w_{\text{resume}} \cdot \text{RMS} + (1 - w_{\text{resume}
 
 ---
 
-## 3. Weekly Simulation & Ranking Update Engine (Season Progression)
+## 3. On-Demand Algorithm Execution & Live Recalculation Engine
 
-In ACFC v0.3.2, users can advance the 2026–27 college football season step-by-step from Week 3 through Week 8:
-* **`🏈 Simulate Week N Games & Update`**: Plays out the authentic 2026 conference slate for the Top 25 teams with realistic scoring spreads, home-field advantage (+2.5), and offensive/defensive drive efficiency.
-* **`⚡ Re-Run Algorithm`**: Instantly recalculates composite scores and rank movements on demand with real-time computation telemetry.
-* **`↺ Reset Baseline`**: Restores the verified Week 3 baseline dataset with a single click.
-* **Dynamic Bayesian Prior Decay:** Emulates real-world SP+ and FPI modeling where roster and coaching priors decay as on-field game sample size increases:
-  * Week 1: 60% Prior
-  * Week 2: 50% Prior
-  * Week 3: 40% Prior (Baseline)
-  * Week 4: 30% Prior (Conference Openers)
-  * Week 5: 22% Prior (Heavyweight Battles)
-  * Week 6: 15% Prior (Mid-Season Pivots)
-  * Week 7: 10% Prior (Red River Rivalry & Marquee Clashes)
-  * Week 8+: 5% Prior (Late-Season Stabilized)
-* **Weekly Scoreboard & Recap Modal:** Pops up after each simulated week showing all final scores, upset alerts, and top risers/fallers (`▲ +3`, `▼ -4`).
+In ACFC v0.3.3, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
+* **`⚡ Run Algorithm & Update Rankings`**: Triggers real-time computation of the full ACFC composite matrix across all 25 teams.
+* **Live Calculation Telemetry**: Instant millisecond feedback badge (e.g. `⚡ Recalculated in 1.1ms`) confirming on-the-fly execution.
+* **Tamper-Proof Integrity**: Runs against calibrated mathematical weights (50% RMS / 50% PES with 40% Bayesian prior), ensuring objective rankings without subjective voter bias or arbitrary tampering.
+* **Matchup Arena**: Interactive head-to-head simulator comparing any two FBS teams on neutral or home fields using component ratings, roster talent, and coach grades.
 
 ---
 
@@ -114,5 +105,5 @@ python -m http.server 8000
 
 ---
 
-## 5. License
+## 6. License
 Distributed under the MIT License.
