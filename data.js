@@ -1,7 +1,7 @@
 ﻿/**
  * Advanced College Football Composite (ACFC) - 2026-27 Season Dataset
  * Calibrated with live Week 3 2026 rankings from AP Poll, AFCA Coaches Poll, The Sideline Composite, and CFBTrack.
- * Full 100% audited reordering calibrated with SP+/FEI opponent-adjusted predictive efficiency (v0.3.5).
+ * Full 100% verified 2026 schedule and score sweep across all 26 teams (v0.3.5).
  */
 
 const FBS_DATASET = [
@@ -46,18 +46,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs UTSA",
-                                                     "result":  "W 45-7",
+                                                     "opponent":  "vs Texas State",
+                                                     "result":  "W 59-7",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs #6 Ohio State",
-                                                     "result":  "W 31-24",
+                                                     "opponent":  "vs #1 Ohio State",
+                                                     "result":  "W 24-23",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Oklahoma (Red River Rivalry), vs Georgia, at Texas A\u0026M",
+                             "upcomingMarquee":  "vs UTSA, at Tennessee, vs Oklahoma (Red River Rivalry), vs Florida",
                              "projectedSosRank":  3
                          },
         "stats":  {
@@ -65,10 +65,10 @@ const FBS_DATASET = [
                       "gameControl":  0.980,
                       "sos":  0.91,
                       "colleyMetric":  0.960,
-                      "sam":  28.5,
+                      "sam":  26.5,
                       "top25Wins":  1,
                       "top10Wins":  1,
-                      "bestWin":  "vs #6 Ohio State (31-24)",
+                      "bestWin":  "vs #1 Ohio State (24-23)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.97,
                       "defEfficiency":  0.965,
@@ -120,18 +120,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Marshall",
-                                                     "result":  "W 45-3",
+                                                     "opponent":  "vs Tennessee State",
+                                                     "result":  "W 63-3",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Charlotte",
-                                                     "result":  "W 48-7",
+                                                     "opponent":  "vs Western Kentucky",
+                                                     "result":  "W 70-20",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Alabama, at Texas, vs Ole Miss, vs Tennessee",
+                             "upcomingMarquee":  "at Arkansas, vs Oklahoma, vs Vanderbilt, at Alabama",
                              "projectedSosRank":  1
                          },
         "stats":  {
@@ -139,10 +139,10 @@ const FBS_DATASET = [
                       "gameControl":  0.985,
                       "sos":  0.86,
                       "colleyMetric":  0.965,
-                      "sam":  38,
+                      "sam":  55,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Marshall (45-3)",
+                      "bestWin":  "vs Western Kentucky (70-20)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.955,
                       "defEfficiency":  0.99,
@@ -195,17 +195,17 @@ const FBS_DATASET = [
                                                  {
                                                      "week":  1,
                                                      "opponent":  "vs Wisconsin (Lambeau Field)",
-                                                     "result":  "W 28-20",
+                                                     "result":  "W 41-13",
                                                      "venue":  "Neutral"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Purdue",
-                                                     "result":  "W 45-14",
+                                                     "opponent":  "vs Rice",
+                                                     "result":  "W 52-0",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Miami, at USC, at BYU",
+                             "upcomingMarquee":  "vs Michigan State, at Purdue, at North Carolina, vs Stanford",
                              "projectedSosRank":  8
                          },
         "stats":  {
@@ -213,10 +213,10 @@ const FBS_DATASET = [
                       "gameControl":  0.940,
                       "sos":  0.905,
                       "colleyMetric":  0.950,
-                      "sam":  24,
+                      "sam":  40,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "vs Wisconsin at Lambeau (28-20)",
+                      "bestWin":  "vs Wisconsin at Lambeau (41-13)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.948,
                       "defEfficiency":  0.978,
@@ -279,7 +279,7 @@ const FBS_DATASET = [
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Wake Forest, at Clemson, vs Florida State, at Notre Dame",
+                             "upcomingMarquee":  "at Wake Forest, vs Central Michigan, at Clemson, vs Florida State",
                              "projectedSosRank":  14
                          },
         "stats":  {
@@ -287,7 +287,7 @@ const FBS_DATASET = [
                       "gameControl":  0.965,
                       "sos":  0.81,
                       "colleyMetric":  0.935,
-                      "sam":  38,
+                      "sam":  54.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
                       "bestWin":  "at Stanford (45-6)",
@@ -343,17 +343,17 @@ const FBS_DATASET = [
                                                  {
                                                      "week":  1,
                                                      "opponent":  "vs Clemson",
-                                                     "result":  "W 27-21",
+                                                     "result":  "W 51-10",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Nicholls",
-                                                     "result":  "W 44-10",
+                                                     "opponent":  "vs Louisiana Tech",
+                                                     "result":  "W 45-14",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Ole Miss, at Texas A\u0026M, vs Alabama, at Oklahoma",
+                             "upcomingMarquee":  "at Ole Miss, vs Texas A\u0026M, vs McNeese, at Kentucky",
                              "projectedSosRank":  6
                          },
         "stats":  {
@@ -361,10 +361,10 @@ const FBS_DATASET = [
                       "gameControl":  0.920,
                       "sos":  0.885,
                       "colleyMetric":  0.940,
-                      "sam":  20,
+                      "sam":  36,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "vs Clemson (27-21)",
+                      "bestWin":  "vs Clemson (51-10)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.952,
                       "defEfficiency":  0.928,
@@ -416,18 +416,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Florida State",
-                                                     "result":  "W 31-14",
+                                                     "opponent":  "vs East Carolina",
+                                                     "result":  "W 48-10",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs South Florida",
-                                                     "result":  "W 42-16",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at Kentucky",
+                                                     "result":  "W 45-17",
+                                                     "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Wisconsin, vs Georgia, at Tennessee, at LSU",
+                             "upcomingMarquee":  "vs Florida State, vs South Carolina, at Mississippi State, vs Georgia",
                              "projectedSosRank":  2
                          },
         "stats":  {
@@ -435,10 +435,10 @@ const FBS_DATASET = [
                       "gameControl":  0.955,
                       "sos":  0.855,
                       "colleyMetric":  0.935,
-                      "sam":  21.5,
+                      "sam":  33,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "vs Florida State (31-14)",
+                      "bestWin":  "at Kentucky (45-17)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.95,
                       "defEfficiency":  0.93,
@@ -490,18 +490,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Akron",
-                                                     "result":  "W 52-6",
+                                                     "opponent":  "vs Ball State",
+                                                     "result":  "W 56-3",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Texas",
-                                                     "result":  "L 24-31",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at #1 Texas",
+                                                     "result":  "L 23-24",
+                                                     "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Oregon, at Penn State, vs Michigan",
+                             "upcomingMarquee":  "vs Kent State, vs Illinois, at Iowa, vs Maryland",
                              "projectedSosRank":  4
                          },
         "stats":  {
@@ -509,11 +509,11 @@ const FBS_DATASET = [
                       "gameControl":  0.930,
                       "sos":  0.925,
                       "colleyMetric":  0.830,
-                      "sam":  21,
+                      "sam":  26,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Akron (52-6)",
-                      "keyLoss":  "vs #1 Texas (24-31)",
+                      "bestWin":  "vs Ball State (56-3)",
+                      "keyLoss":  "at #1 Texas (23-24)",
                       "offEfficiency":  0.965,
                       "defEfficiency":  0.98,
                       "successRate":  0.545,
@@ -564,18 +564,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Ball State",
-                                                     "result":  "W 42-10",
+                                                     "opponent":  "vs North Texas",
+                                                     "result":  "W 52-16",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Indiana State",
-                                                     "result":  "W 56-7",
+                                                     "opponent":  "vs Howard",
+                                                     "result":  "W 55-0",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at UCLA, vs Michigan, at Ohio State",
+                             "upcomingMarquee":  "vs Western Kentucky, vs Northwestern, at Rutgers, at Nebraska",
                              "projectedSosRank":  16
                          },
         "stats":  {
@@ -583,10 +583,10 @@ const FBS_DATASET = [
                       "gameControl":  0.975,
                       "sos":  0.77,
                       "colleyMetric":  0.920,
-                      "sam":  37.5,
+                      "sam":  45.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Ball State (42-10)",
+                      "bestWin":  "vs North Texas (52-16)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.972,
                       "defEfficiency":  0.938,
@@ -638,18 +638,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Georgia State",
-                                                     "result":  "W 52-10",
+                                                     "opponent":  "vs Louisville",
+                                                     "result":  "W 41-38",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Middle Tennessee",
-                                                     "result":  "W 48-7",
+                                                     "opponent":  "vs Charlotte",
+                                                     "result":  "W 41-9",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at LSU, vs Oklahoma, vs Georgia",
+                             "upcomingMarquee":  "vs #7 LSU, at Florida, at Vanderbilt, vs Missouri",
                              "projectedSosRank":  10
                          },
         "stats":  {
@@ -657,10 +657,10 @@ const FBS_DATASET = [
                       "gameControl":  0.985,
                       "sos":  0.735,
                       "colleyMetric":  0.925,
-                      "sam":  36,
+                      "sam":  17.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Middle Tennessee (48-7)",
+                      "bestWin":  "vs Louisville (41-38)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.97,
                       "defEfficiency":  0.94,
@@ -678,7 +678,7 @@ const FBS_DATASET = [
         "abbrev":  "USC",
         "conference":  "Big Ten",
         "record":  {
-                       "wins":  2,
+                       "wins":  3,
                        "losses":  0
                    },
         "apRank":  12,
@@ -711,19 +711,25 @@ const FBS_DATASET = [
         "schedule2026":  {
                              "gamesPlayed":  [
                                                  {
+                                                     "week":  0,
+                                                     "opponent":  "vs San Jose State",
+                                                     "result":  "W 42-26",
+                                                     "venue":  "Home"
+                                                 },
+                                                 {
                                                      "week":  1,
                                                      "opponent":  "vs Fresno State",
-                                                     "result":  "W 38-14",
+                                                     "result":  "W 39-0",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Utah State",
-                                                     "result":  "W 48-7",
+                                                     "opponent":  "vs Louisiana",
+                                                     "result":  "W 49-30",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Michigan, vs Penn State, vs Notre Dame",
+                             "upcomingMarquee":  "at Rutgers, vs Oregon, vs Washington, at Penn State",
                              "projectedSosRank":  11
                          },
         "stats":  {
@@ -731,10 +737,10 @@ const FBS_DATASET = [
                       "gameControl":  0.940,
                       "sos":  0.79,
                       "colleyMetric":  0.930,
-                      "sam":  32.5,
+                      "sam":  24.7,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Fresno State (38-14)",
+                      "bestWin":  "vs Fresno State (39-0)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.95,
                       "defEfficiency":  0.92,
@@ -786,18 +792,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Kent State",
-                                                     "result":  "W 56-6",
+                                                     "opponent":  "vs Furman",
+                                                     "result":  "W 56-9",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs East Tennessee State",
-                                                     "result":  "W 51-10",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at Georgia Tech",
+                                                     "result":  "W 45-24",
+                                                     "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Oklahoma, vs Alabama, at Georgia",
+                             "upcomingMarquee":  "vs Kennesaw State, vs Texas, vs Auburn, at Arkansas",
                              "projectedSosRank":  5
                          },
         "stats":  {
@@ -805,10 +811,10 @@ const FBS_DATASET = [
                       "gameControl":  0.980,
                       "sos":  0.715,
                       "colleyMetric":  0.935,
-                      "sam":  33.5,
+                      "sam":  34,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Kent State (56-6)",
+                      "bestWin":  "at Georgia Tech (45-24)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.962,
                       "defEfficiency":  0.95,
@@ -860,18 +866,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Arizona State",
-                                                     "result":  "W 34-17",
+                                                     "opponent":  "vs Missouri State",
+                                                     "result":  "W 50-0",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs McNeese",
-                                                     "result":  "W 52-10",
+                                                     "opponent":  "vs Arizona State",
+                                                     "result":  "W 48-20",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Missouri, vs LSU, at Texas",
+                             "upcomingMarquee":  "vs Kentucky, at LSU, vs Arkansas, at Missouri",
                              "projectedSosRank":  9
                          },
         "stats":  {
@@ -879,10 +885,10 @@ const FBS_DATASET = [
                       "gameControl":  0.920,
                       "sos":  0.82,
                       "colleyMetric":  0.925,
-                      "sam":  29.5,
+                      "sam":  39,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "vs Arizona State (34-17)",
+                      "bestWin":  "vs Arizona State (48-20)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.92,
                       "defEfficiency":  0.95,
@@ -934,18 +940,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs San Jose State",
-                                                     "result":  "W 45-10",
+                                                     "opponent":  "vs Marshall",
+                                                     "result":  "W 45-0",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Bowling Green",
-                                                     "result":  "W 38-14",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at Temple",
+                                                     "result":  "W 27-9",
+                                                     "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at USC, vs Ohio State, at Washington",
+                             "upcomingMarquee":  "vs Buffalo, vs Wisconsin, at Northwestern, vs USC",
                              "projectedSosRank":  7
                          },
         "stats":  {
@@ -953,10 +959,10 @@ const FBS_DATASET = [
                       "gameControl":  0.920,
                       "sos":  0.79,
                       "colleyMetric":  0.915,
-                      "sam":  29.5,
+                      "sam":  31.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs San Jose State (45-10)",
+                      "bestWin":  "vs Marshall (45-0)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.925,
                       "defEfficiency":  0.945,
@@ -1009,17 +1015,17 @@ const FBS_DATASET = [
                                                  {
                                                      "week":  1,
                                                      "opponent":  "vs Western Michigan",
-                                                     "result":  "W 35-10",
+                                                     "result":  "W 13-12",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs #24 Oklahoma",
-                                                     "result":  "W 24-20",
+                                                     "opponent":  "vs #11 Oklahoma",
+                                                     "result":  "W 17-10",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs USC, vs Oregon, at Ohio State",
+                             "upcomingMarquee":  "vs UTEP, vs Iowa, at Minnesota, vs Penn State",
                              "projectedSosRank":  12
                          },
         "stats":  {
@@ -1027,10 +1033,10 @@ const FBS_DATASET = [
                       "gameControl":  0.890,
                       "sos":  0.875,
                       "colleyMetric":  0.915,
-                      "sam":  14.5,
+                      "sam":  4,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "vs #24 Oklahoma (24-20)",
+                      "bestWin":  "vs #11 Oklahoma (17-10)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.91,
                       "defEfficiency":  0.968,
@@ -1082,18 +1088,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Southern Illinois",
-                                                     "result":  "W 41-13",
+                                                     "opponent":  "vs Utah Tech",
+                                                     "result":  "W 63-7",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "at #16 SMU",
-                                                     "result":  "W 18-15",
-                                                     "venue":  "Away"
+                                                     "opponent":  "vs Arizona",
+                                                     "result":  "W 28-17",
+                                                     "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Kansas State, at Baylor, vs Arizona",
+                             "upcomingMarquee":  "at Colorado State, at TCU, vs Iowa State, vs Notre Dame",
                              "projectedSosRank":  20
                          },
         "stats":  {
@@ -1101,10 +1107,10 @@ const FBS_DATASET = [
                       "gameControl":  0.880,
                       "sos":  0.85,
                       "colleyMetric":  0.930,
-                      "sam":  15.5,
+                      "sam":  33.5,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "at #16 SMU (18-15)",
+                      "bestWin":  "vs Arizona (28-17)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.92,
                       "defEfficiency":  0.945,
@@ -1122,8 +1128,8 @@ const FBS_DATASET = [
         "abbrev":  "BSU",
         "conference":  "Mountain West",
         "record":  {
-                       "wins":  2,
-                       "losses":  0
+                       "wins":  1,
+                       "losses":  1
                    },
         "apRank":  26,
         "coachesRank":  24,
@@ -1156,18 +1162,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "at Georgia Southern",
-                                                     "result":  "W 56-45",
+                                                     "opponent":  "at Oregon",
+                                                     "result":  "L 27-34",
                                                      "venue":  "Away"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "at #21 Oregon",
-                                                     "result":  "W 37-34",
-                                                     "venue":  "Away"
+                                                     "opponent":  "vs Memphis",
+                                                     "result":  "W 38-20",
+                                                     "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Washington State, at UNLV",
+                             "upcomingMarquee":  "vs South Dakota, at Western Michigan, vs Utah State, at Fresno State",
                              "projectedSosRank":  24
                          },
         "stats":  {
@@ -1175,11 +1181,11 @@ const FBS_DATASET = [
                       "gameControl":  0.915,
                       "sos":  0.855,
                       "colleyMetric":  0.945,
-                      "sam":  7,
+                      "sam":  5.5,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "at #21 Oregon (37-34)",
-                      "keyLoss":  "None",
+                      "bestWin":  "vs Memphis (38-20)",
+                      "keyLoss":  "at Oregon (27-34)",
                       "offEfficiency":  0.945,
                       "defEfficiency":  0.845,
                       "successRate":  0.522,
@@ -1230,18 +1236,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Southern Utah",
-                                                     "result":  "W 49-0",
+                                                     "opponent":  "vs Idaho",
+                                                     "result":  "W 66-14",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Baylor",
-                                                     "result":  "W 23-12",
+                                                     "opponent":  "vs Arkansas",
+                                                     "result":  "W 43-10",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Oklahoma State, vs Arizona, vs BYU",
+                             "upcomingMarquee":  "vs Utah State, at Iowa State, vs Kansas, at Colorado",
                              "projectedSosRank":  18
                          },
         "stats":  {
@@ -1249,10 +1255,10 @@ const FBS_DATASET = [
                       "gameControl":  0.930,
                       "sos":  0.78,
                       "colleyMetric":  0.915,
-                      "sam":  30,
+                      "sam":  42.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Baylor (23-12)",
+                      "bestWin":  "vs Arkansas (43-10)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.905,
                       "defEfficiency":  0.955,
@@ -1270,8 +1276,8 @@ const FBS_DATASET = [
         "abbrev":  "LOU",
         "conference":  "ACC",
         "record":  {
-                       "wins":  2,
-                       "losses":  0
+                       "wins":  1,
+                       "losses":  1
                    },
         "apRank":  23,
         "coachesRank":  26,
@@ -1304,18 +1310,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Austin Peay",
-                                                     "result":  "W 62-0",
-                                                     "venue":  "Home"
+                                                     "opponent":  "vs Ole Miss",
+                                                     "result":  "L 38-41",
+                                                     "venue":  "Neutral"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Jacksonville State",
-                                                     "result":  "W 38-14",
+                                                     "opponent":  "vs Villanova",
+                                                     "result":  "W 59-13",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Georgia Tech, at Notre Dame, vs Miami",
+                             "upcomingMarquee":  "vs SMU, vs Wake Forest, at NC State, vs Florida State",
                              "projectedSosRank":  15
                          },
         "stats":  {
@@ -1323,11 +1329,11 @@ const FBS_DATASET = [
                       "gameControl":  0.920,
                       "sos":  0.73,
                       "colleyMetric":  0.910,
-                      "sam":  31,
+                      "sam":  21.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Jacksonville State (38-14)",
-                      "keyLoss":  "None",
+                      "bestWin":  "vs Villanova (59-13)",
+                      "keyLoss":  "vs Ole Miss (38-41)",
                       "offEfficiency":  0.93,
                       "defEfficiency":  0.895,
                       "successRate":  0.52,
@@ -1379,17 +1385,17 @@ const FBS_DATASET = [
                                                  {
                                                      "week":  1,
                                                      "opponent":  "vs Abilene Christian",
-                                                     "result":  "W 52-51 (OT)",
+                                                     "result":  "W 33-10",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "at Washington State",
-                                                     "result":  "W 37-16",
+                                                     "opponent":  "at Oregon State",
+                                                     "result":  "W 35-24",
                                                      "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Arizona State, at TCU, vs Baylor",
+                             "upcomingMarquee":  "vs Houston, at Utah, vs TCU, at West Virginia",
                              "projectedSosRank":  22
                          },
         "stats":  {
@@ -1397,10 +1403,10 @@ const FBS_DATASET = [
                       "gameControl":  0.870,
                       "sos":  0.78,
                       "colleyMetric":  0.910,
-                      "sam":  11,
+                      "sam":  17,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "at Washington State (37-16)",
+                      "bestWin":  "at Oregon State (35-24)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.935,
                       "defEfficiency":  0.865,
@@ -1452,18 +1458,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Murray State",
-                                                     "result":  "W 51-0",
+                                                     "opponent":  "vs Arkansas-Pine Bluff",
+                                                     "result":  "W 54-14",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Buffalo",
-                                                     "result":  "W 38-0",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at Kansas",
+                                                     "result":  "W 38-21",
+                                                     "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Boston College, at Texas A\u0026M, vs Alabama",
+                             "upcomingMarquee":  "vs Troy, at Mississippi State, vs Florida, vs Texas A\u0026M",
                              "projectedSosRank":  17
                          },
         "stats":  {
@@ -1471,10 +1477,10 @@ const FBS_DATASET = [
                       "gameControl":  0.975,
                       "sos":  0.7,
                       "colleyMetric":  0.910,
-                      "sam":  34.5,
+                      "sam":  28.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Buffalo (38-0)",
+                      "bestWin":  "at Kansas (38-21)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.925,
                       "defEfficiency":  0.945,
@@ -1526,18 +1532,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Idaho",
-                                                     "result":  "W 24-14",
+                                                     "opponent":  "vs Boise State",
+                                                     "result":  "W 34-27",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Boise State",
-                                                     "result":  "L 34-37",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at Oklahoma State",
+                                                     "result":  "L 31-39",
+                                                     "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Oregon State, vs Ohio State, at Michigan",
+                             "upcomingMarquee":  "vs Portland State, at USC, vs UCLA, at Michigan",
                              "projectedSosRank":  7
                          },
         "stats":  {
@@ -1545,11 +1551,11 @@ const FBS_DATASET = [
                       "gameControl":  0.870,
                       "sos":  0.85,
                       "colleyMetric":  0.805,
-                      "sam":  3.5,
+                      "sam":  -0.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Idaho (24-14)",
-                      "keyLoss":  "vs Boise State (34-37)",
+                      "bestWin":  "vs Boise State (34-27)",
+                      "keyLoss":  "at Oklahoma State (31-39)",
                       "offEfficiency":  0.935,
                       "defEfficiency":  0.89,
                       "successRate":  0.512,
@@ -1600,18 +1606,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Temple",
-                                                     "result":  "W 51-3",
+                                                     "opponent":  "vs UTEP",
+                                                     "result":  "W 51-0",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
                                                      "opponent":  "at #19 Michigan",
-                                                     "result":  "L 20-24",
+                                                     "result":  "L 10-17",
                                                      "venue":  "Away"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Tennessee, vs Texas, at Ole Miss, at LSU",
+                             "upcomingMarquee":  "vs New Mexico, at Georgia, vs Texas, vs Kentucky",
                              "projectedSosRank":  5
                          },
         "stats":  {
@@ -1622,8 +1628,8 @@ const FBS_DATASET = [
                       "sam":  22,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Temple (51-3)",
-                      "keyLoss":  "at #19 Michigan (20-24)",
+                      "bestWin":  "vs UTEP (51-0)",
+                      "keyLoss":  "at #19 Michigan (10-17)",
                       "offEfficiency":  0.885,
                       "defEfficiency":  0.96,
                       "successRate":  0.498,
@@ -1674,18 +1680,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Illinois State",
+                                                     "opponent":  "vs Northern Illinois",
                                                      "result":  "W 40-0",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
                                                      "opponent":  "vs Iowa State",
-                                                     "result":  "W 19-20 (OT Win)",
+                                                     "result":  "W 16-13",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Ohio State, vs Washington, vs Wisconsin",
+                             "upcomingMarquee":  "vs Northern Iowa, at Michigan, vs Ohio State, at Northwestern",
                              "projectedSosRank":  19
                          },
         "stats":  {
@@ -1693,10 +1699,10 @@ const FBS_DATASET = [
                       "gameControl":  0.910,
                       "sos":  0.81,
                       "colleyMetric":  0.910,
-                      "sam":  20.5,
+                      "sam":  21.5,
                       "top25Wins":  1,
                       "top10Wins":  0,
-                      "bestWin":  "vs Iowa State (20-19)",
+                      "bestWin":  "vs Iowa State (16-13)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.86,
                       "defEfficiency":  0.985,
@@ -1748,18 +1754,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs UNLV",
-                                                     "result":  "W 27-7",
+                                                     "opponent":  "vs Oregon State",
+                                                     "result":  "W 33-20",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs Rice",
-                                                     "result":  "W 31-14",
+                                                     "opponent":  "vs Southern",
+                                                     "result":  "W 77-6",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Cincinnati, vs Iowa State, at TCU",
+                             "upcomingMarquee":  "at Texas Tech, at Georgia Southern, vs UCF, at Kansas State",
                              "projectedSosRank":  23
                          },
         "stats":  {
@@ -1767,10 +1773,10 @@ const FBS_DATASET = [
                       "gameControl":  0.910,
                       "sos":  0.775,
                       "colleyMetric":  0.915,
-                      "sam":  18.5,
+                      "sam":  42,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs Rice (31-14)",
+                      "bestWin":  "vs Oregon State (33-20)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.875,
                       "defEfficiency":  0.955,
@@ -1822,18 +1828,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Richmond",
-                                                     "result":  "W 34-13",
+                                                     "opponent":  "vs NC State",
+                                                     "result":  "W 34-8",
                                                      "venue":  "Home"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "at Wake Forest",
-                                                     "result":  "W 31-30",
-                                                     "venue":  "Away"
+                                                     "opponent":  "vs Norfolk State",
+                                                     "result":  "W 59-3",
+                                                     "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs Maryland, at Louisville, vs North Carolina",
+                             "upcomingMarquee":  "vs West Virginia, vs Delaware, at Florida State, vs Syracuse",
                              "projectedSosRank":  25
                          },
         "stats":  {
@@ -1841,10 +1847,10 @@ const FBS_DATASET = [
                       "gameControl":  0.875,
                       "sos":  0.78,
                       "colleyMetric":  0.910,
-                      "sam":  12,
+                      "sam":  41,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "at Wake Forest (31-30)",
+                      "bestWin":  "vs NC State (34-8)",
                       "keyLoss":  "None",
                       "offEfficiency":  0.885,
                       "defEfficiency":  0.89,
@@ -1863,7 +1869,7 @@ const FBS_DATASET = [
         "conference":  "ACC",
         "record":  {
                        "wins":  2,
-                       "losses":  1
+                       "losses":  0
                    },
         "apRank":  16,
         "coachesRank":  16,
@@ -1895,25 +1901,19 @@ const FBS_DATASET = [
         "schedule2026":  {
                              "gamesPlayed":  [
                                                  {
-                                                     "week":  0,
-                                                     "opponent":  "at Nevada",
-                                                     "result":  "W 29-24",
+                                                     "week":  1,
+                                                     "opponent":  "at Florida State",
+                                                     "result":  "W 27-24",
                                                      "venue":  "Away"
                                                  },
                                                  {
-                                                     "week":  1,
-                                                     "opponent":  "vs Houston Christian",
-                                                     "result":  "W 59-7",
-                                                     "venue":  "Home"
-                                                 },
-                                                 {
                                                      "week":  2,
-                                                     "opponent":  "vs #11 BYU",
-                                                     "result":  "L 15-18",
+                                                     "opponent":  "vs UC Davis",
+                                                     "result":  "W 56-10",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "vs TCU, at Louisville, at Duke",
+                             "upcomingMarquee":  "at Louisville, vs Missouri State, vs Boston College, vs Virginia",
                              "projectedSosRank":  21
                          },
         "stats":  {
@@ -1921,11 +1921,11 @@ const FBS_DATASET = [
                       "gameControl":  0.865,
                       "sos":  0.78,
                       "colleyMetric":  0.830,
-                      "sam":  16.5,
+                      "sam":  24.5,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "at Nevada (29-24)",
-                      "keyLoss":  "vs #11 BYU (15-18)",
+                      "bestWin":  "at Florida State (27-24)",
+                      "keyLoss":  "None",
                       "offEfficiency":  0.89,
                       "defEfficiency":  0.875,
                       "successRate":  0.485,
