@@ -255,7 +255,7 @@ const FBS_DATASET = [
                      },
         "roster":  {
                        "talentComposite":  0.930,
-                       "blueChipRatio":  0.72,
+                       "blueChipRatio":  0.76,
                        "returningProduction":  0.79,
                        "keyPlayers":  [
                                           "Emory Williams (QB)",

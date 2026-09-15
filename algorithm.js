@@ -190,6 +190,24 @@ class ACFCAlgorithmEngine {
       });
     }
 
+    if (stats.offEfficiency >= 0.96) {
+      badges.push({
+        id: "offensive-juggernaut",
+        label: "Offensive Juggernaut",
+        type: "amber",
+        tooltip: `Top-tier offensive drive efficiency (${(stats.offEfficiency * 100).toFixed(1)}%), elite EPA, and explosive scoring execution.`
+      });
+    }
+
+    if (stats.sam >= 35.0) {
+      badges.push({
+        id: "blowout-machine",
+        label: "Blowout Machine",
+        type: "cyan",
+        tooltip: `Dominant scoring differential (+${stats.sam.toFixed(1)} margin) crushing opponents in early-season action.`
+      });
+    }
+
     if (stats.defEfficiency >= 0.94) {
       badges.push({
         id: "defensive-fortress",

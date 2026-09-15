@@ -1399,8 +1399,16 @@
                   <h3 class="text-xl font-black font-display text-white">${team.name} ${team.mascot}</h3>
                   <span class="px-2 py-0.5 rounded-md bg-slate-800 text-xs font-mono text-cyan-400 font-bold">#${team.rank} ACFC</span>
                 </div>
-                <div class="text-xs text-slate-400 mt-0.5">
+                <div class="text-xs text-slate-400 mt-0.5 flex flex-wrap items-center gap-1.5">
                   <span>${team.conference}</span> &bull; <span>${record.wins}-${record.losses} in 2026</span>
+                  ${team.badges && team.badges.length > 0 ? team.badges.map(b => {
+                    const colorClass = b.type === "cyan" ? "bg-cyan-950 text-cyan-400 border-cyan-800/60" :
+                                       b.type === "amber" ? "bg-amber-950 text-amber-400 border-amber-800/60" :
+                                       b.type === "emerald" ? "bg-emerald-950 text-emerald-400 border-emerald-800/60" :
+                                       b.type === "purple" ? "bg-purple-950 text-purple-400 border-purple-800/60" :
+                                       "bg-rose-950 text-rose-400 border-rose-800/60";
+                    return `<span class="px-2 py-0.5 rounded text-[10px] font-semibold border ${colorClass}" title="${b.tooltip}">${b.label}</span>`;
+                  }).join("") : ''}
                 </div>
               </div>
             </div>
