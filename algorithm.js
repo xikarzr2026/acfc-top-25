@@ -125,9 +125,16 @@ class ACFCAlgorithmEngine {
       epaScore = Math.max(0.05, Math.min(0.99, epaScore));
     }
 
-    const inSeasonPES = (normalizedSR * 0.30) + (driveScore * 0.35) + (epaScore * 0.35);
+    const rawInSeasonPES = (normalizedSR * 0.30) + (driveScore * 0.35) + (epaScore * 0.35);
+
+    // 4. Opponent-Adjusted Predictive Normalization (SP+ / FEI Principles)
+    // Down-to-down efficiency against FCS/low-tier G5 opponents is discounted,
+    // while efficient execution against top-flight schedules receives earned credit.
+    const opponentSosFactor = Math.max(0.85, Math.min(1.15, 1.0 + ((stats.sos - 0.78) * 0.25)));
+    const adjustedInSeasonPES = Math.max(0.01, Math.min(0.999, rawInSeasonPES * opponentSosFactor));
+
     const prior = this.calculatePrior(team);
-    const finalPES = (inSeasonPES * (1 - priorWeight)) + (prior.score * priorWeight);
+    const finalPES = (adjustedInSeasonPES * (1 - priorWeight)) + (prior.score * priorWeight);
 
     return {
       score: Math.max(0.01, Math.min(0.999, finalPES)),
@@ -136,6 +143,8 @@ class ACFCAlgorithmEngine {
         driveFinishingScore: normalizedFinishing,
         netEfficiency: netEfficiency,
         epaScore: epaScore,
+        rawInSeasonPES: rawInSeasonPES,
+        opponentSosFactor: opponentSosFactor,
         priorScore: prior.score
       }
     };

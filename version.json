@@ -1,11 +1,11 @@
 {
-  "version": "0.3.4",
+  "version": "0.3.5",
   "name": "Advanced College Football Composite (ACFC) Top 25 Ranking Engine",
-  "releaseDate": "2026-09-14",
+  "releaseDate": "2026-09-15",
   "versionType": "minor",
   "season": "2026-27",
-  "week": "Week 3 Calibrated Baseline",
-  "description": "v0.3.4: Comprehensive College Football Analytics Intelligence Hub integration. Features in-depth profiles and direct access to the 8 premier CFB analytics platforms (CFBD, Game on Paper, BCF Toys / FEI, ESPN SP+ & FPI, CFB-Graphs, Beta_Rank, cfbstats, PFF College) alongside the Top 10 Benchmark Ranking Systems Compendium.",
+  "week": "Week 3 Fully Calibrated Baseline",
+  "description": "v0.3.5: Full Top 25 reordering and SP+/FEI opponent-adjusted predictive normalization. Fully audited team merit hierarchy, fixing Michigan's 2-0 record and Top-25 win over Oklahoma, correcting cupcake inflation (Tennessee #11), elevating marquee resume holders (Notre Dame #3, LSU #5), and syncing with Obsidian second brain.",
   "versioningProtocol": {
     "minor": "+0.1: Algorithmic weight tweaks, UI styling refinements, roster/schedule adjustments, heuristic updates",
     "major": "+1.0: New ranking data models, backend API integration, multi-season archives, or architectural changes"

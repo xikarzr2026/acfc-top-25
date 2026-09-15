@@ -1,14 +1,14 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.3.4-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.3.5-cyan?style=for-the-badge&logo=github)
 ![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
-![Season](https://img.shields.io/badge/Season-2026--27_Calibrated_Baseline-amber?style=for-the-badge)
+![Season](https://img.shields.io/badge/Season-2026--27_Week_3_Calibrated-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 **🚀 Live Web Application:** [https://xikarzr2026.github.io/cfb-top-25-ai/](https://xikarzr2026.github.io/cfb-top-25-ai/)
 
-An advanced, responsive, client-side analytical ranking engine for College Football that decouples **Predictive Power** from **Resume Merit**, calibrated with **Bayesian Prior Blending** and benchmarking against the **Top 10 College Football Ranking Systems** and the **8 Premier College Football Analytics Hubs**.
+An advanced, responsive, client-side analytical ranking engine for College Football that decouples **Predictive Power** from **Resume Merit**, calibrated with **Bayesian Prior Blending**, **SP+/FEI Opponent-Adjusted Predictive Efficiency Normalization**, and benchmarking against the **Top 10 College Football Ranking Systems** and the **8 Premier College Football Analytics Hubs**.
 
 ---
 
@@ -16,7 +16,7 @@ An advanced, responsive, client-side analytical ranking engine for College Footb
 
 College football ranking systems divide into two distinct categories: **Human Consensus Polls** (measuring subjective merit/résumé) and **Algorithmic/Computer Models** (measuring predictive power or mathematically balanced schedules).
 
-In ACFC v0.3.4, users can review the methodologies of each benchmark system inside the Compendium modal:
+In ACFC v0.3.5, users can review the methodologies of each benchmark system inside the Compendium modal:
 
 | # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | Primary Analytical Focus |
 | :-: | :--- | :--- | :--- | :--- | :--- |
