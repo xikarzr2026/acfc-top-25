@@ -1,11 +1,11 @@
 {
-  "version": "0.3.5",
+  "version": "0.4.0",
   "name": "Advanced College Football Composite (ACFC) Top 25 Ranking Engine",
   "releaseDate": "2026-09-15",
   "versionType": "minor",
   "season": "2026-27",
   "week": "Week 3 Fully Calibrated Baseline",
-  "description": "v0.3.5: Full Top 25 reordering and SP+/FEI opponent-adjusted predictive normalization. Fully audited team merit hierarchy, fixing Michigan's 2-0 record and Top-25 win over Oklahoma, correcting cupcake inflation (Tennessee #11), elevating marquee resume holders (Notre Dame #3, LSU #5), and syncing with Obsidian second brain.",
+  "description": "v0.4.0 verification release: every 2026 game result cross-checked against ESPN (53/53 correct) and both published polls verified against AP/USA Today. Fixed seven teams' false Top-25 wins and restored Ole Miss's real one; removed Boise State's fabricated AP #26 / Coaches #24 and Louisville's out-of-range Coaches #26; normalised all opponent rank tags to the kickoff snapshot; corrected Virginia's week-0 game; made projectedSosRank a strict permutation; renamed the mislabelled colleyMetric to meritIndex and added a genuine runtime Colley solve. The UI now renders every weight claim from engine.getEffectiveWeights() so documented and implemented weights cannot diverge again, the matchup engine's spread/score/win-probability are mutually consistent, the Top 25 is exactly 25 rows with a First Team Out strip, KPI cards 2-4 are computed instead of hard-coded, and audit/verify.js runs on every push.",
   "versioningProtocol": {
     "minor": "+0.1: Algorithmic weight tweaks, UI styling refinements, roster/schedule adjustments, heuristic updates",
     "major": "+1.0: New ranking data models, backend API integration, multi-season archives, or architectural changes"
