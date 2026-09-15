@@ -268,18 +268,18 @@ const FBS_DATASET = [
                              "gamesPlayed":  [
                                                  {
                                                      "week":  1,
-                                                     "opponent":  "vs Florida A\u0026M",
-                                                     "result":  "W 52-9",
-                                                     "venue":  "Home"
+                                                     "opponent":  "at Stanford",
+                                                     "result":  "W 45-6",
+                                                     "venue":  "Away"
                                                  },
                                                  {
                                                      "week":  2,
-                                                     "opponent":  "vs South Florida",
-                                                     "result":  "W 41-14",
+                                                     "opponent":  "vs Florida A\u0026M",
+                                                     "result":  "W 77-7",
                                                      "venue":  "Home"
                                                  }
                                              ],
-                             "upcomingMarquee":  "at Notre Dame, vs Florida State, vs Louisville",
+                             "upcomingMarquee":  "at Wake Forest, at Clemson, vs Florida State, at Notre Dame",
                              "projectedSosRank":  14
                          },
         "stats":  {
@@ -287,16 +287,16 @@ const FBS_DATASET = [
                       "gameControl":  0.965,
                       "sos":  0.81,
                       "colleyMetric":  0.935,
-                      "sam":  35.5,
+                      "sam":  38,
                       "top25Wins":  0,
                       "top10Wins":  0,
-                      "bestWin":  "vs South Florida (41-14)",
+                      "bestWin":  "at Stanford (45-6)",
                       "keyLoss":  "None",
-                      "offEfficiency":  0.975,
+                      "offEfficiency":  0.98,
                       "defEfficiency":  0.925,
                       "successRate":  0.545,
                       "finishingDrives":  5.25,
-                      "explosivenessEpa":  0.36,
+                      "explosivenessEpa":  0.365,
                       "turnoverLuckDelta":  0.01
                   },
         "previousRank":  4
