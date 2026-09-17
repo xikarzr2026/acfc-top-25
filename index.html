@@ -447,7 +447,7 @@
                 <th class="py-3.5 px-4 text-center w-24">ACFC Index</th>
                 <th class="py-3.5 px-4 text-center w-28">Prior vs PES</th>
                 <th class="py-3.5 px-4 text-center w-20">vs AP</th>
-                <th class="py-3.5 px-4 text-center w-20">vs Sideline</th>
+                <th class="py-3.5 px-4 text-center w-20" title="Internal hand-maintained composite — not a published poll">vs Composite</th>
                 <th class="py-3.5 px-4 hidden md:table-cell">Roster &amp; 2026 Schedule</th>
                 <th class="py-3.5 px-4 hidden lg:table-cell">Analytical Badges</th>
                 <th class="py-3.5 px-4 text-right">Details</th>
@@ -1080,6 +1080,7 @@
               <li><strong class="text-white">Schedule-Adjusted Margin (SAM):</strong> <span id="mw-rms-margin" class="font-mono text-amber-300">—</span> (logistic S-curve capped at &plusmn;24)</li>
             </ul>
             <p class="text-[11px] text-slate-500">A genuine Colley rating is solved at runtime from the game log and shown in each team deep dive.</p>
+            <p class="text-[11px] text-slate-500">Game Control is scaled by <span id="mw-control-scale" class="font-mono text-amber-300">—</span> before the quality-win bonus is added, so a maximum bonus (0.075 for a top-10 win) lands under the 1.0 ceiling instead of being absorbed by it.</p>
           </div>
 
           <div class="bg-slate-950/70 p-4 rounded-xl border border-slate-800 space-y-2">
@@ -1102,8 +1103,10 @@
         <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800 space-y-2">
           <h4 class="font-bold text-white text-xs uppercase tracking-wider">Methodology References &amp; Poll Benchmarks</h4>
           <p class="text-xs text-slate-400">
-            Rankings and metrics are continually benchmarked against official and independent analytics sources:
-            <strong class="text-slate-300">AP Top 25</strong>, <strong class="text-slate-300">AFCA Coaches Poll</strong>, <strong class="text-slate-300">The Sideline Composite</strong>, <strong class="text-slate-300">CFBTrack</strong>, and <strong class="text-slate-300">ESPN FPI/SP+</strong>.
+            Rankings are benchmarked against <strong class="text-slate-300">published</strong> sources: the
+            <strong class="text-slate-300">AP Top 25</strong> and the <strong class="text-slate-300">US LBM Coaches Poll</strong>, both verified against the 2026-09-13 release.
+            The <strong class="text-slate-300">ACFC Composite</strong> and <strong class="text-slate-300">Simulated BCS</strong> columns are
+            <em>internal, hand-maintained composites</em> — not published polls, and not computed by the engine.
           </p>
         </div>
       </div>
@@ -1139,7 +1142,7 @@
       // Version badge is a single static value. It used to be fetched from version.json at
       // runtime, which worked over http(s) but threw CORS errors when the README's
       // `start index.html` path was used. audit/verify.js asserts HTML badge == version.json.
-      const APP_VERSION = "0.4.0";
+      const APP_VERSION = "0.4.1";
       document.getElementById("header-version-badge").textContent = `v${APP_VERSION}`;
       document.getElementById("footer-version-stamp").textContent = `v${APP_VERSION}`;
 
@@ -1252,7 +1255,7 @@
 
         tableBody.innerHTML = top25.map(team => {
           const apDeltaHtml = renderDeltaBadge(team.apDelta, team.apRank);
-          const sidelineDeltaHtml = renderDeltaBadge(team.sidelineDelta, team.sidelineRank);
+          const compositeDeltaHtml = renderDeltaBadge(team.compositeDelta, team.compositeRank);
 
           const badgePills = team.badges.map(b => {
             const colorClass = b.type === "cyan" ? "bg-cyan-950 text-cyan-400 border-cyan-800/60" :
@@ -1324,7 +1327,7 @@
               </td>
 
               <td class="py-3.5 px-4 text-center">
-                ${sidelineDeltaHtml}
+                ${compositeDeltaHtml}
               </td>
 
               <td class="py-3.5 px-4 hidden md:table-cell">
@@ -1513,11 +1516,11 @@
               <span class="text-slate-400 text-[10px] block">COACHES POLL</span>
               <strong class="text-white text-sm">${fmtPollRank(team.coachesRank)}</strong>
             </div>
-            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
-              <span class="text-slate-400 text-[10px] block">SIDELINE COMP.</span>
-              <strong class="text-cyan-400 text-sm">${fmtPollRank(team.sidelineRank)}</strong>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800" title="Internal hand-maintained composite. NOT a published poll, and not computed by the engine — it tracks the AP ballot closely (Spearman 0.996).">
+              <span class="text-slate-400 text-[10px] block">ACFC COMPOSITE</span>
+              <strong class="text-cyan-400 text-sm">${fmtPollRank(team.compositeRank)}</strong>
             </div>
-            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800" title="Internal simulated composite. NOT a published poll.">
               <span class="text-slate-400 text-[10px] block">SIMULATED BCS</span>
               <strong class="text-amber-400 text-sm">${fmtPollRank(team.bcsRank)}</strong>
             </div>
@@ -1957,6 +1960,7 @@
         set("mw-rms-control", pct(w.rms.gameControlAndQualityWins));
         set("mw-rms-merit", pct(w.rms.meritIndex));
         set("mw-rms-margin", pct(w.rms.scheduleAdjustedMargin));
+        set("mw-control-scale", (w.controlBaseScale).toFixed(3));
         set("mw-pes-sr", pct(w.pes.successRate));
         set("mw-pes-finishing", pct(w.pes.finishingDrives));
         set("mw-pes-eff", pct(w.pes.netOffDefEfficiency));

@@ -1,11 +1,17 @@
 ﻿/**
  * Advanced College Football Composite (ACFC) - 2026-27 Season Dataset
- * Calibrated with live Week 3 2026 rankings from AP Poll, AFCA Coaches Poll, The Sideline Composite, and CFBTrack.
- * Full 100% verified 2026 schedule and score sweep across all 26 tracked teams (v0.4.0).
+ * Calibrated against the published Week 3 2026 AP Top 25 and US LBM Coaches Poll (both verified
+ * against the 2026-09-13 release), plus two internal hand-maintained composites.
+ * Full 100% verified 2026 schedule and score sweep across all 26 tracked teams (v0.4.1).
  *
  * CONVENTIONS (enforced by audit/verify.js):
  *  - apRank/coachesRank are the REAL published polls. A team outside a 25-team poll is null (renders "NR").
  *    Never store a rank > 25: that is what produced the phantom "AP #26" bug.
+ *  - compositeRank and bcsRank are INTERNAL, hand-maintained composites. They are NOT published
+ *    polls and must never be labelled as one. (compositeRank was called "sidelineRank" and shown as
+ *    "The Sideline Composite" until v0.4.1; no such published poll could be verified, and the field
+ *    correlates with the AP ballot at 0.996 Spearman. Renamed so the field cannot assert a source
+ *    that does not exist. Both are hand-set: do not describe them as computed by the engine.)
  *  - Opponent "#N" tags use the poll IN EFFECT AT KICKOFF: preseason (Aug 17) for weeks 0-1, the
  *    Sep 8 poll for week 2. One snapshot per game — both sides of a game must agree.
  *  - top25Wins/top10Wins count only WINS over opponents ranked at kickoff: Texas (#1 Ohio State),
@@ -31,7 +37,7 @@ const FBS_DATASET = [
                    },
         "apRank":  1,
         "coachesRank":  1,
-        "sidelineRank":  1,
+        "compositeRank":  1,
         "bcsRank":  1,
         "colors":  {
                        "primary":  "#BF5700",
@@ -105,7 +111,7 @@ const FBS_DATASET = [
                    },
         "apRank":  2,
         "coachesRank":  2,
-        "sidelineRank":  2,
+        "compositeRank":  2,
         "bcsRank":  2,
         "colors":  {
                        "primary":  "#BA0C2F",
@@ -179,7 +185,7 @@ const FBS_DATASET = [
                    },
         "apRank":  3,
         "coachesRank":  3,
-        "sidelineRank":  3,
+        "compositeRank":  3,
         "bcsRank":  3,
         "colors":  {
                        "primary":  "#0C2340",
@@ -253,7 +259,7 @@ const FBS_DATASET = [
                    },
         "apRank":  5,
         "coachesRank":  5,
-        "sidelineRank":  5,
+        "compositeRank":  5,
         "bcsRank":  5,
         "colors":  {
                        "primary":  "#F47321",
@@ -327,7 +333,7 @@ const FBS_DATASET = [
                    },
         "apRank":  7,
         "coachesRank":  7,
-        "sidelineRank":  7,
+        "compositeRank":  7,
         "bcsRank":  6,
         "colors":  {
                        "primary":  "#461D7C",
@@ -401,7 +407,7 @@ const FBS_DATASET = [
                    },
         "apRank":  10,
         "coachesRank":  10,
-        "sidelineRank":  10,
+        "compositeRank":  10,
         "bcsRank":  10,
         "colors":  {
                        "primary":  "#9E1B32",
@@ -475,7 +481,7 @@ const FBS_DATASET = [
                    },
         "apRank":  6,
         "coachesRank":  6,
-        "sidelineRank":  6,
+        "compositeRank":  6,
         "bcsRank":  7,
         "colors":  {
                        "primary":  "#BB0000",
@@ -549,7 +555,7 @@ const FBS_DATASET = [
                    },
         "apRank":  4,
         "coachesRank":  4,
-        "sidelineRank":  4,
+        "compositeRank":  4,
         "bcsRank":  4,
         "colors":  {
                        "primary":  "#990000",
@@ -623,7 +629,7 @@ const FBS_DATASET = [
                    },
         "apRank":  8,
         "coachesRank":  9,
-        "sidelineRank":  9,
+        "compositeRank":  9,
         "bcsRank":  8,
         "colors":  {
                        "primary":  "#13294B",
@@ -697,7 +703,7 @@ const FBS_DATASET = [
                    },
         "apRank":  12,
         "coachesRank":  11,
-        "sidelineRank":  11,
+        "compositeRank":  11,
         "bcsRank":  11,
         "colors":  {
                        "primary":  "#990000",
@@ -777,7 +783,7 @@ const FBS_DATASET = [
                    },
         "apRank":  15,
         "coachesRank":  14,
-        "sidelineRank":  15,
+        "compositeRank":  15,
         "bcsRank":  15,
         "colors":  {
                        "primary":  "#FF8200",
@@ -851,7 +857,7 @@ const FBS_DATASET = [
                    },
         "apRank":  9,
         "coachesRank":  8,
-        "sidelineRank":  8,
+        "compositeRank":  8,
         "bcsRank":  9,
         "colors":  {
                        "primary":  "#500000",
@@ -925,7 +931,7 @@ const FBS_DATASET = [
                    },
         "apRank":  14,
         "coachesRank":  15,
-        "sidelineRank":  14,
+        "compositeRank":  14,
         "bcsRank":  14,
         "colors":  {
                        "primary":  "#041E42",
@@ -999,7 +1005,7 @@ const FBS_DATASET = [
                    },
         "apRank":  19,
         "coachesRank":  19,
-        "sidelineRank":  19,
+        "compositeRank":  19,
         "bcsRank":  19,
         "colors":  {
                        "primary":  "#00274C",
@@ -1073,7 +1079,7 @@ const FBS_DATASET = [
                    },
         "apRank":  11,
         "coachesRank":  13,
-        "sidelineRank":  12,
+        "compositeRank":  12,
         "bcsRank":  12,
         "colors":  {
                        "primary":  "#002E5D",
@@ -1147,7 +1153,7 @@ const FBS_DATASET = [
                    },
         "apRank":  null,
         "coachesRank":  null,
-        "sidelineRank":  null,
+        "compositeRank":  null,
         "bcsRank":  null,
         "colors":  {
                        "primary":  "#0033A0",
@@ -1221,7 +1227,7 @@ const FBS_DATASET = [
                    },
         "apRank":  17,
         "coachesRank":  17,
-        "sidelineRank":  17,
+        "compositeRank":  17,
         "bcsRank":  17,
         "colors":  {
                        "primary":  "#CC0000",
@@ -1295,7 +1301,7 @@ const FBS_DATASET = [
                    },
         "apRank":  23,
         "coachesRank":  null,
-        "sidelineRank":  24,
+        "compositeRank":  24,
         "bcsRank":  24,
         "colors":  {
                        "primary":  "#AD0000",
@@ -1369,7 +1375,7 @@ const FBS_DATASET = [
                    },
         "apRank":  13,
         "coachesRank":  12,
-        "sidelineRank":  13,
+        "compositeRank":  13,
         "bcsRank":  13,
         "colors":  {
                        "primary":  "#CC0000",
@@ -1443,7 +1449,7 @@ const FBS_DATASET = [
                    },
         "apRank":  20,
         "coachesRank":  22,
-        "sidelineRank":  21,
+        "compositeRank":  21,
         "bcsRank":  21,
         "colors":  {
                        "primary":  "#F1B82D",
@@ -1517,7 +1523,7 @@ const FBS_DATASET = [
                    },
         "apRank":  21,
         "coachesRank":  18,
-        "sidelineRank":  20,
+        "compositeRank":  20,
         "bcsRank":  20,
         "colors":  {
                        "primary":  "#154733",
@@ -1591,7 +1597,7 @@ const FBS_DATASET = [
                    },
         "apRank":  24,
         "coachesRank":  21,
-        "sidelineRank":  22,
+        "compositeRank":  22,
         "bcsRank":  22,
         "colors":  {
                        "primary":  "#841617",
@@ -1665,7 +1671,7 @@ const FBS_DATASET = [
                    },
         "apRank":  18,
         "coachesRank":  20,
-        "sidelineRank":  18,
+        "compositeRank":  18,
         "bcsRank":  18,
         "colors":  {
                        "primary":  "#000000",
@@ -1739,7 +1745,7 @@ const FBS_DATASET = [
                    },
         "apRank":  22,
         "coachesRank":  23,
-        "sidelineRank":  23,
+        "compositeRank":  23,
         "bcsRank":  23,
         "colors":  {
                        "primary":  "#C8102E",
@@ -1813,7 +1819,7 @@ const FBS_DATASET = [
                    },
         "apRank":  25,
         "coachesRank":  25,
-        "sidelineRank":  25,
+        "compositeRank":  25,
         "bcsRank":  25,
         "colors":  {
                        "primary":  "#232D4B",
@@ -1887,7 +1893,7 @@ const FBS_DATASET = [
                    },
         "apRank":  16,
         "coachesRank":  16,
-        "sidelineRank":  16,
+        "compositeRank":  16,
         "bcsRank":  16,
         "colors":  {
                        "primary":  "#0033A0",

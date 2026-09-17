@@ -1,11 +1,11 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "name": "Advanced College Football Composite (ACFC) Top 25 Ranking Engine",
-  "releaseDate": "2026-09-15",
+  "releaseDate": "2026-09-16",
   "versionType": "minor",
   "season": "2026-27",
   "week": "Week 3 Fully Calibrated Baseline",
-  "description": "v0.4.0 verification release: every 2026 game result cross-checked against ESPN (53/53 correct) and both published polls verified against AP/USA Today. Fixed seven teams' false Top-25 wins and restored Ole Miss's real one; removed Boise State's fabricated AP #26 / Coaches #24 and Louisville's out-of-range Coaches #26; normalised all opponent rank tags to the kickoff snapshot; corrected Virginia's week-0 game; made projectedSosRank a strict permutation; renamed the mislabelled colleyMetric to meritIndex and added a genuine runtime Colley solve. The UI now renders every weight claim from engine.getEffectiveWeights() so documented and implemented weights cannot diverge again, the matchup engine's spread/score/win-probability are mutually consistent, the Top 25 is exactly 25 rows with a First Team Out strip, KPI cards 2-4 are computed instead of hard-coded, and audit/verify.js runs on every push.",
+  "description": "v0.4.1: the RMS Game Control sub-component is now scaled by 0.925 before the quality-win bonus is added, so a top-10 win actually banks credit instead of being absorbed by the 1.0 ceiling (verified to change zero ranks, 0/26). The unverifiable 'Sideline Composite' benchmark is removed: stats.sidelineRank is renamed stats.compositeRank, every surface labels it an internal hand-maintained composite rather than a published poll, and the methodology modal's benchmark list no longer cites sources that could not be verified. audit/verify.js additionally asserts that the headroom factor is exposed to the UI rather than being an inline magic number, that a quality win measurably moves the component, and that no surface names an unverifiable poll.",
   "versioningProtocol": {
     "minor": "+0.1: Algorithmic weight tweaks, UI styling refinements, roster/schedule adjustments, heuristic updates",
     "major": "+1.0: New ranking data models, backend API integration, multi-season archives, or architectural changes"

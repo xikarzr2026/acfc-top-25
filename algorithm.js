@@ -27,6 +27,16 @@
  *  - assignBadges(): poll-comparison badges are now null-safe for teams outside the AP Top 25.
  */
 
+/**
+ * The RMS "Game Control & Quality Wins" sub-component is capped at 1.0. A maximum quality-win
+ * bonus (0.05 top-10 + 0.025 top-25 = 0.075) previously could not fit underneath that ceiling, so
+ * for any team already near the top of the range the bonus was silently absorbed — Texas's win
+ * over #1 Ohio State earned literally nothing. Scaling the non-bonus part leaves exactly enough
+ * headroom for a full bonus, so the credit binds for the teams that earned it.
+ * Declared here (not inline) because the UI renders it: see getEffectiveWeights().
+ */
+const CONTROL_BASE_SCALE = 0.925;
+
 class ACFCAlgorithmEngine {
   constructor(dataset = FBS_DATASET) {
     this.dataset = dataset;
@@ -68,6 +78,10 @@ class ACFCAlgorithmEngine {
         meritIndex: 0.20,
         scheduleAdjustedMargin: 0.20
       },
+      // Not a weight (kept out of the maps above so they remain pure weight vectors that sum to 1):
+      // the headroom factor applied to the non-bonus part of the game-control component so a
+      // maximum 0.075 quality-win bonus fits underneath its 1.0 ceiling.
+      controlBaseScale: CONTROL_BASE_SCALE,
       pes: {
         successRate: 0.30,
         // "Drive finishing" is a 0.35 block that is itself 40/60 finishing-drives + net off/def
@@ -112,12 +126,11 @@ class ACFCAlgorithmEngine {
     const sorComponent = stats.sor;
 
     // 2. Game Control & Top-10/25 Wins - 25%
-    // NOTE: the ranked-win bonus is added BEFORE the 1.0 clamp, so for a team already at ceiling
-    // (currently Texas) the bonus is absorbed. Left as-is deliberately: changing it re-tunes the
-    // published calibration. Flagged in README "Known limitations".
+    // The non-bonus part is scaled by CONTROL_BASE_SCALE so a maximum quality-win bonus lands
+    // underneath the 1.0 ceiling instead of being absorbed by it (see the constant's docblock).
     const winBonus = (stats.top10Wins * 0.05) + (stats.top25Wins * 0.025);
     const winPct = record.wins / Math.max(1, (record.wins + record.losses));
-    const controlComponent = Math.min(1.0, (stats.gameControl * 0.7 + winPct * 0.3) + winBonus);
+    const controlComponent = Math.min(1.0, ((stats.gameControl * 0.7 + winPct * 0.3) * CONTROL_BASE_SCALE) + winBonus);
 
     // 3. Stabilized merit index (margin-free W-L composite) - 20%
     // NOT a Colley Matrix output; see computeColley() for the real thing.
@@ -385,7 +398,7 @@ class ACFCAlgorithmEngine {
 
       const apDelta = team.apRank ? team.apRank - rank : null;
       const coachesDelta = team.coachesRank ? team.coachesRank - rank : null;
-      const sidelineDelta = team.sidelineRank ? team.sidelineRank - rank : null;
+      const compositeDelta = team.compositeRank ? team.compositeRank - rank : null;
       const bcsDelta = team.bcsRank ? team.bcsRank - rank : null;
       const rankDelta = team.previousRank !== undefined ? (team.previousRank - rank) : 0;
 
@@ -398,7 +411,7 @@ class ACFCAlgorithmEngine {
         acfcIndexFormatted,
         apDelta,
         coachesDelta,
-        sidelineDelta,
+        compositeDelta,
         bcsDelta,
         rankDelta,
         badges

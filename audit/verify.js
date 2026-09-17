@@ -96,7 +96,7 @@ check('total logged team-games equals the sum of every W+L', totalTeamGames === 
 // ─────────────────────────────────────────────────────────────────────────────
 section('3. Poll membership  (a poll is 25 teams — rank 26 must never exist)');
 // ─────────────────────────────────────────────────────────────────────────────
-for (const field of ['apRank', 'coachesRank', 'sidelineRank', 'bcsRank']) {
+for (const field of ['apRank', 'coachesRank', 'compositeRank', 'bcsRank']) {
   const present = FBS_DATASET.filter(t => t[field] !== null && t[field] !== undefined);
   const values = present.map(t => t[field]);
   check(`${field}: no rank greater than 25`, values.every(v => v <= 25), values.filter(v => v > 25));
@@ -106,7 +106,7 @@ for (const field of ['apRank', 'coachesRank', 'sidelineRank', 'bcsRank']) {
   if (missingSlots.length) warn(`${field}: ${missingSlots.length} poll slot(s) unfilled (${missingSlots.join(', ')}) — legitimate only when the poll ranks a team outside the tracked universe`, { field, missingSlots });
 }
 check('unranked teams are stored as null, not a sentinel like 26',
-  FBS_DATASET.every(t => ['apRank', 'coachesRank', 'sidelineRank', 'bcsRank'].every(f => t[f] === null || typeof t[f] === 'number')));
+  FBS_DATASET.every(t => ['apRank', 'coachesRank', 'compositeRank', 'bcsRank'].every(f => t[f] === null || typeof t[f] === 'number')));
 
 // ─────────────────────────────────────────────────────────────────────────────
 section('4. Opponent rank tags — one kickoff snapshot per game');
@@ -279,6 +279,39 @@ check('the page never hard-codes the phrase "Colley Matrix Iteration" (the field
   !/Colley Matrix Iteration/.test(indexHtml));
 check('the page does hard-code the prior split as different values',
   w.priorShareRMS !== w.priorSharePES, { rms: w.priorShareRMS, pes: w.priorSharePES });
+
+// v0.4.1: the game-control ceiling used to swallow the quality-win bonus entirely, so a team with a
+// top-10 win banked literally nothing for it. Two checks: the headroom factor must be exposed to
+// the UI (so it cannot go undocumented), and the bonus must actually alter the component.
+check('the game-control headroom factor is exposed to the UI, not an inline magic number',
+  typeof w.controlBaseScale === 'number' && w.controlBaseScale > 0 && w.controlBaseScale < 1, w.controlBaseScale);
+check('the headroom factor leaves room for the maximum 0.075 bonus',
+  (1 - w.controlBaseScale) >= 0.075 - 1e-9, { headroom: 1 - w.controlBaseScale });
+check('the methodology modal renders the headroom factor', /id="mw-control-scale"/.test(indexHtml));
+
+const bonusTeam = 'texas';
+const stripped = FBS_DATASET.map(t => t.id === bonusTeam
+  ? { ...t, stats: { ...t.stats, top10Wins: 0, top25Wins: 0 } } : t);
+const withBonus = ranked.find(r => r.id === bonusTeam);
+const withoutBonus = new ACFCAlgorithmEngine(stripped).calculateRankings().find(r => r.id === bonusTeam);
+check('a top-10 win actually changes the game-control component (regression: the bonus was clamped away)',
+  withBonus.rms.breakdown.gameControl > withoutBonus.rms.breakdown.gameControl,
+  { withBonus: withBonus.rms.breakdown.gameControl, withoutBonus: withoutBonus.rms.breakdown.gameControl });
+check('claiming a quality win never lowers a team\'s RMS',
+  withBonus.rms.score >= withoutBonus.rms.score,
+  { withBonus: withBonus.rms.score, withoutBonus: withoutBonus.rms.score });
+
+// The Sideline Composite / CFBTrack were presented as external published polls. Neither could be
+// verified against any published source, so no surface may cite them as a benchmark any more.
+// Historical rename notes are permitted in Known Limitations / Changelog — hence the "body" split.
+const docBody = readme.split('## 8. Known Limitations')[0];
+check('no UI surface claims an unverifiable "Sideline Composite" benchmark', !/[Ss]ideline/.test(indexHtml));
+check('the README body does not cite an unverifiable "Sideline Composite" benchmark', !/[Ss]ideline/.test(docBody));
+check('no surface claims a "CFBTrack" benchmark', !/CFBTrack/.test(indexHtml) && !/CFBTrack/.test(docBody));
+check('the composite column is labelled as internal, not as a published poll',
+  /vs Composite/.test(indexHtml) && /internal, hand-maintained composites/.test(indexHtml));
+check('the data layer no longer carries a field named sidelineRank (a doc mention is fine, a key is not)',
+  !/"sidelineRank"\s*:/.test(dataSrc) && !/sidelineRank/.test(algoSrc));
 
 // ─────────────────────────────────────────────────────────────────────────────
 section('11. UI invariants that shipped broken');

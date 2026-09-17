@@ -1,6 +1,6 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.4.0-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.4.1-cyan?style=for-the-badge&logo=github)
 ![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
 ![Season](https://img.shields.io/badge/Season-2026--27_Week_3_Calibrated-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
@@ -16,7 +16,7 @@ An advanced, responsive, client-side analytical ranking engine for College Footb
 
 College football ranking systems divide into two distinct categories: **Human Consensus Polls** (measuring subjective merit/résumé) and **Algorithmic/Computer Models** (measuring predictive power or mathematically balanced schedules).
 
-In ACFC v0.4.0, users can review the methodologies of each benchmark system inside the Compendium modal:
+In ACFC v0.4.1, users can review the methodologies of each benchmark system inside the Compendium modal:
 
 | # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | Primary Analytical Focus |
 | :-: | :--- | :--- | :--- | :--- | :--- |
@@ -86,7 +86,7 @@ The **real Colley bias-free rating** is solved at runtime from the game log and 
 
 ## 4. On-Demand Algorithm Execution & Live Recalculation Engine
 
-In ACFC v0.4.0, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
+In ACFC v0.4.1, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
 * **`⚡ Run Algorithm & Update Rankings`**: Triggers real-time computation of the full ACFC composite matrix across all 26 tracked teams.
 * **Live Calculation Telemetry**: Instant millisecond feedback badge (e.g. `⚡ Recalculated in 1.1ms`) confirming on-the-fly execution.
 * **Tamper-Proof Integrity**: Operates on fixed mathematical weights (50% RMS / 50% PES, with the prior blended at 16% into RMS and 40% into PES), ensuring objective rankings without subjective voter bias or arbitrary tampering.
@@ -138,9 +138,8 @@ A dependency-free harness that checks schema completeness, record↔log agreemen
 
 * **Rank precision exceeds input precision.** The hand-set rating fields carry roughly ±0.02 of genuine uncertainty. Under a 1,000-trial Monte Carlo at that noise level, 25 of 26 teams fail to hold their exact rank in more than half of runs, and the gap between #6 and #7 is 0.0003. Adjacent ranks should be read as tier-equivalent, not as a strict ordering. Treat the three-decimal index as a display convenience.
 * **The displayed index is a min-max remap** to a fixed 0.580-0.985 band, so its absolute value carries no cross-week information.
-* **Game-control saturation.** `controlComponent` is clamped at 1.0 *after* the ranked-win bonus is added, so Texas — the one team with a top-10 win — has that bonus fully absorbed. Fixing it re-tunes the published calibration and was therefore left as a deliberate choice.
 * **Coaches poll coverage.** The dataset tracks 26 teams; the published Coaches poll's #24 (Washington) is outside that universe, so that slot renders unfilled. The harness reports it as a warning rather than fabricating a row.
-* **`sidelineRank` / `bcsRank`** are internal composites that track the AP ballot very closely (Spearman 0.996 against AP; 17 of 26 ranks identical). They are not independent signals.
+* **`compositeRank` / `bcsRank`** are **internal, hand-maintained composites** — not published polls, and not computed by the engine — that track the AP ballot very closely (Spearman 0.996 against AP; 17 of 26 ranks identical). They are not independent signals. `compositeRank` was named `sidelineRank` and shown as "The Sideline Composite" until v0.4.1; no such published poll could be verified, so both the field name and the label were corrected to stop asserting a source that does not exist.
 * **"Analytics Darling"** currently matches no team, because every team with a PES ≥ 0.88 sits within two spots of its AP rank. The filter pill is retained because the condition is meaningful, but expect an empty result.
 * **Tailwind is loaded from the Play CDN** (now version-pinned). A prebuilt stylesheet would be the production-grade step; the CDN still prints a console advice notice.
 
@@ -167,6 +166,11 @@ python -m http.server 8000
 ---
 
 ## 10. Changelog
+
+### v0.4.1 — model-integrity follow-up
+* **Game-control saturation fixed.** The `Game Control & Quality Wins` sub-component is capped at 1.0, and the quality-win bonus (0.05 top-10 + 0.025 top-25 = 0.075) could not fit underneath that ceiling — so Texas's win over #1 Ohio State banked literally nothing. The non-bonus part is now scaled by `CONTROL_BASE_SCALE` (0.925) so a maximum bonus lands under the cap. Verified to change **zero ranks (0/26)**; it widens Texas's margin over Georgia from 0.0043 to ~0.020. The factor is exposed through `getEffectiveWeights().controlBaseScale` and rendered in the methodology modal, so it cannot become an undocumented magic number.
+* **Unverifiable benchmark removed.** `sidelineRank` was shown as "The Sideline Composite" — a published poll that could not be verified to exist, and whose values track the AP ballot at 0.996 Spearman. The field is renamed **`compositeRank`** and every surface now labels it an *internal, hand-maintained composite* rather than a published poll. The methodology modal's benchmark list no longer cites "The Sideline Composite" or "CFBTrack" (also unverifiable); it lists only the AP and Coaches polls, both verified against the 2026-09-13 release.
+* **New regression tests** in `audit/verify.js`: the headroom factor must be exposed to the UI, the headroom must be large enough for a maximum bonus, a quality win must measurably move the component, claiming a quality win must never lower a team's RMS, and no surface may name an unverifiable poll.
 
 ### v0.4.0 — verification release
 Everything below is backed by `audit/verify.js`.
