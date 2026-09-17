@@ -1,0 +1,34 @@
+# GitHub Actions workflow: verify the dataset and model on every push/PR.
+# The identical harness runs locally with:  node audit/verify.js
+#
+# Guardrails covered: schema, record<->game-log agreement, stats.sam derivation, poll membership
+# (including the "no rank > 25" rule), kickoff-snapshot rank tags, derived top25Wins, the SOS
+# permutation, the Colley claim, matchup-engine self-consistency, documented-vs-implemented
+# weights, and every UI regression that has shipped before.
+
+name: Verify dataset & model
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # No dependencies to install: the harness is plain Node with zero packages.
+      - name: Run verification harness
+        run: node audit/verify.js
+
+      - name: Summary
+        if: always()
+        run: echo "audit/verify.js checks schema, records/margins, poll membership, kickoff rank tags, derived top25Wins, SOS permutation, the Colley claim, matchup-engine self-consistency, documented-vs-implemented weights and the UI regressions that have shipped before."
