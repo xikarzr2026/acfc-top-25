@@ -6,7 +6,7 @@
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
-**🚀 Live Web Application:** [https://xikarzr2026.github.io/cfb-top-25-ai/](https://xikarzr2026.github.io/cfb-top-25-ai/)
+**🚀 Live Web Application:** [https://xikarzr2026.github.io/acfc-top-25/](https://xikarzr2026.github.io/acfc-top-25/)
 
 An advanced, responsive, client-side analytical ranking engine for College Football that decouples **Predictive Power** from **Resume Merit**, calibrated with **Bayesian Prior Blending**, **SP+/FEI Opponent-Adjusted Predictive Efficiency Normalization**, and benchmarking against the **Top 10 College Football Ranking Systems** and the **8 Premier College Football Analytics Hubs**.
 
