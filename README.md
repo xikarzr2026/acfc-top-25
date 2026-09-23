@@ -1,8 +1,8 @@
 # ACFC Top 25 (Advanced College Football Composite) — 2026-27 Season Edition
 
-![Version](https://img.shields.io/badge/version-v0.4.1-cyan?style=for-the-badge&logo=github)
+![Version](https://img.shields.io/badge/version-v0.5.0-cyan?style=for-the-badge&logo=github)
 ![Live App](https://img.shields.io/badge/Live_App-GitHub_Pages-brightgreen?style=for-the-badge&logo=githubpages)
-![Season](https://img.shields.io/badge/Season-2026--27_Week_3_Calibrated-amber?style=for-the-badge)
+![Season](https://img.shields.io/badge/Season-2026--27_Week_4-amber?style=for-the-badge)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-emerald?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
@@ -16,7 +16,7 @@ An advanced, responsive, client-side analytical ranking engine for College Footb
 
 College football ranking systems divide into two distinct categories: **Human Consensus Polls** (measuring subjective merit/résumé) and **Algorithmic/Computer Models** (measuring predictive power or mathematically balanced schedules).
 
-In ACFC v0.4.1, users can review the methodologies of each benchmark system inside the Compendium modal:
+In ACFC v0.5.0, users can review the methodologies of each benchmark system inside the Compendium modal:
 
 | # | System / Site | Type | Transparency Level | How It Is Calculated / Methodology Availability | Primary Analytical Focus |
 | :-: | :--- | :--- | :--- | :--- | :--- |
@@ -57,7 +57,7 @@ $$\text{ACFC Index} = w_{\text{resume}} \cdot \text{RMS} + (1 - w_{\text{resume}
 * **Resume Merit Score (RMS):** 35% Strength of Record (SOR), 25% Game Control & Top-10/25 wins, 20% Merit Index (stabilised, margin-free), 20% Schedule-Adjusted Margin (SAM) with a logistic diminishing-returns curve, scaled dynamically by Schedule Difficulty ($SOS$).
 * **Predictive Efficiency Score (PES):** 30% SP+ Down-to-Down Success Rate, 14% Finishing Drives (Inside-40), 21% Net Off/Def Drive Efficiency, 35% Net EPA/PPA per play, with turnover-luck neutralisation.
 * **Bayesian Prior Calibration:** 50% Roster Talent Index (itself 70% 247 composite / 30% blue-chip ratio), 25% Returning Production (TAR), 25% Coaching Staff Grade. The prior enters the two engines at **different strengths** — 16% of RMS and 40% of PES. Both figures are rendered into the UI directly from `engine.getEffectiveWeights()`.
-* **Verified 2026 early-season results:** the engine ingests the real weeks 0-2 score log — including Ohio State at Texas (Week 2, 24-23), Clemson at LSU (Week 1, 51-10), Wisconsin vs Notre Dame at Lambeau Field (Week 1, 41-13), Ole Miss vs Louisville (Week 1, 41-38), Oklahoma at Michigan (Week 2, 17-10) and Boise State at Oregon (Week 1, 27-34). All 53 team-games were checked against ESPN and official athletic-department box scores.
+* **Verified 2026 early-season results:** the engine ingests the real weeks 0-3 score log — including Ohio State at Texas (Week 2, 24-23), Clemson at LSU (Week 1, 51-10), Wisconsin vs Notre Dame at Lambeau Field (Week 1, 41-13), Ole Miss vs Louisville (Week 1, 41-38), Oklahoma at Michigan (Week 2, 17-10) and Boise State at Oregon (Week 1, 27-34). The 53 weeks 0-2 team-games were checked against ESPN and official athletic-department box scores; the 26 Week 3 team-games come from the ESPN scoreboard and every resulting record is cross-checked against ESPN FPI W-L.
 
 The **real Colley bias-free rating** is solved at runtime from the game log and shown in every team deep dive as "Colley (computed)". It is deliberately *not* the RMS merit component: at a 2-3 game sample a true Colley matrix is near-degenerate (almost every undefeated team collapses to 0.500), so RMS uses a stabilised merit index instead.
 
@@ -86,7 +86,7 @@ The **real Colley bias-free rating** is solved at runtime from the game log and 
 
 ## 4. On-Demand Algorithm Execution & Live Recalculation Engine
 
-In ACFC v0.4.1, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
+In ACFC v0.5.0, users have a dedicated **Execution Dock** directly above the Top 25 rankings table:
 * **`⚡ Run Algorithm & Update Rankings`**: Triggers real-time computation of the full ACFC composite matrix across all 26 tracked teams.
 * **Live Calculation Telemetry**: Instant millisecond feedback badge (e.g. `⚡ Recalculated in 1.1ms`) confirming on-the-fly execution.
 * **Tamper-Proof Integrity**: Operates on fixed mathematical weights (50% RMS / 50% PES, with the prior blended at 16% into RMS and 40% into PES), ensuring objective rankings without subjective voter bias or arbitrary tampering.
@@ -166,6 +166,14 @@ python -m http.server 8000
 ---
 
 ## 10. Changelog
+
+### v0.5.0 — Week 3 data release + weekly updater
+* **`node scripts/update-week.js <week>`** pulls a completed week from ESPN's public APIs (scoreboard, AP/Coaches polls, FPI) and rewrites `data.js`. It appends every tracked team's game with the kickoff rank tag, re-derives record / `sam` / top-25 & top-10 wins / `keyLoss` / `bestWin`, moves `apRank`/`coachesRank` to the latest polls, sets `previousRank` to the pre-update ACFC rank, and refuses to run if a week is incomplete, already logged, or any record disagrees with ESPN FPI.
+* **ESPN-anchored résumé/efficiency stats.** `sor`, `gameControl`, `sos`, `offEfficiency` and `defEfficiency` are quantile-mapped onto ESPN FPI's Strength of Record, Game Control, played-SOS and efficiency ordering — the dataset keeps its calibrated value distribution; ESPN decides which team gets which value. `successRate`, `finishingDrives`, `explosivenessEpa`, `turnoverLuckDelta` and `meritIndex` remain hand-set (no free play-by-play feed wired in yet).
+* **`node scripts/rank.js`** prints the current Top 26 in the terminal.
+* **Matchup rounding fix.** Scores were rounded independently, so the 2.5-point home edge could display as 4. The margin is now rounded once and split.
+* **Colley check corrected.** The harness asserted "every undefeated team outrates every 1-loss team", which Colley does not guarantee (2-1 Louisville, with a win over tracked SMU, legitimately outrates undefeated teams with no tracked opponents). It now asserts Colley's real defining property: ratings are identical when every score is rewritten to 1-0 with the same winner.
+
 
 ### v0.4.1 — model-integrity follow-up
 * **Game-control saturation fixed.** The `Game Control & Quality Wins` sub-component is capped at 1.0, and the quality-win bonus (0.05 top-10 + 0.025 top-25 = 0.075) could not fit underneath that ceiling — so Texas's win over #1 Ohio State banked literally nothing. The non-bonus part is now scaled by `CONTROL_BASE_SCALE` (0.925) so a maximum bonus lands under the cap. Verified to change **zero ranks (0/26)**; it widens Texas's margin over Georgia from 0.0043 to ~0.020. The factor is exposed through `getEffectiveWeights().controlBaseScale` and rendered in the methodology modal, so it cannot become an undocumented magic number.

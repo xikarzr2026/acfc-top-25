@@ -451,8 +451,13 @@ class ACFCAlgorithmEngine {
     const paceB = TOTAL_BASE + ((teamB.stats.offEfficiency - teamA.stats.defEfficiency) * 10);
     const total = Math.max(30, Math.round((paceA + paceB) / 2));
 
-    const scoreA = Math.max(10, Math.round((total + margin) / 2));
-    const scoreB = Math.max(10, Math.round((total - margin) / 2));
+    // Round the MARGIN once, then split it. Rounding each score independently let a 2.5-point
+    // home shift display as 4 (each half rounds up by 1.25 -> +2 and -2).
+    const roundedMargin = Math.round(margin);
+    let scoreA = Math.round((total + roundedMargin) / 2);
+    let scoreB = scoreA - roundedMargin;
+    if (scoreA < 10) { scoreA = 10; scoreB = 10 - roundedMargin; }
+    if (scoreB < 10) { scoreB = 10; scoreA = 10 + roundedMargin; }
 
     // Derived from what is actually displayed.
     const displayedMargin = scoreA - scoreB;

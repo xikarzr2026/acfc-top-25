@@ -1,11 +1,11 @@
 {
-  "version": "0.4.1",
+  "version": "0.5.0",
   "name": "Advanced College Football Composite (ACFC) Top 25 Ranking Engine",
-  "releaseDate": "2026-09-16",
+  "releaseDate": "2026-09-23",
   "versionType": "minor",
   "season": "2026-27",
-  "week": "Week 3 Fully Calibrated Baseline",
-  "description": "v0.4.1: the RMS Game Control sub-component is now scaled by 0.925 before the quality-win bonus is added, so a top-10 win actually banks credit instead of being absorbed by the 1.0 ceiling (verified to change zero ranks, 0/26). The unverifiable 'Sideline Composite' benchmark is removed: stats.sidelineRank is renamed stats.compositeRank, every surface labels it an internal hand-maintained composite rather than a published poll, and the methodology modal's benchmark list no longer cites sources that could not be verified. audit/verify.js additionally asserts that the headroom factor is exposed to the UI rather than being an inline magic number, that a quality win measurably moves the component, and that no surface names an unverifiable poll.",
+  "week": "Week 4 (games through Week 3)",
+  "description": "v0.5.0: Week 3 data release. New scripts/update-week.js pulls a completed week from ESPN (scoreboard, AP/Coaches polls, FPI) and rewrites data.js: 26 Week 3 team-games appended with kickoff rank tags, record/sam/top-25 wins/keyLoss/bestWin derived, polls moved to the 2026-09-20 release, previousRank set to the pre-update ACFC rank, and sor/gameControl/sos/offEfficiency/defEfficiency quantile-mapped onto ESPN FPI ordering (every record cross-checked against ESPN FPI W-L). Matchup engine now rounds the margin once so home field shows as 2-3 points, not 4. The Colley check now asserts the real margin-free property instead of an ordering Colley does not guarantee.",
   "versioningProtocol": {
     "minor": "+0.1: Algorithmic weight tweaks, UI styling refinements, roster/schedule adjustments, heuristic updates",
     "major": "+1.0: New ranking data models, backend API integration, multi-season archives, or architectural changes"

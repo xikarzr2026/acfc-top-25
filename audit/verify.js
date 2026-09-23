@@ -208,12 +208,16 @@ const cVals = Object.values(colley);
 const cMean = cVals.reduce((a, b) => a + b, 0) / cVals.length;
 check('computed Colley mean is near 0.500 (drifts slightly: the tracked universe is not a closed network)', Math.abs(cMean - 0.5) < 0.05, cMean.toFixed(4));
 check('computed Colley stays inside the range a 2-3 game matrix can produce', cVals.every(v => v >= 0.2 && v <= 0.8), { min: Math.min(...cVals), max: Math.max(...cVals) });
-const undefeated = FBS_DATASET.filter(t => t.record.losses === 0).map(t => colley[t.id]);
-const winless = FBS_DATASET.filter(t => t.record.wins === 0).map(t => colley[t.id]);
-const oneLoss = FBS_DATASET.filter(t => t.record.losses === 1).map(t => colley[t.id]);
-check('every undefeated team outrates every 1-loss team (margin-free ordering holds)',
-  Math.min(...undefeated) >= Math.max(...oneLoss),
-  { minUndefeated: Math.min(...undefeated), maxOneLoss: Math.max(...oneLoss) });
+// Colley's defining property is that it is MARGIN-FREE: rewrite every score to a 1-point result with
+// the same winner and the ratings must not move. (An earlier check asserted "every undefeated team
+// outrates every 1-loss team" — that is not a Colley property: once Week 3 added more in-universe
+// games, 2-1 Louisville, with a win over a tracked team, correctly outrated undefeated teams whose
+// opponents are all outside the tracked universe.)
+const oneScoreData = JSON.parse(JSON.stringify(FBS_DATASET));
+for (const t of oneScoreData) for (const g of t.schedule2026.gamesPlayed) g.result = /^W/.test(g.result) ? 'W 1-0' : 'L 0-1';
+const colleyOneScore = new ACFCAlgorithmEngine(oneScoreData).computeColley();
+check('computed Colley is margin-free (identical when every score becomes 1-0, same winners)',
+  Object.keys(colley).every(id => Math.abs(colley[id] - colleyOneScore[id]) < 1e-9));
 check('the old fabricated merit field would have failed this — Boise State is NOT top-3',
   Object.entries(colley).sort((a, b) => b[1] - a[1]).findIndex(([id]) => id === 'boise-state') >= 5,
   Object.entries(colley).sort((a, b) => b[1] - a[1]).map(([id, v]) => `${id}:${v.toFixed(3)}`).slice(0, 6));

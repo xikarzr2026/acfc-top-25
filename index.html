@@ -169,7 +169,7 @@
               v0.3.5
             </span>
             <span class="px-2 py-0.5 text-[11px] font-semibold rounded-md bg-amber-950/60 text-amber-300 border border-amber-800/40 hidden md:inline-flex items-center gap-1">
-              <i class="fa-solid fa-calendar-check text-[10px]"></i> 2026-27 Season &bull; Week 3
+              <i class="fa-solid fa-calendar-check text-[10px]"></i> 2026-27 Season &bull; Week 4
             </span>
           </div>
           <p class="text-xs text-slate-400 hidden sm:block font-medium">
@@ -268,7 +268,7 @@
             </span>
           </div>
           <p class="text-xs text-slate-400 mt-1">
-            Official Week 3 mathematical calibration decoupling Resume Merit (RMS) from Predictive Efficiency (PES) stabilized with Bayesian Roster Priors.
+            Official Week 4 mathematical calibration decoupling Resume Merit (RMS) from Predictive Efficiency (PES) stabilized with Bayesian Roster Priors.
           </p>
         </div>
 
@@ -363,7 +363,7 @@
           <div class="flex items-center gap-2 flex-wrap">
             <h3 class="text-sm sm:text-base font-bold font-display text-white">ACFC Top 25 Ranking Engine</h3>
             <span class="px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 text-[11px] font-mono font-bold flex items-center gap-1">
-              <i class="fa-solid fa-circle-check text-[10px]"></i> Week 3 Active Calibration
+              <i class="fa-solid fa-circle-check text-[10px]"></i> Week 4 Active Calibration
             </span>
             <span id="recalc-telemetry" class="px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-mono transition-opacity duration-300 hidden">
               <i class="fa-solid fa-bolt-lightning text-emerald-400 mr-1"></i> Recalculated in <span id="telemetry-ms">1.1</span>ms
@@ -1104,7 +1104,7 @@
           <h4 class="font-bold text-white text-xs uppercase tracking-wider">Methodology References &amp; Poll Benchmarks</h4>
           <p class="text-xs text-slate-400">
             Rankings are benchmarked against <strong class="text-slate-300">published</strong> sources: the
-            <strong class="text-slate-300">AP Top 25</strong> and the <strong class="text-slate-300">US LBM Coaches Poll</strong>, both verified against the 2026-09-13 release.
+            <strong class="text-slate-300">AP Top 25</strong> and the <strong class="text-slate-300">US LBM Coaches Poll</strong>, both pulled from the 2026-09-20 release.
             The <strong class="text-slate-300">ACFC Composite</strong> and <strong class="text-slate-300">Simulated BCS</strong> columns are
             <em>internal, hand-maintained composites</em> — not published polls, and not computed by the engine.
           </p>
@@ -1121,7 +1121,7 @@
         <span class="text-slate-600">&bull;</span>
         <span id="footer-version-stamp" class="font-mono text-cyan-400 font-semibold">v0.3.5</span>
         <span class="text-slate-600">&bull;</span>
-        <span>2026-27 Season Edition (Week 3)</span>
+        <span>2026-27 Season Edition (Week 4)</span>
       </div>
       <p class="text-slate-500 text-center sm:text-right">
         Bayesian Roster &amp; Early In-Season Model &bull; Self-Contained Client-Side Web App
@@ -1142,7 +1142,7 @@
       // Version badge is a single static value. It used to be fetched from version.json at
       // runtime, which worked over http(s) but threw CORS errors when the README's
       // `start index.html` path was used. audit/verify.js asserts HTML badge == version.json.
-      const APP_VERSION = "0.4.1";
+      const APP_VERSION = "0.5.0";
       document.getElementById("header-version-badge").textContent = `v${APP_VERSION}`;
       document.getElementById("footer-version-stamp").textContent = `v${APP_VERSION}`;
 
@@ -1539,7 +1539,7 @@
               <div class="text-[11px] text-slate-400 mt-0.5">${(roster.blueChipRatio * 100).toFixed(0)}% Blue-Chip &bull; ${(roster.returningProduction * 100).toFixed(0)}% Ret.</div>
             </div>
             <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
-              <span class="text-[10px] uppercase tracking-wider text-slate-400 font-mono">ACFC Index (Week 3)</span>
+              <span class="text-[10px] uppercase tracking-wider text-slate-400 font-mono">ACFC Index (Week 4)</span>
               <div class="text-xl font-bold font-mono text-cyan-400 mt-0.5">${team.acfcIndexFormatted}</div>
               <div class="text-[11px] text-slate-400 mt-0.5">Prior: ${prior.score.toFixed(3)} | PES: ${pes.score.toFixed(3)}</div>
             </div>
